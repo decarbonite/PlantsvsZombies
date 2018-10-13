@@ -9,9 +9,9 @@ SYSC 3110 - Third Year Project
 
 ## Workload
 - Dominic
-  * Flover 
-  * XYFlover
-  * MoneyFlover
+  * Flower 
+  * XYFlower
+  * MoneyFlower
 
 - Ahmed
   * Beast
