@@ -8,19 +8,19 @@ SYSC 3110 - Third Year Project
 
 
 ## Workload
-- Dom
-* Flover 
-* XYFlover
-* MoneyFlover
+- Dominic
+  * Flover 
+  * XYFlover
+  * MoneyFlover
 
 - Ahmed
-* Beast
-* Zombie
+  * Beast
+  * Zombie
 
 - Dima
-* BoardNode
-* Game
+  * BoardNode
+  * Game
 
 - Mrunal
-* Player
-* GameRound
+  * Player
+  * GameRound
