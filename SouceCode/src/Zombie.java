@@ -6,14 +6,9 @@ public class Zombie extends Beast {
     private float walkingSpeed; // time that passed to go from one cell to the other
     private int scoreOnDead;
 
-    public Zombie() {
-
+    public Zombie(String name, int health) {
+        super(name, health);
     }
-
-    public void updatePosition(){
-
-    }
-
 
     public void updateSpeed() {
 

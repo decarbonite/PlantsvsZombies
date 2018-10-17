@@ -4,14 +4,13 @@
  */
 abstract class Beast {
     private int health;
-    private short positionX;
-    private short positionY;
     private String beastName;
     private float atacPower;
     private float atacSpeed;
 
-    public Beast() {
-
+    public Beast(String name, int health) {
+        this.beastName = name;
+        this.health = health;
     }
 
     /**
@@ -23,5 +22,9 @@ abstract class Beast {
     public boolean updateHealth(int damage){
 
         return true;
+    }
+
+    public String toString() {
+        return beastName + " - " + health + "\n";
     }
 }
