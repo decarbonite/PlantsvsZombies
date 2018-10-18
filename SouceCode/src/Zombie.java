@@ -1,6 +1,9 @@
 /**
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
+ *
+ * @author Ahmed Romih (decarbonite)
+ * @version 17 October, 2018
  */
 public class Zombie extends NPC {
     private float walkingSpeed; // time that passed to go from one cell to the other
@@ -10,6 +13,11 @@ public class Zombie extends NPC {
     public Zombie(String name, int health) {
         super(name+" "+counter, health);
         counter++;
+    }
+
+    @Override
+    public void attack(NPC npc) {
+        npc.setHealth(npc.getHealth() - this.getAttackPower());
     }
 
 

@@ -13,8 +13,8 @@ public abstract class NPC {
 
     private int health;
     private String name;
-    private float attackPower;
-    private float attackSpeed;
+    private int attackPower;
+    private int attackSpeed;
 
     public NPC(String name, int health) {
         this.name = name;
@@ -24,10 +24,10 @@ public abstract class NPC {
     /**
      * Returns true if the updated health is greater than zero and false otherwise
      *
-     * @param damage
-     * @return
+     * @param damage damage given to the NPC
+     * @return returns a boolean, whether the NPC is alive or not
      */
-    public boolean updateHealth(int damage){
+    public boolean isAlive(int damage){
         if (this.getHealth() - damage > 0) {
             return true;
         }
@@ -38,14 +38,19 @@ public abstract class NPC {
         return health;
     }
 
-    public float getAttackPower() {
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAttackPower() {
         return attackPower;
     }
 
-    public void setAttackPower(float attackPower) {
+    public void setAttackPower(int attackPower) {
         this.attackPower = attackPower;
     }
 
+    public abstract void attack(NPC npc);
 
     public String toString() {
         return name + " - " + health;

@@ -31,7 +31,7 @@ public BoardNode(Plant plant) {
 
     public void destroyPlant(){
         if(plant != null){
-            if(!plant.updateHealth(0)) {
+            if(!plant.isAlive(0)) {
                 plant = null;
             }
         }
