@@ -74,7 +74,7 @@ public BoardNode(Plant plant) {
         return false;
     }
 
-    public String getZombie() {
+    public String getZombieName() {
         return zombie.toString();
     }
 }

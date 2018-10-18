@@ -13,9 +13,9 @@ public class Game {
 
     public Game() {
         board = new ArrayList<BoardRow>(5);
-//        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             board.add(new BoardRow());
-//        }
+        }
     }
 
     public void updateBoard() {

@@ -27,7 +27,7 @@ public class BoardRow {
             }
             if(next.hasZombie()) {
                 current.addZombie(next.destroyZombie());
-                System.out.println("Zombie "+current.getZombie()+" Moved from [ " + (i+1) + " ] -> [ "+ i +" ]");
+                System.out.println("Zombie "+current.getZombieName()+" Moved from [ " + (i+1) + " ] -> [ "+ i +" ]");
             }
         }
     }
