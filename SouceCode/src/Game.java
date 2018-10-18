@@ -28,17 +28,26 @@ public class Game {
         }
     }
 
+    public void addPlant(int x, int y, Plant plant){
+        board.get(x).addPlant(y, plant);
+    }
+
     public static void main(String[] args) {
         Game newGame = new Game();
+        newGame.addPlant(0,0, new XYPlant("Plant 1", 100, 70));
+        newGame.addPlant(1,0, new XYPlant("Plant 2", 100, 70));
+        newGame.addPlant(2,0, new XYPlant("Plant 3", 100, 70));
+        newGame.addPlant(3,0, new XYPlant("Plant 4", 100, 70));
+        newGame.addPlant(4,0, new XYPlant("Plant 5", 100, 70));
 
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 30; i++) {
             System.out.println("\t\tRound ["+ (i+1) +"]");
             newGame.updateBoard();
-//            try {
-//                TimeUnit.SECONDS.sleep(2);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

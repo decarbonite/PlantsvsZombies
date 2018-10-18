@@ -7,6 +7,11 @@ public class MoneyPlant extends Plant {
         super(name, health);
     }
 
+    @Override
+    public void attack(NPC npc) {
+        npc.setHealth(npc.getHealth() - this.getAttackPower());
+    }
+
     public void updateMoney(){
 
     }

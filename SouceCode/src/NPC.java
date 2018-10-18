@@ -21,6 +21,12 @@ public abstract class NPC {
         this.health = health;
     }
 
+    public NPC(String name, int health, int attackPower) {
+        this.name = name;
+        this.health = health;
+        this.attackPower = attackPower;
+    }
+
     /**
      * Returns true if the updated health is greater than zero and false otherwise
      *

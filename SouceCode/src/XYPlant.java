@@ -6,4 +6,11 @@ public class XYPlant extends Plant {
     public XYPlant(String name, int health){
         super(name, health);
     }
+
+    public XYPlant(String name, int health, int attackPower){
+        super(name, health, attackPower);
+    }
+
+    @Override
+    public void attack(NPC npc) { npc.setHealth(npc.getHealth() - this.getAttackPower()); }
 }

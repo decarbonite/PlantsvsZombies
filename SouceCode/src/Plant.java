@@ -10,4 +10,7 @@ abstract class Plant extends NPC {
         super(name, health);
     }
 
+    public Plant(String name, int health, int attackPower) {
+        super(name, health, attackPower);
+    }
 }
