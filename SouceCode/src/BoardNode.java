@@ -1,7 +1,5 @@
-import java.util.Queue;
-
 /**
- * Board node is holding information about beasts on it.
+ * Board node is holding information about NPCs on it.
  *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018

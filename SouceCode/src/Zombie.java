@@ -2,7 +2,7 @@
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
  */
-public class Zombie extends Beast {
+public class Zombie extends NPC {
     private float walkingSpeed; // time that passed to go from one cell to the other
     private int scoreOnDead;
 
@@ -10,7 +10,9 @@ public class Zombie extends Beast {
         super(name, health);
     }
 
+
+    /*worry about later
     public void updateSpeed() {
 
-    }
+    }*/
 }
