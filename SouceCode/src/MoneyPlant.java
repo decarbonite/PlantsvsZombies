@@ -7,6 +7,11 @@ public class MoneyPlant extends Plant {
         super(name, health);
     }
 
+    @Override
+    public void attack(NPC npc) {
+
+    }
+
     public void updateMoney(){
 
     }
