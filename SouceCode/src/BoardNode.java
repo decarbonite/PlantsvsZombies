@@ -7,7 +7,6 @@ import java.util.Queue;
  * @version 13 October, 2018
  */
 public class BoardNode {
-    private int coordinateX, coordinateY;
     private Plant plant;
     private Zombie zombie;
 
@@ -19,28 +18,20 @@ public class BoardNode {
         zombie = null;
     }
 
-    public BoardNode(int x, int y, Plant plant) {
-        this.coordinateX = x;
-        this.coordinateY = y;
+public BoardNode(Plant plant) {
         this.plant = plant;
-//        this.zombies = null;
     }
 
-    public BoardNode(int x, int y, Zombie zombie) {
-        this.coordinateX = x;
-        this.coordinateY = y;
-        this.plant = null;
-//        this.zombies.add(zombie);
+    public BoardNode(Zombie zombie) {
+        this.zombie = zombie;
     }
 
-    public BoardNode(int x, int y, Plant plant, Zombie zombie) {
-        this.coordinateX = x;
-        this.coordinateY = y;
+    public BoardNode(Plant plant, Zombie zombie) {
         this.plant = plant;
-//        this.zombies.add(zombie);
+        this.zombie = zombie;
     }
 
-    public void destroyFlower(){
+    public void destroyPlant(){
         if(plant != null){
             if(!plant.updateHealth(0)) {
                 plant = null;
@@ -55,11 +46,10 @@ public class BoardNode {
             zombie = null;
             return z;
         }
-
         return null;
     }
 
-    public boolean addFlover(Plant plant) {
+    public boolean addPlant(Plant plant) {
         if(this.plant != null) {
             this.plant = plant;
             return true;
@@ -72,10 +62,21 @@ public class BoardNode {
         this.zombie = zombie;
     }
 
-//    public boolean hasZombie() {
-//        if(zombies.size() == 0) {
-//            return false;
-//        }
-//        return true;
-//    }
+    public boolean hasZombie() {
+        if(zombie != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasPlant() {
+        if(plant != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getZombie() {
+        return zombie.toString();
+    }
 }

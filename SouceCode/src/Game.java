@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -12,23 +13,32 @@ public class Game {
 
     public Game() {
         board = new ArrayList<BoardRow>(5);
-        for (int i = 0; i < 5; i++) {
+//        for (int i = 0; i < 5; i++) {
             board.add(new BoardRow());
-        }
-        System.out.println(board.size());
+//        }
     }
 
     public void updateBoard() {
         int i = 1;
         for(BoardRow br: board) {
+            System.out.println("\t\tROW [ "+ i +" ]");
             br.runRow();
-            System.out.println("\t\tROW [ "+ i +" ]\n");
             i++;
+            System.out.println("\n**********************************************\n");
         }
     }
 
     public static void main(String[] args) {
         Game newGame = new Game();
-        newGame.updateBoard();
+
+        for(int i = 0; i < 20; i++) {
+            System.out.println("\t\tRound ["+ (i+1) +"]");
+            newGame.updateBoard();
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

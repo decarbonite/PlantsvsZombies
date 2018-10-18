@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Dmytro Sytnik (VanArman)
@@ -17,16 +18,29 @@ public class BoardRow {
     }
 
     private void moveZombie() {
-        BoardNode previous;
-        for(int i = 1; i < row.size(); i++){
-            previous = row.get(i-1);
-            previous.addZombie(row.get(i).destroyZombie());
-            System.out.println("Zombie Moved from [ " + i + " ] -> [ "+ (i-1) +" ]");
+        for(int i = 0; i < row.size() - 1; i++){
+            BoardNode current = row.get(i);
+            BoardNode next = row.get(i+1);
+            if(current.hasZombie() && !current.hasPlant()) {
+                System.out.println("\t\t***Zombies WON***\n");
+                System.exit(0);
+            }
+            if(next.hasZombie()) {
+                current.addZombie(next.destroyZombie());
+                System.out.println("Zombie "+current.getZombie()+" Moved from [ " + (i+1) + " ] -> [ "+ i +" ]");
+            }
         }
     }
 
     private void generateNewZombie() {
-        row.get(8).addZombie(new Zombie("Stiven", 100));
+        Random rand = new Random();
+        if(rand.nextInt(5) % 3 == 0) {
+            row.get(8).addZombie(new Zombie("Stiven", 100));
+        }
+    }
+
+    private void fightPlantVsZombie(){
+
     }
 
     public void runRow() {

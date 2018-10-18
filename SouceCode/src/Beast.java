@@ -20,11 +20,15 @@ abstract class Beast {
      * @return
      */
     public boolean updateHealth(int damage){
-
-        return true;
+        this.health -= damage;
+        if(this.health > 0) {
+            return true;
+        }
+        return false;
     }
 
+    @Override
     public String toString() {
-        return beastName + " - " + health + "\n";
+        return beastName + " - " + health;
     }
 }
