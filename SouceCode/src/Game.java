@@ -34,11 +34,11 @@ public class Game {
         for(int i = 0; i < 20; i++) {
             System.out.println("\t\tRound ["+ (i+1) +"]");
             newGame.updateBoard();
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                TimeUnit.SECONDS.sleep(2);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }
