@@ -3,7 +3,7 @@
  * @version 13 October, 2018
  */
 public class Player {
-    private String playerName;
+    private String name;
     private int money;
     private int score;
 }

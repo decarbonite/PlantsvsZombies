@@ -52,13 +52,9 @@ public abstract class NPC {
         return attackPower;
     }
 
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-
     public abstract void attack(NPC npc);
 
     public String toString() {
-        return name + " - " + health;
+        return name;
     }
 }

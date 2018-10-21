@@ -16,7 +16,7 @@ public class BoardNode {
         zombie = null;
     }
 
-public BoardNode(Plant plant) {
+    public BoardNode(Plant plant) {
         this.plant = plant;
     }
 
@@ -37,6 +37,8 @@ public BoardNode(Plant plant) {
         }
     }
 
+
+    //why make zombie z??
 
     public Zombie destroyZombie() {
         if(zombie != null) {
@@ -77,6 +79,7 @@ public BoardNode(Plant plant) {
         this.zombie = zombie;
     }
 
+
     public boolean hasZombie() {
         if(zombie != null) {
             return true;
@@ -98,4 +101,5 @@ public BoardNode(Plant plant) {
     public String getPlantName() {
         return plant.toString();
     }
+
 }
