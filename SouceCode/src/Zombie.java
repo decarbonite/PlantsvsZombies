@@ -16,13 +16,15 @@ public class Zombie extends NPC {
     }
 
     public Zombie(String name, int health, int attackPower) {
-        super(name+" "+counter, health, attackPower);
+        super(name+""+counter, health, attackPower);
         counter++;
     }
 
     @Override
     public void attack(NPC npc) {
-        npc.setHealth(npc.getHealth() - this.getAttackPower());
+        if (npc != null && npc.getHealth() > 0) {
+            npc.setHealth(npc.getHealth() - this.getAttackPower());
+        }
     }
 
 

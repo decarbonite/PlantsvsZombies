@@ -29,9 +29,9 @@ public class BoardNode {
         this.zombie = zombie;
     }
 
-    public void destroyPlant(){
-        if(plant != null){
-            if(!plant.isAlive(0)) {
+    public void destroyPlant() {
+        if (plant != null) {
+            if (!plant.isAlive(0)) {
                 plant = null;
             }
         }
@@ -39,7 +39,7 @@ public class BoardNode {
 
 
     public Zombie destroyZombie() {
-        if(zombie != null) {
+        if (zombie != null) {
             Zombie z = zombie;
             zombie = null;
             return z;
@@ -48,34 +48,33 @@ public class BoardNode {
     }
 
     public boolean addPlant(Plant plant) {
-        if(this.plant == null) {
+        if (this.plant == null) {
             this.plant = plant;
             return true;
         }
-
         return false;
     }
 
     public void plantFightZombie() {
         this.plant.attack(this.zombie);
 
-        if(this.zombie.getHealth() <= 0) {
+        if (this.zombie.getHealth() <= 0) {
             this.zombie = null;
             return;
         }
-
         this.zombie.attack(this.plant);
 
-        if(this.plant.getHealth() <= 0) {
+        if (this.plant.getHealth() <= 0) {
             this.plant = null;
             return;
         }
+
     }
 
     public Zombie plantFightZombie(Zombie zombie) {
         this.plant.attack(zombie);
 
-        if(zombie.getHealth() <= 0) {
+        if (zombie.getHealth() <= 0) {
             return null;
         }
 
@@ -105,14 +104,14 @@ public class BoardNode {
 
 
     public boolean hasZombie() {
-        if(zombie != null) {
+        if (zombie != null) {
             return true;
         }
         return false;
     }
 
     public boolean hasPlant() {
-        if(plant != null) {
+        if (plant != null) {
             return true;
         }
         return false;
