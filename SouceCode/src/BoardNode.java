@@ -73,6 +73,33 @@ public BoardNode(Plant plant) {
 
     }
 
+    public Zombie plantFightZombie(Zombie zombie) {
+        this.plant.attack(zombie);
+
+        if(zombie.getHealth() <= 0) {
+            return null;
+        }
+
+        return zombie;
+    }
+
+//    public void plantFightZombie(Plant plant) {
+//        plant.attack(zombie);
+//
+//        if(this.zombie.getHealth() <= 0) {
+//            this.zombie = null;
+//            return;
+//        }
+//
+//        this.zombie.attack(plant);
+//
+//        if(plant.getHealth() <= 0) {
+//            plant = null;
+//            return;
+//        }
+//
+//    }
+
     public void addZombie(Zombie zombie) {
         this.zombie = zombie;
     }
@@ -89,6 +116,14 @@ public BoardNode(Plant plant) {
             return true;
         }
         return false;
+    }
+
+    public Plant getPlant() {
+        return this.plant;
+    }
+
+    public Zombie getZombie() {
+        return this.zombie;
     }
 
     public String getZombieName() {

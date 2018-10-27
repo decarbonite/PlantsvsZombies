@@ -14,7 +14,7 @@ public class Game {
     public Game() {
         board = new ArrayList<BoardRow>(5);
         for (int i = 0; i < 5; i++) {
-            board.add(new BoardRow());
+            board.add(new BoardRow(10));
         }
     }
 
@@ -34,13 +34,13 @@ public class Game {
 
     public static void main(String[] args) {
         Game newGame = new Game();
-        newGame.addPlant(0,0, new XYPlant("Plant 1", 100, 70));
+        newGame.addPlant(0,0, new XYPlant("Plant 1", 100, 20));
         newGame.addPlant(1,0, new XYPlant("Plant 2", 100, 70));
         newGame.addPlant(2,0, new XYPlant("Plant 3", 100, 70));
         newGame.addPlant(3,0, new XYPlant("Plant 4", 100, 70));
         newGame.addPlant(4,0, new XYPlant("Plant 5", 100, 70));
 
-        for(int i = 0; i < 30; i++) {
+        for(int i = 0; i < 150; i++) {
             System.out.println("\t\tRound ["+ (i+1) +"]");
             newGame.updateBoard();
             try {
