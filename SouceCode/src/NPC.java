@@ -55,6 +55,6 @@ public abstract class NPC {
     public abstract void attack(NPC npc);
 
     public String toString() {
-        return name;
+        return name + " ("+ health +")";
     }
 }

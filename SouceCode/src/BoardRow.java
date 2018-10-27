@@ -32,15 +32,15 @@ public class BoardRow {
 
     public void printBoard() {
         String str = "";
-        for (int i = 0; i < board.size(); i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < ROWS_ON_BOARD; i++) {
+            for (int j = 0; j < COLUMNS_ON_BOARD; j++) {
                 if (board.get(i).get(j).hasZombie()) {
-                    str += board.get(i).get(j).getZombieName() + "\t\t\t";
+                    str = String.format("%15s", board.get(i).get(j).getZombie());
                 } else if (board.get(i).get(j).hasPlant() && !board.get(i).get(j).hasZombie()) {
-                    str += board.get(i).get(j).getPlantName() + "\t\t\t";
+                    str = String.format("%15s", board.get(i).get(j).getPlant());
                 } else {
                     //empty
-                    str += "XX\t\t\t\t";
+                    str += String.format("%15s", "XX");
                 }
             }
             str += "\n";
@@ -55,8 +55,8 @@ public class BoardRow {
     }*/
 
     private void moveZombie() {
-        for (int i = 0; i < board.size(); i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < ROWS_ON_BOARD; i++) {
+            for (int j = 0; j < COLUMNS_ON_BOARD - 1; j++) {
                 BoardNode current = board.get(i).get(j);
                 BoardNode next = board.get(i).get(j + 1);
                 if (j == 0 && current.hasZombie() && !current.hasPlant()) {

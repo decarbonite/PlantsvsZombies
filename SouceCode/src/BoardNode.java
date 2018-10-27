@@ -82,23 +82,6 @@ public class BoardNode {
         return zombie;
     }
 
-//    public void plantFightZombie(Plant plant) {
-//        plant.attack(zombie);
-//
-//        if(this.zombie.getHealth() <= 0) {
-//            this.zombie = null;
-//            return;
-//        }
-//
-//        this.zombie.attack(plant);
-//
-//        if(plant.getHealth() <= 0) {
-//            plant = null;
-//            return;
-//        }
-//
-//    }
-
     public void addZombie(Zombie zombie) {
         this.zombie = zombie;
     }
