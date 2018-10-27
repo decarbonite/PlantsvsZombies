@@ -38,8 +38,6 @@ public class BoardNode {
     }
 
 
-    //why make zombie z??
-
     public Zombie destroyZombie() {
         if(zombie != null) {
             Zombie z = zombie;
