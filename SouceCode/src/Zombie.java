@@ -7,11 +7,11 @@
  */
 public class Zombie extends NPC {
     private float walkingSpeed; // time that passed to go from one cell to the other
-    private int scoreOnDead;
+    private int scoreOnDeath;
     private static int counter = 0;
 
     public Zombie(String name, int health) {
-        super(name+" "+counter, health);
+        super(name+""+counter, health);
         counter++;
     }
 

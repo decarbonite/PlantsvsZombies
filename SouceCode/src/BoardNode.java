@@ -16,7 +16,7 @@ public class BoardNode {
         zombie = null;
     }
 
-public BoardNode(Plant plant) {
+    public BoardNode(Plant plant) {
         this.plant = plant;
     }
 
@@ -70,7 +70,6 @@ public BoardNode(Plant plant) {
             this.plant = null;
             return;
         }
-
     }
 
     public Zombie plantFightZombie(Zombie zombie) {
@@ -104,6 +103,7 @@ public BoardNode(Plant plant) {
         this.zombie = zombie;
     }
 
+
     public boolean hasZombie() {
         if(zombie != null) {
             return true;
@@ -133,4 +133,5 @@ public BoardNode(Plant plant) {
     public String getPlantName() {
         return plant.toString();
     }
+
 }
