@@ -33,8 +33,8 @@ public abstract class NPC {
      * @param damage damage given to the NPC
      * @return returns a boolean, whether the NPC is alive or not
      */
-    public boolean isAlive(int damage){
-        if (this.getHealth() - damage > 0) {
+    public boolean isAlive(){
+        if (this.getHealth() > 0) {
             return true;
         }
         return false;
@@ -55,6 +55,6 @@ public abstract class NPC {
     public abstract void attack(NPC npc);
 
     public String toString() {
-        return name + " ("+ health +")";
+        return name +" ("+health+")";
     }
 }
