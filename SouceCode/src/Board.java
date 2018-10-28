@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -7,26 +6,30 @@ import java.util.Random;
  * @version 27 October, 2018
  */
 public class Board {
-    private static int BOARD_ROWS;
-    private static int BOARD_COLUMNS;
+    private static int boardRows;
+    private static int boardColumns;
+
+    private int money;
 
     private int zombiesToSpawn;
 
     private ArrayList<BoardRow> board;
 
     public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn) {
-        BOARD_ROWS = numberOfRows;
-        BOARD_COLUMNS = numberOfColumns;
+        money = 200;
+        boardRows = numberOfRows;
+        boardColumns = numberOfColumns;
         this.zombiesToSpawn = zombiesToSpawn;
-        this.board = new ArrayList<BoardRow>(BOARD_ROWS);
+        this.board = new ArrayList<>(boardRows);
 
-        for(int i = 0; i < BOARD_ROWS; i++) {
-            board.add(new BoardRow(BOARD_COLUMNS));
+        for (int i = 0; i < boardRows; i++) {
+            board.add(new BoardRow(boardColumns));
         }
     }
 
     private void printBoard() {
-        for(BoardRow br : board){
+        System.out.println("Player's Money: " + money);
+        for (BoardRow br : board) {
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println(br);
         }
@@ -34,19 +37,20 @@ public class Board {
         System.out.println("\n");
     }
 
-    private void moveZombies(){
-        for(BoardRow br : board){
+    private void moveZombies() {
+        for (BoardRow br : board) {
             br.moveZombie();
         }
     }
 
     private void fightPlantZombie() {
-        for(BoardRow br : board){
+        for (BoardRow br : board) {
             br.fightPvsZ();
         }
     }
 
     public void runBoard() {
+        generateNewPlant();
         generateNewZombie();
         printBoard();
         fightPlantZombie();
@@ -59,13 +63,27 @@ public class Board {
 
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
-                int randRow = rand.nextInt(BOARD_ROWS);
-                if (!board.get(randRow).hasZombie(BOARD_COLUMNS - 1)) {
-                    addZombie(randRow, BOARD_COLUMNS - 1, new Zombie("Zombie", 100, 40));
+                int randRow = rand.nextInt(boardRows);
+                if (!board.get(randRow).hasZombie(boardColumns - 1)) {
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 40));
                     zombiesToSpawn--;
                 }
             }
         }
+    }
+
+    private void generateNewPlant() {
+        Random rand = new Random();
+
+        if (money >= 50 && rand.nextInt(5) % 3 == 0) {
+            int randRow = rand.nextInt(boardRows);
+            int randCol = rand.nextInt(boardColumns);
+            if (!board.get(randRow).hasZombie(boardColumns - 1)) {
+                addPlant(randRow, randCol, new XYPlant("Plant", 100, 40));
+                money -= 50;
+            }
+        }
+
     }
 
     public void addPlant(int x, int y, Plant plant) {

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Board node is holding information about NPCs on it.
  *
@@ -9,6 +7,7 @@ import java.util.ArrayList;
 public class BoardNode {
     private Plant plant;
     private Zombie zombie;
+
 
     /**
      * Default constructor that creates empty node with a specified coordinates
