@@ -30,7 +30,6 @@ public abstract class NPC {
     /**
      * Returns true if the updated health is greater than zero and false otherwise
      *
-     * @param damage damage given to the NPC
      * @return returns a boolean, whether the NPC is alive or not
      */
     public boolean isAlive(){
