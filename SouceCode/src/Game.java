@@ -20,9 +20,9 @@ public class Game {
 
         Player newPlayer = new Player();
 
-        int choice=0;
-        int plantX=0;
-        int plantY=0;
+        int choice = 0;
+        int plantX = 0;
+        int plantY = 0;
 
         Board board = new Board(numberOfRows, numberOfColumns, 20, newPlayer.getScore(), newPlayer.getMoney());
 
