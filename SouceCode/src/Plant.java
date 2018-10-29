@@ -30,6 +30,10 @@ public class Plant extends NPC {
         counter++;
     }
 
+    /**
+     * Simulates fight between Plant and given NPC (Zombie)
+     * @param npc NPC to be attacked
+     */
     @Override
     public void attack(NPC npc) {
         if (npc != null){

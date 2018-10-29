@@ -14,7 +14,6 @@ public abstract class NPC {
     private int health;
     private String name;
     private int attackPower;
-    private int attackSpeed;
 
     /**
      * Initializes a new NPC
@@ -38,13 +37,6 @@ public abstract class NPC {
         this.attackPower = attackPower;
     }
 
-    /*public NPC(String name, int health, int attackPower, int points) {
-        this.name = name;
-        this.health = health;
-        this.attackPower = attackPower;
-        this.pointsWhenDead = points;
-    }*/
-
     /**
      * Returns true if the NPC's health is greater than 0, false otherwise
      *
@@ -58,6 +50,7 @@ public abstract class NPC {
     }
 
     /**
+     * Returns health of the current NPC's
      * @return Returns NPC's health points
      */
     public int getHealth() {
@@ -86,6 +79,7 @@ public abstract class NPC {
     public abstract void attack(NPC npc);
 
     /**
+     * Forms String object with NPC's name and health
      * @return Returns a string containing NPC's name and health
      */
     public String toString() {

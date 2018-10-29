@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Holds instances of the BoardNodes and creates virtual row on the board.
@@ -160,5 +161,24 @@ public class BoardRow {
             }
         }
         return score;
+    }
+
+    /**
+     * Money generator if on row contains MoneyFlower with 50% chance to gain money
+     * @param money int amount of money player currently have
+     * @return int amount of money player gain from MoneyFlower
+     */
+    protected int generateMoney(int money){
+        for(BoardNode bn : nodes){
+            if(bn.hasMoneyPlant()){
+                Random rand = new Random();
+
+                if(rand.nextInt(2) % 2 == 0) {
+                    money += bn.getMoneyPlant().getMoney();
+                    return money;
+                }
+            }
+        }
+        return money;
     }
 }

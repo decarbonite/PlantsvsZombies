@@ -114,10 +114,31 @@ public class BoardNode {
     }
 
     /**
+     * Returns MoneyPlant if exists in current node
+     * @return MoneyPlant object
+     */
+    public MoneyPlant getMoneyPlant() {
+        if(this.plant instanceof MoneyPlant) {
+            return (MoneyPlant) this.plant;
+        }
+        return null;
+    }
+    /**
      * Returns zombie instance of the current node
      * @return Zombie instance
      */
     public Zombie getZombie() {
         return this.zombie;
+    }
+
+    /**
+     * Check if the plant stored in the current nod is MoneyPlant
+     * @return true when Plant stored in the node is MoneyPlant instance; false - otherwise
+     */
+    public boolean hasMoneyPlant() {
+        if(this.plant instanceof MoneyPlant) {
+            return true;
+        }
+        return false;
     }
 }

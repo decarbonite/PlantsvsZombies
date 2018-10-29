@@ -32,15 +32,18 @@ public class Game {
 
             while (true) {
                 System.out.println(" 1  - Add a plant");
-                System.out.println(" 2 - Play with no plants for now");
+                System.out.println(" 2  - Add Sun Flower (to generate money)");
+                System.out.println(" 3  - Play with no plants for now");
                 choice = scan.nextInt();
-                if (choice == 1){
+                if (choice == 1 || choice == 2){
                     System.out.println("Enter row position (1 -> "+ (numberOfRows) +"): ");
                     plantX = scan.nextInt() - 1;
                     System.out.println("Enter column position (1 -> "+ (numberOfColumns - 1) +"): ");
                     plantY = scan.nextInt() - 1;
 
-                    if(board.addPlant(plantX, plantY, new Plant("Plant", 200, 15))){
+                    if(choice == 1 && board.addPlant(plantX, plantY, new Plant("Plant", 200, 15))){
+                        break;
+                    } else if (choice == 2 && board.addPlant(plantX, plantY, new MoneyPlant("SunFlower", 75, 25))){
                         break;
                     } else {
                         System.out.println("Cannot add plant into this cell");

@@ -76,9 +76,19 @@ public class Board {
     }
 
     /**
+     * Rise money if at least one of the rows contains MoneyFlower (if more, values added)
+     */
+    private void riseMoney() {
+        for (BoardRow br : board){
+            this.money = br.generateMoney(this.money);
+        }
+    }
+
+    /**
      * Main method that runs the Zombie generation, simulates fight method, moves zombies across board and prints board.
      */
     public void runBoard() {
+        riseMoney();
         generateNewZombie();
         printBoard();
         fightPlantZombie();
