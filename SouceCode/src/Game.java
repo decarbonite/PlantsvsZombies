@@ -10,7 +10,8 @@ public class Game {
      * @param args String[] - not used in this game
      */
     public static void main(String[] args) {
-        Board board = new Board(5, 10, 20, 0, 200);
+        Player newPlayer = new Player();
+        Board board = new Board(5, 10, 1, newPlayer.getScore(), newPlayer.getMoney());
 
         board.addPlant(0,0, new XYPlant("Plant", 200, 15));
         board.addPlant(1,0, new XYPlant("Plant", 200, 15));
@@ -18,19 +19,24 @@ public class Game {
         board.addPlant(3,0, new XYPlant("Plant", 200, 15));
         board.addPlant(4,0, new XYPlant("Plant", 200, 15));
 
-        board.printBoard();
         while(true) {
             boolean[] res = board.gameEnds();
+
+            board.generateNewPlant();
+            newPlayer.setMoney(board.money);
+            newPlayer.updateScore(board.score);
+
             if(!res[0]) {
-                System.out.println("Player's Money: " + board.money+ "\t\tScore: "+ board.score);
-                board.generateNewPlant();
+                System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: "+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
                 board.runBoard();
+
+                newPlayer.setMoney(board.money);
+                newPlayer.updateScore(board.score);
             } else {
-                System.out.println("Player's Money: " + board.money+ "\t\tScore: "+ board.score);
-                board.printBoard();
-                System.out.println(res[1] ? "\n\t\t***ZOMBIE WON***\n" : "\n\t\t***PLANTS WON***\n");
+                System.out.println(res[1] ? "\t\t\t\t***ZOMBIE WON***\n" : "\t\t\t\t***PLANTS WON***\n");
                 return;
             }
         }
+
     }
 }

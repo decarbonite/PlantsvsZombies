@@ -23,6 +23,8 @@ public class Board {
      * @param numberOfRows int number of rows
      * @param numberOfColumns int number of BoardNode instances in each row
      * @param zombiesToSpawn int number of zombies that would be randomly generated
+     * @param score int initial score for the game (round)
+     * @param money int initial amount of money
      */
     public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn, int score, int money) {
         boardRows = numberOfRows;
@@ -65,7 +67,7 @@ public class Board {
     }
 
     /**
-     * Simulates fight between Zombies and Plants on each row
+     * Simulates fight between Zombies and Plants on each row and if Plant kill Zombie add point to the player
      */
     private void fightPlantZombie() {
         for (BoardRow br : board) {

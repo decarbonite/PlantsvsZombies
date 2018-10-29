@@ -45,6 +45,7 @@ public class BoardNode {
 
     /**
      * Simulates fight between Plant and Zombie in current node
+     * @return int reward when plant kills zombie
      */
     public int plantFightZombie() {
         this.plant.attack(this.zombie);
@@ -54,7 +55,7 @@ public class BoardNode {
             this.zombie = null;
             return score;
         }
-        
+
         this.zombie.attack(this.plant);
 
         if (this.plant.getHealth() <= 0) {

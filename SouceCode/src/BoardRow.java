@@ -49,6 +49,7 @@ public class BoardRow {
 
     /**
      * Moves zombies across plane (based on the number of node(s))
+     * Assign ZOMBIE_WON to true if zombie stays on the first node (end of the board) and this node does not contain plant.
      */
     protected void moveZombie() {
         for (int i = 0; i < COLUMNS_ON_BOARD - 1; i++) {
@@ -133,6 +134,8 @@ public class BoardRow {
 
     /**
      * Simulates fighting between Plant and Zombie
+     * @param score int current player score
+     * @return int reward for the player when plant kills zombie
      */
     protected int fightPvsZ(int score) {
         for (int i = 0; i < COLUMNS_ON_BOARD; i++) {

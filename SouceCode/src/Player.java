@@ -14,22 +14,17 @@ public class Player {
     public Player () {
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-			System.out.print("Enter Player Name\n");
-			playerName = bufferedReader.readLine();
-			setPlayerName(playerName);
-			setMoney(100);
-			System.out.println ("Player Name: " + getPlayerName()+ "/n Money: " + getMoney()+ "/n Score: " + getScore());
-			System.out.print("Enter Number of Rounds to Play\n");
+			System.out.print("Enter Player Name: ");
+			this.playerName = bufferedReader.readLine();
 			try{
 				//totalRounds = Integer.parseInt(bufferedReader.readLine());
 			}catch(NumberFormatException nfe){
 				System.err.println("Invalid Format!");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Something went Wrong");
 		}
-		this.money = 100;
+		this.money = 200;
 		this.score = 0;
 	}
 
@@ -37,9 +32,9 @@ public class Player {
 		return playerName;
 	}
 
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
+//	public void setPlayerName(String playerName) {
+//		this.playerName = playerName;
+//	}
 
 	public int getMoney() {
 		return money;
