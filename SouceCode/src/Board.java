@@ -46,6 +46,7 @@ public class Board {
         }
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
+        // to make a small delay between each zombie move
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
@@ -120,7 +121,7 @@ public class Board {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie ", 100, 15));
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 20));
                     zombiesToSpawn--;
                 }
             }
@@ -137,7 +138,7 @@ public class Board {
             int randRow = rand.nextInt(boardRows);
             int randCol = rand.nextInt(boardColumns - 1);
             if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                addPlant(randRow, randCol, new XYPlant("Plant1 ", 100, 40));
+                addPlant(randRow, randCol, new XYPlant("Plant1 ", 100, 30));
                 money -= 50;
             }
         }

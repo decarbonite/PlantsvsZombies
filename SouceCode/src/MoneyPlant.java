@@ -1,4 +1,5 @@
 /**
+ * This is a plant class that generates money
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
  */
@@ -14,7 +15,7 @@ public class MoneyPlant extends Plant {
         }
     }
 
-    public void updateMoney(){
+    /*public void updateMoney(){
 
-    }
+    }*/
 }
