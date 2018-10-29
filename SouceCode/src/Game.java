@@ -1,8 +1,13 @@
+import java.util.Scanner;
+
 /**
  * Starting point of the Plant vs Zombie game
  *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
+ *
+ * @author Ahmed Romih (decarbonite)
+ * @version 27 October, 2019
  */
 public class Game {
     /**
@@ -10,28 +15,47 @@ public class Game {
      * @param args String[] - not used in this game
      */
     public static void main(String[] args) {
-        Player newPlayer = new Player();
-        Board board = new Board(5, 10, 1, newPlayer.getScore(), newPlayer.getMoney());
+        int numberOfRows = 5;
+        int numberOfColumns = 10;
 
-        board.addPlant(0,0, new XYPlant("Plant", 200, 15));
-        board.addPlant(1,0, new XYPlant("Plant", 200, 15));
-        board.addPlant(2,0, new XYPlant("Plant", 200, 15));
-        board.addPlant(3,0, new XYPlant("Plant", 200, 15));
-        board.addPlant(4,0, new XYPlant("Plant", 200, 15));
+        Player newPlayer = new Player();
+
+        int choice=0;
+        int plantX=0;
+        int plantY=0;
+
+        Board board = new Board(numberOfRows, numberOfColumns, 20, newPlayer.getScore(), newPlayer.getMoney());
 
         while(true) {
             boolean[] res = board.gameEnds();
+            Scanner scan = new Scanner(System.in);
 
-            board.generateNewPlant();
-            newPlayer.setMoney(board.money);
-            newPlayer.updateScore(board.score);
+            while (true) {
+                System.out.println(" 1  - Add a plant");
+                System.out.println(" 2 - Play with no plants for now");
+                choice = scan.nextInt();
+                if (choice == 1){
+                    System.out.println("Enter row position (1 -> "+ (numberOfRows) +"): ");
+                    plantX = scan.nextInt() - 1;
+                    System.out.println("Enter column position (1 -> "+ (numberOfColumns - 1) +"): ");
+                    plantY = scan.nextInt() - 1;
+
+                    if(board.addPlant(plantX, plantY, new Plant("Plant", 200, 15))){
+                        break;
+                    } else {
+                        System.out.println("Cannot add plant into this cell");
+                    }
+                } else {
+                    break;
+                }
+            }
 
             if(!res[0]) {
-                System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: "+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
-                board.runBoard();
-
                 newPlayer.setMoney(board.money);
                 newPlayer.updateScore(board.score);
+                System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: "+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
+
+                board.runBoard();
             } else {
                 System.out.println(res[1] ? "\t\t\t\t***ZOMBIE WON***\n" : "\t\t\t\t***PLANTS WON***\n");
                 return;

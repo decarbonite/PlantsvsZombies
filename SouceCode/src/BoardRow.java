@@ -127,7 +127,7 @@ public class BoardRow {
      */
     protected boolean hasPlant(int index) {
         if(index >= 0){
-            nodes.get(index).hasPlant();
+            return nodes.get(index).hasPlant();
         }
         return false;
     }

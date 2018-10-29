@@ -133,6 +133,7 @@ public class Board {
 
     /**
      * Randomly generates Plants on the board
+     * NOT used (ONLY for testing)
      */
     protected void generateNewPlant() {
         Random rand = new Random();
@@ -141,23 +142,30 @@ public class Board {
             int randRow = rand.nextInt(boardRows);
             int randCol = rand.nextInt(boardColumns - 1);
             if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                addPlant(randRow, randCol, new XYPlant("Plant1 ", 100, 30));
+                addPlant(randRow, randCol, new Plant("Plant1 ", 100, 30));
                 money -= 50;
             }
         }
-
     }
 
     /**
      * Adds Plant object on a specific coordinate
-     * @param x int row index
-     * @param y int column index
+     * @param x int column index
+     * @param y int row index
      * @param plant Plant object
+     * @return boolean true if plant has been added; false - otherwise
      */
-    public void addPlant(int x, int y, Plant plant) {
-        if (plant != null) {
-            board.get(x).addPlant(y, plant);
+    public boolean addPlant(int x, int y, Plant plant) {
+        if(money >= 50 && (x >= 0 && x < boardRows) && (y >= 0 && y < (boardColumns - 1))) {
+            if (plant != null) {
+                if(!board.get(x).hasPlant(y)) {
+                    board.get(x).addPlant(y, plant);
+                    money -= 50;
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     /**

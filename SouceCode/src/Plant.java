@@ -1,10 +1,13 @@
 /**
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
+ *
+ * @author Ahmed Romih (decarbonite)
+ * @version 26 October, 2018
  */
 
-abstract class Plant extends NPC {
-    private int cost;
+public class Plant extends NPC {
+    private static int counter = 0;
 
     /**
      * Initializes a new Plant
@@ -15,6 +18,7 @@ abstract class Plant extends NPC {
         super(name, health);
     }
 
+
     /**
      * Initializes a new Plant
      * @param name Plant's name
@@ -22,6 +26,14 @@ abstract class Plant extends NPC {
      * @param attackPower Plant's attack power
      */
     public Plant(String name, int health, int attackPower) {
-        super(name, health, attackPower);
+        super(name+""+counter, health, attackPower);
+        counter++;
+    }
+
+    @Override
+    public void attack(NPC npc) {
+        if (npc != null){
+            npc.setHealth(npc.getHealth() - this.getAttackPower());
+        }
     }
 }
