@@ -46,20 +46,22 @@ public class BoardNode {
     /**
      * Simulates fight between Plant and Zombie in current node
      */
-    public void plantFightZombie() {
+    public int plantFightZombie() {
         this.plant.attack(this.zombie);
 
         if (this.zombie.getHealth() <= 0) {
+            int score = this.zombie.getPointsWhenDead();
             this.zombie = null;
-            return;
+            return score;
         }
+        
         this.zombie.attack(this.plant);
 
         if (this.plant.getHealth() <= 0) {
             this.plant = null;
-            return;
+            return 0;
         }
-
+        return 0;
     }
 
     /**
@@ -69,11 +71,6 @@ public class BoardNode {
      */
     public Zombie plantFightZombie(Zombie zombie) {
         this.plant.attack(zombie);
-
-        if (zombie.getHealth() <= 0) {
-            return null;
-        }
-
         return zombie;
     }
 

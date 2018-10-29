@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class Board {
     private static int boardRows;
     private static int boardColumns;
-    private int money;
+    protected static int score;
+    protected static int money;
     private int zombiesToSpawn;
     private ArrayList<BoardRow> board;
 
@@ -23,10 +24,11 @@ public class Board {
      * @param numberOfColumns int number of BoardNode instances in each row
      * @param zombiesToSpawn int number of zombies that would be randomly generated
      */
-    public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn) {
-        money = 200;
+    public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn, int score, int money) {
         boardRows = numberOfRows;
         boardColumns = numberOfColumns;
+        this.score = score;
+        this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
         this.board = new ArrayList<>(boardRows);
 
@@ -39,7 +41,6 @@ public class Board {
      * Console print of the board
      */
     protected void printBoard() {
-        System.out.println("Player's Money: " + money);
         for (BoardRow br : board) {
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println(br);
@@ -68,7 +69,7 @@ public class Board {
      */
     private void fightPlantZombie() {
         for (BoardRow br : board) {
-            br.fightPvsZ();
+            this.score = br.fightPvsZ(this.score);
         }
     }
 
@@ -121,7 +122,7 @@ public class Board {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 20));
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10));
                     zombiesToSpawn--;
                 }
             }

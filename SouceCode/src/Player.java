@@ -42,9 +42,4 @@ public class Player {
         }
         
 	}
-	
-	//main method for testing purpose
-    public static void main (String[] args) {
-    	Player aPlayer = new Player ();
-	}
 }

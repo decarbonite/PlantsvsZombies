@@ -1,5 +1,6 @@
 /**
  * @author Dmytro Sytnik (VanArman)
+ * @author Mrunal Patel
  * @version 13 October, 2018
  */
 import java.lang.Math;
@@ -42,9 +43,4 @@ public class GameRound {
     	int range = max - min + 1;
     	this.multiplier = (int) (Math.random() * range) + min;
     }
-    
-    //main method for testing purpose
-    public static void main (String[] args) {	
-    	
-	}
 }

@@ -134,21 +134,28 @@ public class BoardRow {
     /**
      * Simulates fighting between Plant and Zombie
      */
-    protected void fightPvsZ() {
+    protected int fightPvsZ(int score) {
         for (int i = 0; i < COLUMNS_ON_BOARD; i++) {
             BoardNode plantFind = nodes.get(i);
             if (plantFind.hasPlant()) {
                 for (int j = i; j < COLUMNS_ON_BOARD; j++) {
                     BoardNode zombieFind = nodes.get(j);
                     if (plantFind == zombieFind && plantFind.hasZombie()) {
-                        plantFind.plantFightZombie();
+                        score += plantFind.plantFightZombie();
                         break;
                     } else if (plantFind != zombieFind && zombieFind.hasZombie()) {
-                        zombieFind.addZombie(plantFind.plantFightZombie(zombieFind.destroyZombie()));
+                        Zombie z = plantFind.plantFightZombie(zombieFind.destroyZombie());
+                        if(z.getHealth() <= 0){
+                            zombieFind.addZombie(null);
+                            score += z.getPointsWhenDead();
+                        } else {
+                            zombieFind.addZombie(z);
+                        }
                         break;
                     }
                 }
             }
         }
+        return score;
     }
 }

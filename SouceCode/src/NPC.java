@@ -15,7 +15,6 @@ public abstract class NPC {
     private String name;
     private int attackPower;
     private int attackSpeed;
-    private int pointsWhenDead;
 
     /**
      * Initializes a new NPC
@@ -79,8 +78,6 @@ public abstract class NPC {
     public int getAttackPower() {
         return attackPower;
     }
-
-    public int getPointsWhenDead() { return pointsWhenDead; }
 
     /**
      * Attacks npc, implemented in subclasses

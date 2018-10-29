@@ -7,7 +7,6 @@
  * @version 17 October, 2018
  */
 public class Zombie extends NPC {
-    private float walkingSpeed; // time that passed to go from one cell to the other
     private int scoreOnDeath;
     private static int counter = 0;
 
@@ -31,6 +30,21 @@ public class Zombie extends NPC {
         super(name+""+counter, health, attackPower);
         counter++;
     }
+
+    /**
+     * Initializes a new zombie
+     * @param name Zombie's name
+     * @param health Zombie's health
+     * @param attackPower zombie's attack power
+     * @param scoreOnDeath score added to the player when zombie is died
+     */
+    public Zombie(String name, int health, int attackPower, int scoreOnDeath) {
+        super(name+""+counter, health, attackPower);
+        this.scoreOnDeath = scoreOnDeath;
+        counter++;
+    }
+
+    public int getPointsWhenDead() { return scoreOnDeath; }
 
     /*public Zombie(String name, int health, int attackPower, int points) {
         super(name+""+counter, health, attackPower);
