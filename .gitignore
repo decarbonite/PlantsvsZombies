@@ -76,6 +76,7 @@ fabric.properties
 modules.xml
 .idea/misc.xml
 *.ipr
+.idea
 
 ### Java ###
 # Compiled class file
