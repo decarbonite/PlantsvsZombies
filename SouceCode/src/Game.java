@@ -1,27 +1,40 @@
 /**
+ * Starting point of the Plant vs Zombie game
+ *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
  */
 public class Game {
     //game should have the main that initializes, model,controller,view later on
 
+    /**
+     * Default contractor
+     */
     public Game() { }
 
+    /**
+     * Entering point of the game
+     * @param args String[] - not used in this game
+     */
     public static void main(String[] args) {
-        Board board = new Board(5, 9, 20);
+        Board board = new Board(5, 9, 5);
 
-        board.addPlant(0,0, new XYPlant("Plant1", 100, 10));
-        board.addPlant(1,0, new XYPlant("Plant2", 100, 10));
-        board.addPlant(2,0, new XYPlant("Plant3", 100, 10));
-        board.addPlant(3,0, new XYPlant("Plant4", 100, 10));
-        board.addPlant(4,0, new XYPlant("Plant5", 100, 10));
-        board.addPlant(0,7, new XYPlant("Plant5", 100, 10));
-        board.addPlant(0,6, new XYPlant("Plant5", 100, 10));
+        board.addPlant(0,0, new XYPlant("Plant1", 100, 15));
+        board.addPlant(1,0, new XYPlant("Plant1", 100, 15));
+        board.addPlant(2,0, new XYPlant("Plant1", 100, 15));
+        board.addPlant(3,0, new XYPlant("Plant1", 100, 15));
+        board.addPlant(4,0, new XYPlant("Plant1", 100, 15));
 
-        for (int i =0; i<20;i++){
-            
-            board.runBoard();
-            System.out.println();
+        board.printBoard();
+        while(true) {
+            boolean[] res = board.gameEnds();
+            if(!res[0]) {
+                board.runBoard();
+            } else {
+                board.printBoard();
+                System.out.println(res[1] ? "\n\t\t***ZOMBIE WON***\n" : "\n\t\t***PLANTS WON***\n");
+                return;
+            }
         }
     }
 }

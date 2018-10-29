@@ -15,6 +15,7 @@ public abstract class NPC {
     private String name;
     private int attackPower;
     private int attackSpeed;
+    private int pointsWhenDead;
 
     public NPC(String name, int health) {
         this.name = name;
@@ -25,6 +26,13 @@ public abstract class NPC {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
+    }
+
+    public NPC(String name, int health, int attackPower, int points) {
+        this.name = name;
+        this.health = health;
+        this.attackPower = attackPower;
+        this.pointsWhenDead = points;
     }
 
     /**
@@ -50,6 +58,8 @@ public abstract class NPC {
     public int getAttackPower() {
         return attackPower;
     }
+
+    public int getPointsWhenDead() { return pointsWhenDead; }
 
     public abstract void attack(NPC npc);
 

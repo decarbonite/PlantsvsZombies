@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Board node is holding information about NPCs on it.
  *
@@ -18,20 +16,10 @@ public class BoardNode {
         zombie = null;
     }
 
-    public BoardNode(Plant plant, Zombie zombie) {
-        this.plant = plant;
-        this.zombie = zombie;
-    }
-
-    public void destroyPlant() {
-        if (plant != null) {
-            if (!plant.isAlive()) {
-                plant = null;
-            }
-        }
-    }
-
-
+    /**
+     * Remove Zombie instance iff exists
+     * @return Zombie instance of current node before Zombie will be removed
+     */
     public Zombie destroyZombie() {
         if (zombie != null) {
             Zombie z = zombie;
@@ -41,6 +29,11 @@ public class BoardNode {
         return null;
     }
 
+    /**
+     * Adds Plant instance to the current node
+     * @param plant new Plant
+     * @return true - if plant was added; false otherwise
+     */
     public boolean addPlant(Plant plant) {
         if (this.plant == null) {
             this.plant = plant;
@@ -49,6 +42,9 @@ public class BoardNode {
         return false;
     }
 
+    /**
+     * Simulates fight between Plant and Zombie in current node
+     */
     public void plantFightZombie() {
         this.plant.attack(this.zombie);
 
@@ -65,6 +61,11 @@ public class BoardNode {
 
     }
 
+    /**
+     * Simulates fight between current Plant instance and given Zombie instance
+     * @param zombie Zombie object to fight with
+     * @return Zombie iff not ded; otherwise Zombie with updated health
+     */
     public Zombie plantFightZombie(Zombie zombie) {
         this.plant.attack(zombie);
 
@@ -75,11 +76,18 @@ public class BoardNode {
         return zombie;
     }
 
+    /**
+     * Adds Zombie instance into the node
+     * @param zombie Zombie object
+     */
     public void addZombie(Zombie zombie) {
         this.zombie = zombie;
     }
 
-
+    /**
+     * Check if the current node contain Zombie object
+     * @return true - node contain zombie instance; false - otherwise
+     */
     public boolean hasZombie() {
         if (zombie != null) {
             return true;
@@ -87,6 +95,10 @@ public class BoardNode {
         return false;
     }
 
+    /**
+     * Check if the current node contain Plant object
+     * @return true - node contain plant instance; false - otherwise
+     */
     public boolean hasPlant() {
         if (plant != null) {
             return true;
@@ -94,20 +106,19 @@ public class BoardNode {
         return false;
     }
 
+    /**
+     * Returns plant instance if the current node
+     * @return Plant instance
+     */
     public Plant getPlant() {
         return this.plant;
     }
 
+    /**
+     * Returns zombie instance of the current node
+     * @return Zombie instance
+     */
     public Zombie getZombie() {
         return this.zombie;
     }
-
-    public String getZombieName() {
-        return zombie.toString();
-    }
-
-    public String getPlantName() {
-        return plant.toString();
-    }
-
 }
