@@ -40,7 +40,7 @@ public abstract class NPC {
     /**
      * Returns true if the NPC's health is greater than 0, false otherwise
      *
-     * @return returns a boolean, whether the NPC is alive or not
+     * @return boolean returns whether the NPC is alive or not
      */
     public boolean isAlive(){
         if (this.getHealth() > 0) {
@@ -51,7 +51,7 @@ public abstract class NPC {
 
     /**
      * Returns health of the current NPC's
-     * @return Returns NPC's health points
+     * @return int Returns NPC's health points
      */
     public int getHealth() {
         return health;
@@ -66,7 +66,7 @@ public abstract class NPC {
     }
 
     /**
-     * @return Returns NPC's attack power
+     * @return int Returns NPC's attack power
      */
     public int getAttackPower() {
         return attackPower;
@@ -80,7 +80,7 @@ public abstract class NPC {
 
     /**
      * Forms String object with NPC's name and health
-     * @return Returns a string containing NPC's name and health
+     * @return String Returns a string containing NPC's name and health
      */
     public String toString() {
         return name +" ("+health+")";

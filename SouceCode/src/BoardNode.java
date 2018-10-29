@@ -33,7 +33,7 @@ public class BoardNode {
     /**
      * Adds Plant instance to the current node
      * @param plant new Plant
-     * @return true - if plant was added; false otherwise
+     * @return boolean true - if plant was added; false otherwise
      */
     public boolean addPlant(Plant plant) {
         if (this.plant == null) {
@@ -85,7 +85,7 @@ public class BoardNode {
 
     /**
      * Check if the current node contain Zombie object
-     * @return true - node contain zombie instance; false - otherwise
+     * @return boolean true - node contain zombie instance; false - otherwise
      */
     public boolean hasZombie() {
         if (zombie != null) {
@@ -107,7 +107,7 @@ public class BoardNode {
 
     /**
      * Returns plant instance if the current node
-     * @return Plant instance
+     * @return Plant instance of the plant
      */
     public Plant getPlant() {
         return this.plant;
@@ -115,7 +115,7 @@ public class BoardNode {
 
     /**
      * Returns MoneyPlant if exists in current node
-     * @return MoneyPlant object
+     * @return MoneyPlant object of MoneyPlant
      */
     public MoneyPlant getMoneyPlant() {
         if(this.plant instanceof MoneyPlant) {
@@ -125,7 +125,7 @@ public class BoardNode {
     }
     /**
      * Returns zombie instance of the current node
-     * @return Zombie instance
+     * @return Zombie instance of Zombie
      */
     public Zombie getZombie() {
         return this.zombie;
@@ -133,7 +133,7 @@ public class BoardNode {
 
     /**
      * Check if the plant stored in the current nod is MoneyPlant
-     * @return true when Plant stored in the node is MoneyPlant instance; false - otherwise
+     * @return boolean true when Plant stored in the node is MoneyPlant instance; false - otherwise
      */
     public boolean hasMoneyPlant() {
         if(this.plant instanceof MoneyPlant) {
