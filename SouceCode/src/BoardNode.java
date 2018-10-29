@@ -8,6 +8,7 @@ public class BoardNode {
     private Plant plant;
     private Zombie zombie;
 
+
     /**
      * Default constructor that creates empty node with a specified coordinates
      */

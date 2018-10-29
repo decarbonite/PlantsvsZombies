@@ -6,13 +6,14 @@ import java.util.concurrent.TimeUnit;
  * Creates board that contains BoardRows based on BoardNodes
  *
  * @author Dmytro Sytnik (VanArman)
+ * @author Ahmed Romih (decarbonite)
  * @version 27 October, 2018
  */
 public class Board {
-    protected static boolean GAME_ENDS = false;
-    private static int BOARD_ROWS;
-    private static int BOARD_COLUMNS;
-    private static int zombiesToSpawn;
+    private static int boardRows;
+    private static int boardColumns;
+    private int money;
+    private int zombiesToSpawn;
     private ArrayList<BoardRow> board;
 
     /**
@@ -23,13 +24,14 @@ public class Board {
      * @param zombiesToSpawn int number of zombies that would be randomly generated
      */
     public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn) {
-        BOARD_ROWS = numberOfRows;
-        BOARD_COLUMNS = numberOfColumns;
+        money = 200;
+        boardRows = numberOfRows;
+        boardColumns = numberOfColumns;
         this.zombiesToSpawn = zombiesToSpawn;
-        this.board = new ArrayList<BoardRow>(BOARD_ROWS);
+        this.board = new ArrayList<>(boardRows);
 
-        for(int i = 0; i < BOARD_ROWS; i++) {
-            board.add(new BoardRow(BOARD_COLUMNS));
+        for (int i = 0; i < boardRows; i++) {
+            board.add(new BoardRow(boardColumns));
         }
     }
 
@@ -37,18 +39,25 @@ public class Board {
      * Console print of the board
      */
     protected void printBoard() {
-        for(BoardRow br : board){
+        System.out.println("Player's Money: " + money);
+        for (BoardRow br : board) {
             System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println(br);
         }
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Move Zombies across board in each row
      */
-    private void moveZombies(){
-        for(BoardRow br : board){
+    private void moveZombies() {
+        for (BoardRow br : board) {
             br.moveZombie();
         }
     }
@@ -57,7 +66,7 @@ public class Board {
      * Simulates fight between Zombies and Plants on each row
      */
     private void fightPlantZombie() {
-        for(BoardRow br : board){
+        for (BoardRow br : board) {
             br.fightPvsZ();
         }
     }
@@ -70,12 +79,6 @@ public class Board {
         printBoard();
         fightPlantZombie();
         moveZombies();
-
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -115,13 +118,30 @@ public class Board {
 
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
-                int randRow = rand.nextInt(BOARD_ROWS);
-                if (!board.get(randRow).hasZombie(BOARD_COLUMNS - 1)) {
-                    addZombie(randRow, BOARD_COLUMNS - 1, new Zombie("Zombie", 100, 40, 10));
+                int randRow = rand.nextInt(boardRows);
+                if (!board.get(randRow).hasZombie(boardColumns - 1)) {
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie ", 100, 15));
                     zombiesToSpawn--;
                 }
             }
         }
+    }
+
+    /**
+     * Randomly generates Plants on the board
+     */
+    protected void generateNewPlant() {
+        Random rand = new Random();
+
+        if (money >= 50 && rand.nextInt(5) % 3 == 0) {
+            int randRow = rand.nextInt(boardRows);
+            int randCol = rand.nextInt(boardColumns - 1);
+            if (!board.get(randRow).hasZombie(boardColumns - 1)) {
+                addPlant(randRow, randCol, new XYPlant("Plant1 ", 100, 40));
+                money -= 50;
+            }
+        }
+
     }
 
     /**
