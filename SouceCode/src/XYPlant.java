@@ -1,9 +1,12 @@
 /**
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
+ *
+ * @author Ahmed Romih (decarbonite)
+ * @version 26 October, 2018
  */
-public class XYPlant extends Plant {
-    private static int counter = 0;
+public class XYPlant {
+    /*private static int counter = 0;
     public XYPlant(String name, int health){
         super(name, health);
     }
@@ -19,5 +22,5 @@ public class XYPlant extends Plant {
             npc.setHealth(npc.getHealth() - this.getAttackPower());
         }
     }
-
+*/
 }

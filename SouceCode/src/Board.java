@@ -139,7 +139,7 @@ public class Board {
             int randRow = rand.nextInt(boardRows);
             int randCol = rand.nextInt(boardColumns - 1);
             if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                addPlant(randRow, randCol, new XYPlant("Plant1 ", 100, 30));
+                addPlant(randRow, randCol, new Plant("Plant1 ", 100, 30));
                 money -= 50;
             }
         }
