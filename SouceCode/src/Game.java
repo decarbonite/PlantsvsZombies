@@ -11,7 +11,7 @@ public class Game {
      * @param args String[] - not used in this game
      */
     public static void main(String[] args) {
-        Board board = new Board(5, 9, 5);
+        Board board = new Board(5, 10, 5);
 
         board.addPlant(0,0, new XYPlant("Plant", 200, 5));
         board.addPlant(1,0, new XYPlant("Plant", 200, 5));
