@@ -7,21 +7,22 @@ SYSC 3110 - Third Year Project
 - Source - The project source code (.java files)
 
 ## Workload
-- (@DomK123)
+- [Dominic (Dominic Kocjan)](@DomK123)
     * ~~Flower~~ -> Plant  
     * ~~XYFlower~~ -> XYPlant
     * ~~MoneyFlower~~ -> MoneyPlant
 
-- (@decarbonite)
+- [Ahmed (Ahmed Romih)](@decarbonite)
     * ~~Beast~~ -> NPC
     * Zombie
 
-- (@vanarman)
+- [Dima (Dmytro Sytnik)](@vanarman)
     * Board
     * BoardRow
     * BoardNode
     * Game
 
-- (@mrunal-patel1997)
+- [Mrunal (Mrunal Patel)](@mrunal-patel1997)
     * Player
     * GameRound
+
