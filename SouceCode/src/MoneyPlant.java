@@ -7,7 +7,6 @@
  * @version 26 October, 2018
  */
 public class MoneyPlant extends Plant {
-
     /**
      * Initializes a new MoneyPlant
      * @param name Plant's name
