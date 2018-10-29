@@ -16,7 +16,8 @@ SYSC 3110 - Third Year Project
     * ~~Beast~~ -> NPC
     * Zombie
 
-- Dima
+- Dima (Dmytro)
+    * Board
     * BoardRow
     * BoardNode
     * Game
