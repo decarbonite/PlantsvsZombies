@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Creates board that contains BoardRows based on BoardNodes
@@ -48,13 +47,6 @@ public class Board {
             System.out.println(br);
         }
         System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-
-        // to make a small delay between each zombie move
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

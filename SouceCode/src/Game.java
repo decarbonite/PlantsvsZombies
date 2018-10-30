@@ -26,14 +26,17 @@ public class Game {
 
         Board board = new Board(numberOfRows, numberOfColumns, 20, newPlayer.getScore(), newPlayer.getMoney());
 
+        System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: $"+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
+        board.printBoard();
+
         while(true) {
             boolean[] res = board.gameEnds();
             Scanner scan = new Scanner(System.in);
 
             while (true) {
-                System.out.println(" 1  - Add a plant");
-                System.out.println(" 2  - Add Sun Flower (to generate money)");
-                System.out.println(" 3  - Play with no plants for now");
+                System.out.println(" 1  - Add a Plant                           [HP - 200; AP - 15; MG - 0; Cost: $50]");
+                System.out.println(" 2  - Add Sun Flower (to generate money)    [HP - 75; AP - 25; MG - 15 (50% chance); Cost: $50]");
+                System.out.println(" 3  - Continue step");
                 choice = scan.nextInt();
                 if (choice == 1 || choice == 2){
                     System.out.print("Enter row position (1 -> "+ (numberOfRows) +"): ");
@@ -56,7 +59,7 @@ public class Game {
             if(!res[0]) {
                 newPlayer.setMoney(board.money);
                 newPlayer.updateScore(board.score);
-                System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: "+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
+                System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: $"+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
 
                 board.runBoard();
             } else {
