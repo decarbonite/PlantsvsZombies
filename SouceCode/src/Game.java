@@ -53,6 +53,7 @@ public class Game {
                         System.out.println("Cannot add plant into this cell");
                     }
                 } else if (choice == 4){
+                    System.out.println("You quitted the game");
                     return;
                 }
                 else {
