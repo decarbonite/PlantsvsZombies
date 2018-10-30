@@ -36,9 +36,9 @@ public class Game {
                 System.out.println(" 3  - Play with no plants for now");
                 choice = scan.nextInt();
                 if (choice == 1 || choice == 2){
-                    System.out.println("Enter row position (1 -> "+ (numberOfRows) +"): ");
+                    System.out.print("Enter row position (1 -> "+ (numberOfRows) +"): ");
                     plantX = scan.nextInt() - 1;
-                    System.out.println("Enter column position (1 -> "+ (numberOfColumns - 1) +"): ");
+                    System.out.print("Enter column position (1 -> "+ (numberOfColumns - 1) +"): ");
                     plantY = scan.nextInt() - 1;
 
                     if(choice == 1 && board.addPlant(plantX, plantY, new Plant("Plant", 200, 15))){
