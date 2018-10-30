@@ -51,7 +51,7 @@ Game continue until Plants will kill all Zombies (20) or at least one Zombie rea
     
     ![Start game](Documentation/images/GameStart.png)
     
-    * 1 - Add a plant (Adding fighting plant: **Health** 200; **Attack Power** 15; **Price** 50)
+    * 1 - Add a Plant (Adding fighting plant: **Health** 200; **Attack Power** 15; **Price** 50)
     
         When Player choose adding Plant, system will offer to specify where to place it:
         *  Enter row position (1 -> 5): eg. 1
@@ -61,7 +61,7 @@ Game continue until Plants will kill all Zombies (20) or at least one Zombie rea
             
     ![Board display 1](Documentation/images/BoardDisplay1.png)
         
-    * 2 - Add Sun Flower (Adding money-generator that cannot fight with zombies: **Health** 75; **Price** 50; **Money generates** 25 (50% chance per board update))
+    * 2 - Add Sun Flower (Adding money-generator Plant that cannot fight with zombies: **Health** 75; **Price** 50; **Money generates** 25 (50% chance per board update))
       
         When Player choose adding Sun Flower, system will offer to specify where to place it:
         *  Enter row position (1 -> 5): eg. 1
@@ -71,10 +71,15 @@ Game continue until Plants will kill all Zombies (20) or at least one Zombie rea
                 
     ![Board display 2](Documentation/images/BoardDisplay2.png)
     
-    * 3 - Play with no plants for now (Continue with existing plants - next move)
+    * 3 - Continue step (Continue with existing plants - next move)
     
-        When Player choose to play with no plants, the system will print empty board
+        When Player choose to play with no plants, the system will print current board
         
     ![Board display 3](Documentation/images/BoardDisplay3.png) 
 
+    * 4 - Quit Game (Ends the game)
+    
+        When Player choose to Quit the game, game will ended and system will print massage shown bellow.
+        
+    ![Quit game 3](Documentation/images/QuitGame.png) 
 3. The game will loop step 2. until Plants will kill all Zombies or at least one Zombie reaches the end of the board with no Plant on the last cell.
