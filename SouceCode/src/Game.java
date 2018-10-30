@@ -37,6 +37,7 @@ public class Game {
                 System.out.println(" 1  - Add a Plant                           [HP - 200; AP - 15; MG - 0; Cost: $50]");
                 System.out.println(" 2  - Add Sun Flower (to generate money)    [HP - 75; AP - 25; MG - 15 (50% chance); Cost: $50]");
                 System.out.println(" 3  - Continue step");
+                System.out.println(" 4  - Quit game");
                 choice = scan.nextInt();
                 if (choice == 1 || choice == 2){
                     System.out.print("Enter row position (1 -> "+ (numberOfRows) +"): ");
@@ -51,7 +52,10 @@ public class Game {
                     } else {
                         System.out.println("Cannot add plant into this cell");
                     }
-                } else {
+                } else if (choice == 4){
+                    return;
+                }
+                else {
                     break;
                 }
             }
