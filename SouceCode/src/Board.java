@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,55 +12,35 @@ import java.util.Random;
  */
 public class Board extends JFrame{
 
-    private static int boardRows;
-    private static int boardColumns;
+    public static final int BOARD_ROWS = 5;
+    public static final int BOARD_COLS = 9;
     protected static int score;
     protected static int money;
-    private int zombiesToSpawn;
-    private ArrayList<BoardRow> board;
+    private int zombiesToSpawn = 3;
     private JPanel gridPanel;
     private JPanel selectPanel;
-    private JButton[][] label;
-    private JButton shootflowerButton;
+    private JButton[][] btn;
+    private JButton shootFlowerButton;
     private JButton sunflowerButton;
-    private Image cursorIcon;
-    private ImageIcon img22;
+    private ImageIcon img;
     private JFrame frame;
+    private static final ImageIcon PLANT_IMAGE = new ImageIcon("plant.png");
+    private static final ImageIcon SUNFLOWER_IMAGE = new ImageIcon("sunflower.png");
+    private static final ImageIcon ZOMBIE_IMAGE = new ImageIcon("zombie.png");
+    private static final ImageIcon GRASS_IMAGE = new ImageIcon("grass.jpg");
 
 
 
-    private ActionListener listener;
-
-    /**
-     * Default constructor
-     *
-     * @param numberOfRows int number of rows
-     * @param numberOfColumns int number of BoardNode instances in each row
-     * @param zombiesToSpawn int number of zombies that would be randomly generated
-     * @param score int initial score for the game (round)
-     * @param money int initial amount of money
-     */
-    public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn, int score, int money) {
-        boardRows = numberOfRows;
-        boardColumns = numberOfColumns;
+    public Board(int zombiesToSpawn, int score, int money) {
         this.score = score;
         this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
-        this.board = new ArrayList<>(boardRows);
-
-        for (int i = 0; i < boardRows; i++) {
-            board.add(new BoardRow(boardColumns));
-        }
-    }
-
-    public Board(){
-
         frame = new JFrame("Plants Vs Zombies");
 
         selectPanel = new JPanel(new GridLayout(1,5,2,2));
 
         gridPanel = new JPanel(new GridLayout(5,9,2,2));
-        label = new JButton[5][9];
+        btn = new JButton[5][9];
 
         paintGrid();
 
@@ -81,208 +60,90 @@ public class Board extends JFrame{
         return frame;
     }
 
-    public JButton[][] getLabel() {
-        return label;
+    public JButton[][] getBtn() {
+        return btn;
     }
 
-    public JButton getShootflowerButton() {
-        return shootflowerButton;
+    public JButton getShootFlowerButton() {
+        return shootFlowerButton;
     }
 
     public JButton getSunflowerButton() {
         return sunflowerButton;
     }
 
-    public ImageIcon getImg22() {
-        return img22;
+    public ImageIcon getImg() {
+        return img;
     }
 
-    public void setImg22(ImageIcon img22) {
-        this.img22 = img22;
+    public void setImg(ImageIcon img) {
+        this.img = img;
     }
 
-    /**
-     * Move Zombies across board in each row
-     */
-    private void moveZombies() {
-        for (BoardRow br : board) {
-            br.moveZombie();
+    @SuppressWarnings("Duplicates")
+    public void moveZombie() {
+        for (int i = 0; i < BOARD_ROWS; i++) {
+            for (int j = 0; j < BOARD_COLS; j++) {
+                if (btn[i][j].getIcon().toString().equals("zombie.png")){
+                    if (j != 0 && btn[i][j-1].getIcon().toString().equals("grass.jpg")){
+                        btn[i][j].setIcon(GRASS_IMAGE);
+                        btn[i][j-1].setIcon(ZOMBIE_IMAGE);
+                    }
+                }
+            }
         }
     }
 
-    /**
+/**
      * Simulates fight between Zombies and Plants on each row and if Plant kill Zombie add point to the player
-     */
+     *//*
+
     private void fightPlantZombie() {
         for (BoardRow br : board) {
             this.score = br.fightPvsZ(this.score);
         }
     }
+*/
 
-    /**
-     * Rise money if at least one of the rows contains MoneyFlower (if more, values added)
-     */
-    private void riseMoney() {
-        for (BoardRow br : board){
-            this.money = br.generateMoney(this.money);
-        }
-    }
-
-    /**
-     * Main method that runs the Zombie generation, simulates fight method, moves zombies across board and prints board.
-     */
-    public void runBoard() {
-        riseMoney();
-        generateNewZombie();
-
-        fightPlantZombie();
-        moveZombies();
-    }
-
-    /**
-     * Check is the game ends
-     * @return boolean[], boolean[0] = true if game is end; false otherwise. boolean[1] = true Zombie won; false if Plants won
-     */
-    public boolean[] gameEnds() {
-        boolean[] res = new boolean[2];
-        if(board.get(0).ZOMBIE_WON){
-            res[0] = true; res[1] = true;
-            return res;
-        }
-
-        boolean zombieOnRow = false;
-
-        for(BoardRow br : board) {
-            if(br.hasZombie() && !zombieOnRow) {
-                zombieOnRow = true;
-                continue;
-            }
-        }
-
-        if(zombiesToSpawn <= 0) {
-            res[0] = !zombieOnRow; res[1] = false;
-            return res;
-        } else {
-            res[0] = false; res[1] = false;
-            return res;
-        }
-    }
 
     /**
      * Randomly generates zombies on the board across rows starting on the right of the board
      */
-    private void generateNewZombie() {
-        Random rand = new Random();
-
+    public void addZombie() {
         if (zombiesToSpawn > 0) {
+            Random rand = new Random();
+
             if (rand.nextInt(5) % 3 == 0) {
-                int randRow = rand.nextInt(boardRows);
-                if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10));
-                    //label[5][9] = new JLabel(new ImageIcon("./img.jpg"));
-                    //panel.add(label[i][j]);
+
+                int randRow = rand.nextInt(BOARD_ROWS);
+
+                // Place zombie only if its a grass button
+                if (btn[randRow][8].getIcon().toString().equals("grass.jpg")){
+                    btn[randRow][8].setIcon(ZOMBIE_IMAGE);
                     zombiesToSpawn--;
                 }
             }
         }
-    }
 
-    /**
-     * Adds Plant object on a specific coordinate
-     * @param x int column index
-     * @param y int row index
-     * @param plant Plant object
-     * @return boolean true if plant has been added; false - otherwise
-     */
-    public boolean addPlant(int x, int y, Plant plant) {
-        if(money >= 50 && (x >= 0 && x < boardRows) && (y >= 0 && y < (boardColumns - 1))) {
-            if (plant != null) {
-                if(!board.get(x).hasPlant(y)) {
-                    board.get(x).addPlant(y, plant);
-                    money -= 50;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
-
-    /**
-     * Adds Zombie object on a specific coordinate
-     * @param x int row index
-     * @param y int column index
-     * @param zombie Zombie object
-     */
-    public void addZombie(int x, int y, Zombie zombie) {
-        if (zombie != null) {
-            board.get(x).addZombie(y, zombie);
-        }
-    }
-
 
     public void paintGrid(){
-        Image img = new ImageIcon("./plant.png").getImage();
-        Image newImg = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(newImg);
-        shootflowerButton = new JButton(icon);
-        shootflowerButton.addActionListener(new Controller(this));
-        selectPanel.add(shootflowerButton);
+        shootFlowerButton = new JButton(PLANT_IMAGE);
+        shootFlowerButton.addActionListener(new Controller(this));
+        selectPanel.add(shootFlowerButton);
 
-
-        img = new ImageIcon("./sunflower.png").getImage();
-        newImg = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
-        icon = new ImageIcon(newImg);
-        sunflowerButton = new JButton(icon);
+        sunflowerButton = new JButton(SUNFLOWER_IMAGE);
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 9; j++) {
-                label[i][j] = new JButton(new ImageIcon("./img.jpg"));
-                label[i][j].putClientProperty("row", i);
-                label[i][j].putClientProperty("column", j);
-                label[i][j].addActionListener(new Controller(this));
-                gridPanel.add(label[i][j]);
+        for (int i = 0; i < BOARD_ROWS; i++) {
+            for (int j = 0; j < BOARD_COLS; j++) {
+                btn[i][j] = new JButton(GRASS_IMAGE);
+                btn[i][j].putClientProperty("row", i);
+                btn[i][j].putClientProperty("column", j);
+                btn[i][j].addActionListener(new Controller(this));
+                gridPanel.add(btn[i][j]);
             }
         }
     }
-
-
-/*
-    @SuppressWarnings("Duplicates")
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == shootflowerButton){
-            if (frame.getCursor().getType() != 0){
-                frame.setCursor(DEFAULT_CURSOR);
-            }else {
-                frame.setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("./plant.png").getImage(),
-                        new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("./plant.png").getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
-                img22 = new ImageIcon(icon);
-            }
-        }
-        if(e.getSource() == sunflowerButton){
-            if (frame.getCursor().getType() != 0){
-                frame.setCursor(DEFAULT_CURSOR);
-            }else {
-                frame.setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("./sunflower.png").getImage(),
-                                new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("./sunflower.png").getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
-                img22 = new ImageIcon(icon);
-            }
-        }
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (e.getSource() == label[i][j]){
-                    if (frame.getCursor().getType() != 0) {
-                        label[i][j].setIcon(img22);
-                    }
-                }
-            }
-        }
-
-    }*/
 }

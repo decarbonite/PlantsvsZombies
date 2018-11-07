@@ -1,5 +1,7 @@
+/*
 import java.util.Scanner;
 
+*/
 /**
  * Starting point of the Plant vs Zombie game
  *
@@ -8,12 +10,15 @@ import java.util.Scanner;
  *
  * @author Ahmed Romih (decarbonite)
  * @version 27 October, 2019
- */
+ *//*
+
 public class Game {
-    /**
+    */
+/**
      * Entering point of the game
      * @param args String[] - not used in this game
-     */
+     *//*
+
     public static void main(String[] args) {
         int numberOfRows = 5;
         int numberOfColumns = 10;
@@ -75,3 +80,4 @@ public class Game {
 
     }
 }
+*/

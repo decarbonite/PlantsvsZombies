@@ -27,7 +27,7 @@ public class Gui extends JFrame {
     public void paintGrid(){
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                label[i][j] = new JLabel(new ImageIcon("./img.jpg"));
+                label[i][j] = new JLabel(new ImageIcon("grass.jpg"));
                 panel.add(label[i][j]);
             }
         }

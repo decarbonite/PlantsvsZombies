@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
+
 import static java.awt.Cursor.DEFAULT_CURSOR;
 
 @SuppressWarnings("Duplicates")
@@ -16,7 +18,7 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == view.getShootflowerButton()){
+        if(e.getSource() == view.getShootFlowerButton()){
             if (view.getFrame().getCursor().getType() != 0){
                 view.getFrame().setCursor(DEFAULT_CURSOR);
                 return;
@@ -25,7 +27,7 @@ public class Controller implements ActionListener {
                         createCustomCursor(new ImageIcon("./plant.png").getImage(),
                                 new Point(0, 0), "custom cursor"));
                 Image icon = new ImageIcon("./plant.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-                view.setImg22(new ImageIcon(icon));
+                view.setImg(new ImageIcon(icon));
                 return;
             }
         }
@@ -38,7 +40,7 @@ public class Controller implements ActionListener {
                         createCustomCursor(new ImageIcon("./sunflower.png").getImage(),
                                 new Point(0, 0), "custom cursor"));
                 Image icon = new ImageIcon("./sunflower.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-                view.setImg22(new ImageIcon(icon));
+                view.setImg(new ImageIcon(icon));
                 return;
             }
         }
@@ -46,14 +48,36 @@ public class Controller implements ActionListener {
         JButton btn =  (JButton) e.getSource();
         int row = (int)btn.getClientProperty("row");
         int col = (int)btn.getClientProperty("column");
+
         if (view.getFrame().getCursor().getType() != 0) {
-            view.getLabel()[row][col].setIcon(view.getImg22());
+            //Only place it if cell is empty
+            if (!view.getBtn()[row][col].getIcon().toString().equals("grass.jpg")) {
+                JOptionPane.showMessageDialog(null, "This cell is occupied");
+                return;
+            }
+            view.getBtn()[row][col].setIcon(view.getImg());
         }
 
 
 
 }
     public static void main(String[] args) {
-        new Controller(new Board());
+        Board b = new Board(2,200,200);
+        new Controller(b);
+        while(true) {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                b.addZombie();
+                TimeUnit.SECONDS.sleep(2);
+                b.moveZombie();
+                //TimeUnit.SECONDS.sleep(3);
+
+            }catch (InterruptedException e){
+                System.out.println(e.getMessage());
+            }
+
+
+
+        }
     }
 }
