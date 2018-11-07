@@ -24,9 +24,9 @@ public class Controller implements ActionListener {
                 return;
             }else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("./plant.png").getImage(),
+                        createCustomCursor(new ImageIcon("../images/plant.png").getImage(),
                                 new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("./plant.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                Image icon = new ImageIcon("../images/plant.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 view.setImg(new ImageIcon(icon));
                 return;
             }
@@ -37,9 +37,9 @@ public class Controller implements ActionListener {
                 return;
             }else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("./sunflower.png").getImage(),
+                        createCustomCursor(new ImageIcon("../images/sunflower.png").getImage(),
                                 new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("./sunflower.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                Image icon = new ImageIcon("../images/sunflower.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
                 view.setImg(new ImageIcon(icon));
                 return;
             }
@@ -51,7 +51,7 @@ public class Controller implements ActionListener {
 
         if (view.getFrame().getCursor().getType() != 0) {
             //Only place it if cell is empty
-            if (!view.getBtn()[row][col].getIcon().toString().equals("grass.jpg")) {
+            if (!view.getBtn()[row][col].getIcon().toString().equals("../images/grass.jpg")) {
                 JOptionPane.showMessageDialog(null, "This cell is occupied");
                 return;
             }

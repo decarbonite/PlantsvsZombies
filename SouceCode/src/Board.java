@@ -24,10 +24,10 @@ public class Board extends JFrame{
     private JButton sunflowerButton;
     private ImageIcon img;
     private JFrame frame;
-    private static final ImageIcon PLANT_IMAGE = new ImageIcon("plant.png");
-    private static final ImageIcon SUNFLOWER_IMAGE = new ImageIcon("sunflower.png");
-    private static final ImageIcon ZOMBIE_IMAGE = new ImageIcon("zombie.png");
-    private static final ImageIcon GRASS_IMAGE = new ImageIcon("grass.jpg");
+    private static final ImageIcon PLANT_IMAGE = new ImageIcon("../images/plant.png");
+    private static final ImageIcon SUNFLOWER_IMAGE = new ImageIcon("../images/sunflower.png");
+    private static final ImageIcon ZOMBIE_IMAGE = new ImageIcon("../images/zombie.png");
+    private static final ImageIcon GRASS_IMAGE = new ImageIcon("../images/grass.jpg");
 
 
 
@@ -84,8 +84,8 @@ public class Board extends JFrame{
     public void moveZombie() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                if (btn[i][j].getIcon().toString().equals("zombie.png")){
-                    if (j != 0 && btn[i][j-1].getIcon().toString().equals("grass.jpg")){
+                if (btn[i][j].getIcon().toString().equals("../images/zombie.png")){
+                    if (j != 0 && btn[i][j-1].getIcon().toString().equals("../images/grass.jpg")){
                         btn[i][j].setIcon(GRASS_IMAGE);
                         btn[i][j-1].setIcon(ZOMBIE_IMAGE);
                     }
@@ -118,7 +118,7 @@ public class Board extends JFrame{
                 int randRow = rand.nextInt(BOARD_ROWS);
 
                 // Place zombie only if its a grass button
-                if (btn[randRow][8].getIcon().toString().equals("grass.jpg")){
+                if (btn[randRow][8].getIcon().toString().equals("../images/grass.jpg")){
                     btn[randRow][8].setIcon(ZOMBIE_IMAGE);
                     zombiesToSpawn--;
                 }
@@ -145,5 +145,9 @@ public class Board extends JFrame{
                 gridPanel.add(btn[i][j]);
             }
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
