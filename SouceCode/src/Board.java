@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,13 +11,26 @@ import java.util.Random;
  * @author Ahmed Romih (decarbonite)
  * @version 27 October, 2018
  */
-public class Board {
+public class Board extends JFrame{
+
     private static int boardRows;
     private static int boardColumns;
     protected static int score;
     protected static int money;
     private int zombiesToSpawn;
     private ArrayList<BoardRow> board;
+    private JPanel gridPanel;
+    private JPanel selectPanel;
+    private JButton[][] label;
+    private JButton shootflowerButton;
+    private JButton sunflowerButton;
+    private Image cursorIcon;
+    private ImageIcon img22;
+    private JFrame frame;
+
+
+
+    private ActionListener listener;
 
     /**
      * Default constructor
@@ -38,15 +54,51 @@ public class Board {
         }
     }
 
-    /**
-     * Console print of the board
-     */
-    protected void printBoard() {
-        for (BoardRow br : board) {
-            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println(br);
-        }
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+    public Board(){
+
+        frame = new JFrame("Plants Vs Zombies");
+
+        selectPanel = new JPanel(new GridLayout(1,5,2,2));
+
+        gridPanel = new JPanel(new GridLayout(5,9,2,2));
+        label = new JButton[5][9];
+
+        paintGrid();
+
+        selectPanel.setSize(100,100);
+
+        frame.setSize(1000, 600);
+
+        frame.add(selectPanel, BorderLayout.NORTH);
+        frame.add(gridPanel, BorderLayout.CENTER);
+
+        frame.setLocationRelativeTo(null);//show gui in the middle of screen
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public JButton[][] getLabel() {
+        return label;
+    }
+
+    public JButton getShootflowerButton() {
+        return shootflowerButton;
+    }
+
+    public JButton getSunflowerButton() {
+        return sunflowerButton;
+    }
+
+    public ImageIcon getImg22() {
+        return img22;
+    }
+
+    public void setImg22(ImageIcon img22) {
+        this.img22 = img22;
     }
 
     /**
@@ -82,7 +134,7 @@ public class Board {
     public void runBoard() {
         riseMoney();
         generateNewZombie();
-        printBoard();
+
         fightPlantZombie();
         moveZombies();
     }
@@ -127,25 +179,10 @@ public class Board {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
                     addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10));
+                    //label[5][9] = new JLabel(new ImageIcon("./img.jpg"));
+                    //panel.add(label[i][j]);
                     zombiesToSpawn--;
                 }
-            }
-        }
-    }
-
-    /**
-     * Randomly generates Plants on the board
-     * NOT used (ONLY for testing)
-     */
-    protected void generateNewPlant() {
-        Random rand = new Random();
-
-        if (money >= 50 && rand.nextInt(5) % 3 == 0) {
-            int randRow = rand.nextInt(boardRows);
-            int randCol = rand.nextInt(boardColumns - 1);
-            if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                addPlant(randRow, randCol, new Plant("Plant1 ", 100, 30));
-                money -= 50;
             }
         }
     }
@@ -181,4 +218,71 @@ public class Board {
             board.get(x).addZombie(y, zombie);
         }
     }
+
+
+    public void paintGrid(){
+        Image img = new ImageIcon("./plant.png").getImage();
+        Image newImg = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(newImg);
+        shootflowerButton = new JButton(icon);
+        shootflowerButton.addActionListener(new Controller(this));
+        selectPanel.add(shootflowerButton);
+
+
+        img = new ImageIcon("./sunflower.png").getImage();
+        newImg = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImg);
+        sunflowerButton = new JButton(icon);
+        sunflowerButton.addActionListener(new Controller(this));
+        selectPanel.add(sunflowerButton);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                label[i][j] = new JButton(new ImageIcon("./img.jpg"));
+                label[i][j].putClientProperty("row", i);
+                label[i][j].putClientProperty("column", j);
+                label[i][j].addActionListener(new Controller(this));
+                gridPanel.add(label[i][j]);
+            }
+        }
+    }
+
+
+/*
+    @SuppressWarnings("Duplicates")
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == shootflowerButton){
+            if (frame.getCursor().getType() != 0){
+                frame.setCursor(DEFAULT_CURSOR);
+            }else {
+                frame.setCursor(Toolkit.getDefaultToolkit().
+                        createCustomCursor(new ImageIcon("./plant.png").getImage(),
+                        new Point(0, 0), "custom cursor"));
+                Image icon = new ImageIcon("./plant.png").getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+                img22 = new ImageIcon(icon);
+            }
+        }
+        if(e.getSource() == sunflowerButton){
+            if (frame.getCursor().getType() != 0){
+                frame.setCursor(DEFAULT_CURSOR);
+            }else {
+                frame.setCursor(Toolkit.getDefaultToolkit().
+                        createCustomCursor(new ImageIcon("./sunflower.png").getImage(),
+                                new Point(0, 0), "custom cursor"));
+                Image icon = new ImageIcon("./sunflower.png").getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+                img22 = new ImageIcon(icon);
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (e.getSource() == label[i][j]){
+                    if (frame.getCursor().getType() != 0) {
+                        label[i][j].setIcon(img22);
+                    }
+                }
+            }
+        }
+
+    }*/
 }

@@ -27,7 +27,7 @@ public class Game {
         Board board = new Board(numberOfRows, numberOfColumns, 20, newPlayer.getScore(), newPlayer.getMoney());
 
         System.out.println("Player: "+ newPlayer.getPlayerName() +"\t\tMoney: $"+ newPlayer.getMoney() +"\t\tScore: "+ newPlayer.getScore());
-        board.printBoard();
+        //board.printBoard();
 
         while(true) {
             boolean[] res = board.gameEnds();
