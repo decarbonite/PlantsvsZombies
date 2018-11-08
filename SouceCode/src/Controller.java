@@ -62,7 +62,7 @@ public class Controller implements ActionListener {
 
 }
     public static void main(String[] args) {
-        Board b = new Board(2,200,200);
+        Board b = new Board(4,200,200);
         new Controller(b);
         while(true) {
             try {
@@ -70,8 +70,6 @@ public class Controller implements ActionListener {
                 b.addZombie();
                 TimeUnit.SECONDS.sleep(2);
                 b.moveZombie();
-                //TimeUnit.SECONDS.sleep(3);
-
             }catch (InterruptedException e){
                 System.out.println(e.getMessage());
             }
