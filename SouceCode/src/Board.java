@@ -15,7 +15,7 @@ public class Board {
     protected static int money;
     private int zombiesToSpawn;
     private ArrayList<BoardRow> board;
-    View v;
+    private View view;
 
     /**
      * Default constructor
@@ -42,10 +42,15 @@ public class Board {
     /**
      * Move Zombies across board in each row
      */
-    private void moveZombies() {
-        for (BoardRow br : board) {
-            br.moveZombie();
+    protected int[] getZombieLocation() {
+        for (int i = 0; i < boardRows; i++) {
+            for (int j = 0; j < boardColumns; j++) {
+                if (View.getBtn()[i][j].getIcon().toString().equals(View.ZOMBIE_IMAGE)){
+                    return new int[]{i,j};
+                }
+            }
         }
+        return null;
     }
 
     /**
@@ -72,7 +77,7 @@ public class Board {
     public void runBoard() {
         riseMoney();
         fightPlantZombie();
-        moveZombies();
+        //moveZombies();
     }
 
     /**
@@ -105,16 +110,16 @@ public class Board {
     }
 
     /**
-     * Randomly generates zombies on the board across rows starting on the right of the board
+     * Randomly generates zombies' spawn location on the board
      */
-    protected int[] generateNewZombie() {
+    protected int[] generateZombieSpawn() {
         Random rand = new Random();
 
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10, View.ZOMBIE_IMAGE));
+                    //addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
                     return new int[]{(boardColumns - 1), randRow};
                 }

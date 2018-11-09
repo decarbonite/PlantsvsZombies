@@ -10,15 +10,15 @@ public class View extends JFrame {
     public static final int BOARD_COLS = 9;
     private JPanel gridPanel;
     private JPanel selectPanel;
-    private JButton[][] btn;
+    private static JButton[][] btn;
     private JButton shootFlowerButton;
     private JButton sunflowerButton;
     private ImageIcon img;
     private JFrame frame;
-    private static final ImageIcon GRASS_IMAGE = new ImageIcon("../images/grass.jpg");
-    private static final ImageIcon PLANT_IMAGE = new ImageIcon("../images/plant.png");
-    private static final ImageIcon SUNFLOWER_IMAGE = new ImageIcon("../images/sunflower.png");
-    public static final String ZOMBIE_IMAGE = new ImageIcon("../images/zombie.png").toString();
+    public static final String GRASS_IMAGE = new ImageIcon("./images/grass.jpg").toString();
+    public static final String PLANT_IMAGE = new ImageIcon("./images/plant.png").toString();
+    public static final String SUNFLOWER_IMAGE = new ImageIcon("./images/sunflower.png").toString();
+    public static final String ZOMBIE_IMAGE = new ImageIcon("./images/zombie.png").toString();
 
 
     public View() {
@@ -44,11 +44,11 @@ public class View extends JFrame {
     }
 
     public void paintGrid(){
-        shootFlowerButton = new JButton(PLANT_IMAGE);
+        shootFlowerButton = new JButton(new ImageIcon(PLANT_IMAGE));
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
 
-        sunflowerButton = new JButton(SUNFLOWER_IMAGE);
+        sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_IMAGE));
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
@@ -58,7 +58,7 @@ public class View extends JFrame {
     public void generteBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new JButton(GRASS_IMAGE);
+                btn[i][j] = new JButton(new ImageIcon(GRASS_IMAGE));
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);
@@ -73,7 +73,7 @@ public class View extends JFrame {
         return frame;
     }
 
-    public JButton[][] getBtn() {
+    public static JButton[][] getBtn() {
         return btn;
     }
 

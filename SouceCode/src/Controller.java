@@ -24,12 +24,22 @@ public class Controller implements ActionListener {
         this.model = m;
     }
 
-    public void gameStep() {
-        int[] coordinates = model.generateNewZombie();
-        if(coordinates != null) {
-            if (view.getBtn()[coordinates[1]][coordinates[0]].getIcon().toString().equals("../images/grass.jpg")){
-                    view.getBtn()[coordinates[1]][coordinates[0]].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
+    public void generateZombie() {
+        int[] coordinates = model.generateZombieSpawn();
+        if (coordinates != null) {
+            if (view.getBtn()[coordinates[1]][coordinates[0]].getIcon().toString().equals(View.GRASS_IMAGE)) {
+                view.getBtn()[coordinates[1]][coordinates[0]].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
             }
+        }
+    }
+
+    public void moveZombie() {
+
+        int[] coordinates = model.getZombieLocation();
+
+        if (coordinates != null && coordinates[1] != 0 && view.getBtn()[coordinates[0]][coordinates[1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
+            view.getBtn()[coordinates[0]][coordinates[1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
+            view.getBtn()[coordinates[0]][coordinates[1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
         }
     }
 
@@ -42,9 +52,9 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("../images/plant.png").getImage(),
+                        createCustomCursor(new ImageIcon(View.PLANT_IMAGE).getImage(),
                                 new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("../images/plant.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                Image icon = new ImageIcon(View.PLANT_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
                 return;
             }
@@ -55,9 +65,9 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon("../images/sunflower.png").getImage(),
+                        createCustomCursor(new ImageIcon(View.SUNFLOWER_IMAGE).getImage(),
                                 new Point(0, 0), "custom cursor"));
-                Image icon = new ImageIcon("../images/sunflower.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                Image icon = new ImageIcon(View.SUNFLOWER_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
                 return;
             }
@@ -69,7 +79,7 @@ public class Controller implements ActionListener {
 
         if (view.getFrame().getCursor().getType() != 0) {
             //Only place it if cell is empty
-            if (!view.getBtn()[row][col].getIcon().toString().equals("../images/grass.jpg")) {
+            if (!view.getBtn()[row][col].getIcon().toString().equals(View.GRASS_IMAGE)) {
                 JOptionPane.showMessageDialog(null, "This cell is occupied");
                 return;
             }
@@ -79,10 +89,11 @@ public class Controller implements ActionListener {
 
     public static void main(String[] args) {
         Controller c = new Controller(new View());
-        while(true) {
+        while (true) {
             try {
-                c.gameStep();
+                c.generateZombie();
                 TimeUnit.SECONDS.sleep(2);
+                c.moveZombie();
 
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
