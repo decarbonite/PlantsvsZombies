@@ -14,10 +14,10 @@ public class Zombie extends NPC {
      * Initializes a new zombie
      * @param name Zombie's name
      * @param health Zombie's health
+     * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health) {
-        super(name+""+counter, health);
-        counter++;
+    public Zombie(String name, int health, String imgURL) {
+        super(name, health, imgURL);
     }
 
     /**
@@ -25,10 +25,10 @@ public class Zombie extends NPC {
      * @param name Zombie's name
      * @param health Zombie's health
      * @param attackPower zombie's attack power
+     * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower) {
-        super(name+""+counter, health, attackPower);
-        counter++;
+    public Zombie(String name, int health, int attackPower, String imgURL) {
+        super(name, health, attackPower, imgURL);
     }
 
     /**
@@ -37,19 +37,14 @@ public class Zombie extends NPC {
      * @param health Zombie's health
      * @param attackPower zombie's attack power
      * @param scoreOnDeath score added to the player when zombie is died
+     * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower, int scoreOnDeath) {
-        super(name+""+counter, health, attackPower);
+    public Zombie(String name, int health, int attackPower, int scoreOnDeath, String imgURL) {
+        super(name, health, attackPower, imgURL);
         this.scoreOnDeath = scoreOnDeath;
-        counter++;
     }
 
     public int getPointsWhenDead() { return scoreOnDeath; }
-
-    /*public Zombie(String name, int health, int attackPower, int points) {
-        super(name+""+counter, health, attackPower);
-        counter++;
-    }*/
 
     /**
      * Allows the zombie to attack plants

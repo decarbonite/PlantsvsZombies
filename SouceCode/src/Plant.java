@@ -13,9 +13,10 @@ public class Plant extends NPC {
      * Initializes a new Plant
      * @param name Plant's name
      * @param health Plant's health
+     * @param imgURL String image of the plant on the board (GUI)
      */
-    public Plant(String name, int health) {
-        super(name, health);
+    public Plant(String name, int health, String imgURL) {
+        super(name, health, imgURL);
     }
 
 
@@ -24,9 +25,10 @@ public class Plant extends NPC {
      * @param name Plant's name
      * @param health Plant's health
      * @param attackPower Plant's attack power
+     * @param imgURL String image of the plant on the board (GUI)
      */
-    public Plant(String name, int health, int attackPower) {
-        super(name+""+counter, health, attackPower);
+    public Plant(String name, int health, int attackPower, String imgURL) {
+        super(name+""+counter, health, attackPower, imgURL);
         counter++;
     }
 

@@ -10,7 +10,7 @@
  *
  */
 public abstract class NPC {
-
+    private String imgURL;
     private int health;
     private String name;
     private int attackPower;
@@ -19,10 +19,12 @@ public abstract class NPC {
      * Initializes a new NPC
      * @param name NPC's name
      * @param health NPC's health
+     * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health) {
+    public NPC(String name, int health, String imgURL) {
         this.name = name;
         this.health = health;
+        this.imgURL = imgURL;
     }
 
     /**
@@ -30,11 +32,13 @@ public abstract class NPC {
      * @param name NPC's name
      * @param health NPC's health
      * @param attackPower NPC's attack power
+     * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health, int attackPower) {
+    public NPC(String name, int health, int attackPower, String imgURL) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
+        this.imgURL = imgURL;
     }
 
     /**
@@ -77,6 +81,14 @@ public abstract class NPC {
      * @param npc NPC to be attacked
      */
     public abstract void attack(NPC npc);
+
+    /**
+     * Returns url to the image of NPC's
+     * @return String url
+     */
+    public String getImgURL() {
+        return imgURL;
+    }
 
     /**
      * Forms String object with NPC's name and health

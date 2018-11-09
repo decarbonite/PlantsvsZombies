@@ -15,6 +15,7 @@ public class Board {
     protected static int money;
     private int zombiesToSpawn;
     private ArrayList<BoardRow> board;
+    View v;
 
     /**
      * Default constructor
@@ -36,17 +37,6 @@ public class Board {
         for (int i = 0; i < boardRows; i++) {
             board.add(new BoardRow(boardColumns));
         }
-    }
-
-    /**
-     * Console print of the board
-     */
-    protected void printBoard() {
-        for (BoardRow br : board) {
-            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println(br);
-        }
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     /**
@@ -81,8 +71,6 @@ public class Board {
      */
     public void runBoard() {
         riseMoney();
-        generateNewZombie();
-        printBoard();
         fightPlantZombie();
         moveZombies();
     }
@@ -119,35 +107,20 @@ public class Board {
     /**
      * Randomly generates zombies on the board across rows starting on the right of the board
      */
-    private void generateNewZombie() {
+    protected int[] generateNewZombie() {
         Random rand = new Random();
 
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10));
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
+                    return new int[]{(boardColumns - 1), randRow};
                 }
             }
         }
-    }
-
-    /**
-     * Randomly generates Plants on the board
-     * NOT used (ONLY for testing)
-     */
-    protected void generateNewPlant() {
-        Random rand = new Random();
-
-        if (money >= 50 && rand.nextInt(5) % 3 == 0) {
-            int randRow = rand.nextInt(boardRows);
-            int randCol = rand.nextInt(boardColumns - 1);
-            if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                addPlant(randRow, randCol, new Plant("Plant1 ", 100, 30));
-                money -= 50;
-            }
-        }
+        return null;
     }
 
     /**
