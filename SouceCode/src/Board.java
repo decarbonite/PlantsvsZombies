@@ -6,7 +6,7 @@ import java.util.Random;
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
- * @version 27 October, 2018
+ * @version 09 November, 2018
  */
 public class Board {
     private static int boardRows;
@@ -14,8 +14,8 @@ public class Board {
     protected static int score;
     protected static int money;
     private int zombiesToSpawn;
+    private int totalZombies;
     private ArrayList<BoardRow> board;
-    private View view;
 
     /**
      * Default constructor
@@ -32,6 +32,7 @@ public class Board {
         this.score = score;
         this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
+        totalZombies = zombiesToSpawn;
         this.board = new ArrayList<>(boardRows);
 
         for (int i = 0; i < boardRows; i++) {
@@ -43,14 +44,20 @@ public class Board {
      * Move Zombies across board in each row
      */
     protected int[] getZombieLocation() {
+        int[] location = new int[totalZombies * 2];
+
+        int y=0;
+
         for (int i = 0; i < boardRows; i++) {
             for (int j = 0; j < boardColumns; j++) {
                 if (View.getBtn()[i][j].getIcon().toString().equals(View.ZOMBIE_IMAGE)){
-                    return new int[]{i,j};
+                    location[y] = i;
+                    location[y+1] = j;
+                    y+=2;
                 }
             }
         }
-        return null;
+        return location;
     }
 
     /**
@@ -114,7 +121,6 @@ public class Board {
      */
     protected int[] generateZombieSpawn() {
         Random rand = new Random();
-
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);

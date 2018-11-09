@@ -3,6 +3,7 @@ import java.awt.*;
 
 /**
  * @author Dmytro Sytnik (VanArman)
+ * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
  */
 public class View extends JFrame {
@@ -19,7 +20,6 @@ public class View extends JFrame {
     public static final String PLANT_IMAGE = new ImageIcon("./images/plant.png").toString();
     public static final String SUNFLOWER_IMAGE = new ImageIcon("./images/sunflower.png").toString();
     public static final String ZOMBIE_IMAGE = new ImageIcon("./images/zombie.png").toString();
-
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
@@ -52,10 +52,10 @@ public class View extends JFrame {
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
-        generteBoard();
+        generateBoard();
     }
 
-    public void generteBoard() {
+    public void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
                 btn[i][j] = new JButton(new ImageIcon(GRASS_IMAGE));

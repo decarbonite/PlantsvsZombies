@@ -8,6 +8,7 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
 
 /**
  * @author Dmytro Sytnik (VanArman)
+ * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
  */
 public class Controller implements ActionListener {
@@ -36,11 +37,13 @@ public class Controller implements ActionListener {
     public void moveZombie() {
 
         int[] coordinates = model.getZombieLocation();
-
-        if (coordinates != null && coordinates[1] != 0 && view.getBtn()[coordinates[0]][coordinates[1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
-            view.getBtn()[coordinates[0]][coordinates[1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
-            view.getBtn()[coordinates[0]][coordinates[1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
+        for (int i = 0; i < coordinates.length-1; i+=2) {
+            if (coordinates != null && coordinates[i+1] != 0 && view.getBtn()[coordinates[i]][coordinates[i+1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
+                view.getBtn()[coordinates[i]][coordinates[i+1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
+                view.getBtn()[coordinates[i]][coordinates[i+1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
+            }
         }
+
     }
 
     @Override
