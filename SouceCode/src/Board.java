@@ -15,7 +15,7 @@ public class Board {
     protected static int money;
     private int zombiesToSpawn;
     private int totalZombies;
-    private ArrayList<BoardRow> board;
+    protected static ArrayList<BoardRow> board;
 
     /**
      * Default constructor

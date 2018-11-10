@@ -11,29 +11,33 @@ public class View extends JFrame {
     public static final int BOARD_COLS = 9;
     private JPanel gridPanel;
     private JPanel selectPanel;
-    private static JButton[][] btn;
+    private static NodeButton<BoardNode>[][] btn;
     private JButton shootFlowerButton;
     private JButton sunflowerButton;
     private ImageIcon img;
     private JFrame frame;
-    public static final String GRASS_IMAGE = new ImageIcon("./images/grass.jpg").toString();
-    public static final String PLANT_IMAGE = new ImageIcon("./images/plant.png").toString();
-    public static final String SUNFLOWER_IMAGE = new ImageIcon("./images/sunflower.png").toString();
-    public static final String ZOMBIE_IMAGE = new ImageIcon("./images/zombie.png").toString();
+
+    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
+    protected static final String PLANT_ICON = PATH+"/plant.png";
+    protected static final String SUNFLOWER_ICON = PATH+"/sunflower.png";
+    public static final String GRASS_IMAGE = PATH+"/grass.png";
+    public static final String PLANT_IMAGE = PATH+"/grassed_plant.png";
+    public static final String SUNFLOWER_IMAGE = PATH+"/grassed_sunflower.png";
+    public static final String ZOMBIE_IMAGE = PATH+"/grassed_zombie.png";
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
 
-        selectPanel = new JPanel(new GridLayout(1,5,2,2));
+        selectPanel = new JPanel(new GridLayout(1,5,0,0));
 
-        gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,2,2));
-        btn = new JButton[BOARD_ROWS][BOARD_COLS];
+        gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,0));
+        btn = new NodeButton[BOARD_ROWS][BOARD_COLS];
 
         paintGrid();
 
         selectPanel.setSize(100,100);
 
-        frame.setSize(1000, 600);
+        frame.setSize(800, 500);
 
         frame.add(selectPanel, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
@@ -44,11 +48,12 @@ public class View extends JFrame {
     }
 
     public void paintGrid(){
-        shootFlowerButton = new JButton(new ImageIcon(PLANT_IMAGE));
+        System.out.println(PATH);
+        shootFlowerButton = new JButton(new ImageIcon(PLANT_ICON));
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
 
-        sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_IMAGE));
+        sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_ICON));
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
@@ -58,7 +63,7 @@ public class View extends JFrame {
     public void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new JButton(new ImageIcon(GRASS_IMAGE));
+                btn[i][j] = new NodeButton<BoardNode>( new BoardNode(), GRASS_IMAGE);
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);

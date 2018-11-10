@@ -55,7 +55,7 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon(View.PLANT_IMAGE).getImage(),
+                        createCustomCursor(new ImageIcon(View.PLANT_ICON).getImage(),
                                 new Point(0, 0), "custom cursor"));
                 Image icon = new ImageIcon(View.PLANT_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
@@ -68,7 +68,7 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon(View.SUNFLOWER_IMAGE).getImage(),
+                        createCustomCursor(new ImageIcon(View.SUNFLOWER_ICON).getImage(),
                                 new Point(0, 0), "custom cursor"));
                 Image icon = new ImageIcon(View.SUNFLOWER_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
