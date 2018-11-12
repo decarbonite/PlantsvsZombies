@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
-
+@SuppressWarnings("Duplicates")
 /**
  * Creates board that contains BoardRows based on BoardNodes
  *
@@ -41,23 +41,64 @@ public class Board {
     }
 
     /**
-     * Move Zombies across board in each row
+     * Gets all Zombies' locations on the board
+     * [1,2,4,4] => indicates 2 zombies one at (1,2) and another at (4,4)
      */
-    protected int[] getZombieLocation() {
+    public int[] getZombieLocation() {
         int[] location = new int[totalZombies * 2];
 
-        int y=0;
+        //initialize array with -1 values to differentiate between
+        // empty location and zombie at location 0
+        for (int i = 0; i < location.length; i++) {
+            location[i] = -1;
+        }
 
+        int y = 0;
         for (int i = 0; i < boardRows; i++) {
             for (int j = 0; j < boardColumns; j++) {
-                if (View.getBtn()[i][j].getIcon().toString().equals(View.ZOMBIE_IMAGE)){
+                if (View.getBtn()[i][j].getIcon().toString().equals(View.ZOMBIE_IMAGE)) {
                     location[y] = i;
-                    location[y+1] = j;
-                    y+=2;
+                    location[y + 1] = j;
+                    y += 2;
                 }
             }
         }
         return location;
+    }
+
+    public int[] getPlantLocation() {
+
+        int[] location = new int[5*9];
+
+        //initialize array with -1 values to differentiate between
+        // empty location and plant at location 0
+        for (int i = 0; i < location.length; i++) {
+            location[i] = -1;
+        }
+
+        int y = 0;
+        for (int i = 0; i < boardRows; i++) {
+            for (int j = 0; j < boardColumns; j++) {
+                if (View.getBtn()[i][j].getIcon().toString().equals(View.PLANT_IMAGE)) {
+                    location[y] = i;
+                    location[y + 1] = j;
+                    y += 2;
+                }
+            }
+        }
+        return location;
+    }
+
+
+    public boolean hasLost() {
+        int[] arr = getZombieLocation();
+
+        for (int i = 1; i < arr.length; i += 2) {
+            if (arr[i] == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -72,21 +113,21 @@ public class Board {
     /**
      * Rise money if at least one of the rows contains MoneyFlower (if more, values added)
      */
-    private void riseMoney() {
+    /*private void riseMoney() {
         for (BoardRow br : board){
             this.money = br.generateMoney(this.money);
         }
-    }
+    }*/
 
     /**
      * Main method that runs the Zombie generation, simulates fight method, moves zombies across board and prints board.
      */
-    public void runBoard() {
+    /*public void runBoard() {
         riseMoney();
         fightPlantZombie();
         //moveZombies();
     }
-
+*/
     /**
      * Check is the game ends
      * @return boolean[], boolean[0] = true if game is end; false otherwise. boolean[1] = true Zombie won; false if Plants won
@@ -125,9 +166,8 @@ public class Board {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    //addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
-                    return new int[]{(boardColumns - 1), randRow};
+                    return new int[]{randRow, (boardColumns - 1)};
                 }
             }
         }

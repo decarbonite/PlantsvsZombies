@@ -12,18 +12,18 @@ public class View extends JFrame {
     private JPanel gridPanel;
     private JPanel selectPanel;
     private static NodeButton<BoardNode>[][] btn;
-    private JButton shootFlowerButton;
-    private JButton sunflowerButton;
+    private NodeButton shootFlowerButton;
+    private NodeButton sunflowerButton;
     private ImageIcon img;
     private JFrame frame;
 
-    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
-    protected static final String PLANT_ICON = PATH+"/plant.png";
-    protected static final String SUNFLOWER_ICON = PATH+"/sunflower.png";
-    public static final String GRASS_IMAGE = PATH+"/grass.png";
-    public static final String PLANT_IMAGE = PATH+"/grassed_plant.png";
-    public static final String SUNFLOWER_IMAGE = PATH+"/grassed_sunflower.png";
-    public static final String ZOMBIE_IMAGE = PATH+"/grassed_zombie.png";
+    protected static final String PATH = System.getProperty("user.dir");
+    protected static final String PLANT_ICON = PATH + "/images/plant.png";
+    protected static final String SUNFLOWER_ICON = PATH + "/images/sunflower.png";
+    public static final String GRASS_IMAGE = PATH +"/images/grass.png";
+    public static final String PLANT_IMAGE = PATH +"/images/grassed_plant.png";
+    public static final String SUNFLOWER_IMAGE = PATH +"/images/grassed_sunflower.png";
+    public static final String ZOMBIE_IMAGE = PATH +"/images/grassed_zombie.png";
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
@@ -48,12 +48,12 @@ public class View extends JFrame {
     }
 
     public void paintGrid(){
-        System.out.println(PATH);
-        shootFlowerButton = new JButton(new ImageIcon(PLANT_ICON));
+        //System.out.println(PATH);
+        shootFlowerButton = new NodeButton<>(new BoardNode(), View.PLANT_ICON);
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
 
-        sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_ICON));
+        sunflowerButton = new NodeButton<>(new BoardNode(), View.SUNFLOWER_ICON);
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
@@ -63,7 +63,7 @@ public class View extends JFrame {
     public void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new NodeButton<BoardNode>( new BoardNode(), GRASS_IMAGE);
+                btn[i][j] = new NodeButton<>(new BoardNode(), new Plant());     //  Grass plant
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);
@@ -78,15 +78,15 @@ public class View extends JFrame {
         return frame;
     }
 
-    public static JButton[][] getBtn() {
+    public static NodeButton<BoardNode>[][] getBtn() {
         return btn;
     }
 
-    public JButton getShootFlowerButton() {
+    public NodeButton<BoardNode> getShootFlowerButton() {
         return shootFlowerButton;
     }
 
-    public JButton getSunflowerButton() {
+    public NodeButton<BoardNode> getSunflowerButton() {
         return sunflowerButton;
     }
 
@@ -97,4 +97,5 @@ public class View extends JFrame {
     public void setImg(ImageIcon img) {
         this.img = img;
     }
+
 }

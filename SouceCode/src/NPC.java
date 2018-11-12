@@ -14,28 +14,47 @@ public abstract class NPC {
     private int health;
     private String name;
     private int attackPower;
+    private int money;
+
 
     /**
      * Initializes a new NPC
-     * @param name NPC's name
+     * @param imgURL url of the image for NPS's on the board
+     */
+    public NPC(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    /**
+     * Initializes a new NPC
      * @param health NPC's health
      * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health, String imgURL) {
-        this.name = name;
+    public NPC(int health, String imgURL) {
         this.health = health;
         this.imgURL = imgURL;
     }
 
     /**
      * Initializes a new NPC
-     * @param name NPC's name
      * @param health NPC's health
      * @param attackPower NPC's attack power
      * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health, int attackPower, String imgURL) {
-        this.name = name;
+    public NPC(int health, int money, int attackPower, String imgURL) {
+        this.health = health;
+        this.money = money;
+        this.attackPower = attackPower;
+        this.imgURL = imgURL;
+    }
+
+    /**
+     * Initializes a new NPC
+     * @param health NPC's health
+     * @param attackPower NPC's attack power
+     * @param imgURL url of the image for NPS's on the board
+     */
+    public NPC(int health, int attackPower, String imgURL) {
         this.health = health;
         this.attackPower = attackPower;
         this.imgURL = imgURL;

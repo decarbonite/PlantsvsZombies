@@ -151,7 +151,7 @@ public class BoardRow {
                         Zombie z = plantFind.plantFightZombie(zombieFind.destroyZombie());
                         if(z.getHealth() <= 0){
                             zombieFind.addZombie(null);
-                            score += z.getPointsWhenDead();
+                            score += z.getScoreOnDeath();
                         } else {
                             zombieFind.addZombie(z);
                         }
@@ -168,7 +168,7 @@ public class BoardRow {
      * @param money int amount of money player currently have
      * @return int amount of money player gain from MoneyFlower
      */
-    protected int generateMoney(int money){
+    /*protected int generateMoney(int money){
         for(BoardNode bn : nodes){
             if(bn.hasMoneyPlant()){
                 Random rand = new Random();
@@ -180,5 +180,5 @@ public class BoardRow {
             }
         }
         return money;
-    }
+    }*/
 }

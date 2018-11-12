@@ -7,14 +7,13 @@
 public class BoardNode {
     private Plant plant;
     private Zombie zombie;
-    View b;
 
     /**
      * Default constructor that creates empty node with a specified coordinates
      */
     public BoardNode() {
-        plant = null;
-        zombie = null;
+        this.plant = null;
+        this.zombie = null;
     }
 
 
@@ -52,7 +51,7 @@ public class BoardNode {
         this.plant.attack(this.zombie);
 
         if (this.zombie.getHealth() <= 0) {
-            int score = this.zombie.getPointsWhenDead();
+            int score = this.zombie.getScoreOnDeath();
             this.zombie = null;
             return score;
         }
@@ -118,12 +117,12 @@ public class BoardNode {
      * Returns MoneyPlant if exists in current node
      * @return MoneyPlant object of MoneyPlant
      */
-    public MoneyPlant getMoneyPlant() {
+    /*public MoneyPlant getMoneyPlant() {
         if(this.plant instanceof MoneyPlant) {
             return (MoneyPlant) this.plant;
         }
         return null;
-    }
+    }*/
     /**
      * Returns zombie instance of the current node
      * @return Zombie instance of Zombie
@@ -136,10 +135,10 @@ public class BoardNode {
      * Check if the plant stored in the current nod is MoneyPlant
      * @return boolean true when Plant stored in the node is MoneyPlant instance; false - otherwise
      */
-    public boolean hasMoneyPlant() {
+    /*public boolean hasMoneyPlant() {
         if(this.plant instanceof MoneyPlant) {
             return true;
         }
         return false;
-    }
+    }*/
 }
