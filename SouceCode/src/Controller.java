@@ -17,7 +17,8 @@ public class Controller implements ActionListener {
 
     public Controller(View v) {
         this.view = v;
-        this.model = new Board(v.BOARD_ROWS, v.BOARD_COLS, 5, 100, 100);
+        this.model = new Board(v.BOARD_ROWS, v.BOARD_COLS, 1, 100, 100);
+//        this.generateBoard();
     }
 
     public Controller(View v, Board m) {
@@ -25,26 +26,36 @@ public class Controller implements ActionListener {
         this.model = m;
     }
 
-    public void generateZombie() {
-        int[] coordinates = model.generateZombieSpawn();
-        if (coordinates != null) {
-            if (view.getBtn()[coordinates[1]][coordinates[0]].getIcon().toString().equals(View.GRASS_IMAGE)) {
-                view.getBtn()[coordinates[1]][coordinates[0]].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
-            }
-        }
+    public void generateBoard() {
+        view.linkModelView(model.board);
     }
 
-    public void moveZombie() {
-
-        int[] coordinates = model.getZombieLocation();
-        for (int i = 0; i < coordinates.length-1; i+=2) {
-            if (coordinates != null && coordinates[i+1] != 0 && view.getBtn()[coordinates[i]][coordinates[i+1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
-                view.getBtn()[coordinates[i]][coordinates[i+1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
-                view.getBtn()[coordinates[i]][coordinates[i+1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
-            }
-        }
-
+    public void updateBoard() {
+//        view.linkModelView(model.board);
+        model.runBoard();
+        view.updateView();
     }
+
+//    public void generateZombie() {
+//        int[] coordinates = model.generateZombieSpawn();
+//        if (coordinates != null) {
+//            if (view.getBtn()[coordinates[1]][coordinates[0]].getIcon().toString().equals(View.GRASS_IMAGE)) {
+//                view.getBtn()[coordinates[1]][coordinates[0]].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
+//            }
+//        }
+//    }
+
+//    public void moveZombie() {
+//
+//        int[] coordinates = model.getZombieLocation();
+//        for (int i = 0; i < coordinates.length-1; i+=2) {
+//            if (coordinates != null && coordinates[i+1] != 0 && view.getBtn()[coordinates[i]][coordinates[i+1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
+//                view.getBtn()[coordinates[i]][coordinates[i+1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
+//                view.getBtn()[coordinates[i]][coordinates[i+1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
+//            }
+//        }
+//
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -56,7 +67,7 @@ public class Controller implements ActionListener {
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
                         createCustomCursor(new ImageIcon(View.PLANT_ICON).getImage(),
-                                new Point(0, 0), "custom cursor"));
+                                new Point(0, 0), "plant"));
                 Image icon = new ImageIcon(View.PLANT_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
                 return;
@@ -69,7 +80,7 @@ public class Controller implements ActionListener {
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
                         createCustomCursor(new ImageIcon(View.SUNFLOWER_ICON).getImage(),
-                                new Point(0, 0), "custom cursor"));
+                                new Point(0, 0), "sunflower"));
                 Image icon = new ImageIcon(View.SUNFLOWER_IMAGE).getImage();
                 view.setImg(new ImageIcon(icon));
                 return;
@@ -82,21 +93,36 @@ public class Controller implements ActionListener {
 
         if (view.getFrame().getCursor().getType() != 0) {
             //Only place it if cell is empty
-            if (!view.getBtn()[row][col].getIcon().toString().equals(View.GRASS_IMAGE)) {
+            BoardNode bn = (BoardNode) view.getBtn()[row][col].getObject();
+            if (bn.hasPlant() || bn.hasZombie()) {
                 JOptionPane.showMessageDialog(null, "This cell is occupied");
                 return;
             }
-            view.getBtn()[row][col].setIcon(view.getImg());
+            String toPlant = view.getFrame().getCursor().getName();
+            if(toPlant.equals("plant")) {
+                model.addPlant(row, col, new Plant("Plant", 100, 5, View.PLANT_IMAGE));
+            }
+
+            if(toPlant.equals("sunflower")) {
+                model.addPlant(row, col, new MoneyPlant("Sunflower", 100, 25,  View.SUNFLOWER_IMAGE));
+            }
+
+            if (view.getFrame().getCursor().getType() != 0) {
+                view.getFrame().setCursor(DEFAULT_CURSOR);
+            }
+            view.updateView();
         }
     }
 
     public static void main(String[] args) {
         Controller c = new Controller(new View());
+        c.generateBoard();
         while (true) {
             try {
-                c.generateZombie();
-                TimeUnit.SECONDS.sleep(2);
-                c.moveZombie();
+                c.updateBoard();
+//                c.generateZombie();
+                TimeUnit.SECONDS.sleep(3);
+//                c.moveZombie();
 
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());

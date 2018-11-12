@@ -79,12 +79,22 @@ public class Board {
     }
 
     /**
+     * Move Zombies across board in each row
+     */
+    private void moveZombies() {
+        for (BoardRow br : board) {
+            br.moveZombie();
+        }
+    }
+
+    /**
      * Main method that runs the Zombie generation, simulates fight method, moves zombies across board and prints board.
      */
     public void runBoard() {
         riseMoney();
         fightPlantZombie();
-        //moveZombies();
+        moveZombies();
+        generateZombieSpawn();
     }
 
     /**
@@ -125,7 +135,7 @@ public class Board {
             if (rand.nextInt(5) % 3 == 0) {
                 int randRow = rand.nextInt(boardRows);
                 if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    //addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 100, 10, 10, View.ZOMBIE_IMAGE));
+                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 10, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
                     return new int[]{(boardColumns - 1), randRow};
                 }

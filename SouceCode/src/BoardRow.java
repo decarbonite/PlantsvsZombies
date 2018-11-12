@@ -181,4 +181,12 @@ public class BoardRow {
         }
         return money;
     }
+
+    protected ArrayList<BoardNode> getRow() {
+        if(nodes != null) {
+            return nodes;
+        } else {
+            return null;
+        }
+    }
 }

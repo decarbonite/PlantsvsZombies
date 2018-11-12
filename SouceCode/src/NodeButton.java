@@ -7,8 +7,16 @@ import javax.swing.JButton;
  * @version 09 November, 2018
  */
 public class NodeButton<E> extends JButton {
-    private static final String PATH = System.getProperty("user.dir") + "/src/images";
     private E internalObj;
+    private ImageIcon defaultImage;
+
+    public NodeButton() {
+        this(null, "");
+    }
+
+    public NodeButton(String defaultImageURL)  {
+        this(null, new ImageIcon(defaultImageURL));
+    }
 
     public NodeButton(E obj) {
         this.internalObj = obj;
@@ -20,6 +28,7 @@ public class NodeButton<E> extends JButton {
 
     private NodeButton(E obj, ImageIcon icon) {
         this.internalObj = obj;
+        this.defaultImage = icon;
         stringToImageConverter(icon);
     }
 
@@ -33,6 +42,10 @@ public class NodeButton<E> extends JButton {
         this.setSize(icon.getImage().getWidth(null), icon.getImage().getHeight(null));
     }
 
+    public void setObject(E obj) {
+        this.internalObj = obj;
+    }
+
     public E getObject(){
         return this.internalObj;
     }
@@ -43,5 +56,29 @@ public class NodeButton<E> extends JButton {
 
     public void setImage(ImageIcon imageIcon) {
         stringToImageConverter(imageIcon);
+    }
+
+    public void update() {
+        if(!(internalObj instanceof BoardNode)){
+            return;
+        }
+
+        BoardNode bn = (BoardNode) internalObj;
+
+        if(bn.hasZombie() && bn.hasPlant()) {
+            if (bn.getPlant() instanceof MoneyPlant) {
+                this.stringToImageConverter(new ImageIcon(View.ZOMBIE_SUNFLOWER_IMAGE));
+            } else {
+                this.stringToImageConverter(new ImageIcon(View.ZOMBIE_PLANT_IMAGE));
+            }
+        } else if (bn.hasPlant()) {
+                this.stringToImageConverter(new ImageIcon(bn.getPlant().getImgURL()));
+        } else if (bn.hasZombie()) {
+            this.stringToImageConverter(new ImageIcon(bn.getZombie().getImgURL()));
+        } else {
+            this.stringToImageConverter(defaultImage);
+        }
+
+
     }
 }

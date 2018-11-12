@@ -38,7 +38,7 @@ public class Plant extends NPC {
      */
     @Override
     public void attack(NPC npc) {
-        if (npc != null){
+        if (npc != null && npc.getHealth() > 0) {
             npc.setHealth(npc.getHealth() - this.getAttackPower());
         }
     }

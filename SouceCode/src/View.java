@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Dmytro Sytnik (VanArman)
@@ -20,10 +21,12 @@ public class View extends JFrame {
     protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
     protected static final String PLANT_ICON = PATH+"/plant.png";
     protected static final String SUNFLOWER_ICON = PATH+"/sunflower.png";
-    public static final String GRASS_IMAGE = PATH+"/grass.png";
-    public static final String PLANT_IMAGE = PATH+"/grassed_plant.png";
-    public static final String SUNFLOWER_IMAGE = PATH+"/grassed_sunflower.png";
-    public static final String ZOMBIE_IMAGE = PATH+"/grassed_zombie.png";
+    protected static final String GRASS_IMAGE = PATH+"/grass.png";
+    protected static final String PLANT_IMAGE = PATH+"/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE = PATH+"/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = PATH+"/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE = PATH+"/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE = PATH+"/grassed_plant_zombie.png";
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
@@ -48,22 +51,23 @@ public class View extends JFrame {
     }
 
     public void paintGrid(){
-        System.out.println(PATH);
         shootFlowerButton = new JButton(new ImageIcon(PLANT_ICON));
+        shootFlowerButton.setName("Plant");
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
 
         sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_ICON));
+        sunflowerButton.setName("Sunflower");
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
 
         generateBoard();
     }
 
-    public void generateBoard() {
+    private void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new NodeButton<BoardNode>( new BoardNode(), GRASS_IMAGE);
+                btn[i][j] = new NodeButton<BoardNode>(GRASS_IMAGE);
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);
@@ -74,11 +78,28 @@ public class View extends JFrame {
         }
     }
 
+    public void linkModelView(ArrayList<BoardRow> b) {
+        for (int i = 0; i < BOARD_ROWS; i++) {
+            ArrayList<BoardNode> br = b.get(i).getRow();
+            for (int j = 0; j < BOARD_COLS; j++) {
+                btn[i][j].setObject(br.get(j));
+            }
+        }
+    }
+
+    public void updateView() {
+        for (int i = 0; i < BOARD_ROWS; i++) {
+            for (int j = 0; j < BOARD_COLS; j++) {
+                btn[i][j].update();
+            }
+        }
+    }
+
     public JFrame getFrame() {
         return frame;
     }
 
-    public static JButton[][] getBtn() {
+    public static NodeButton[][] getBtn() {
         return btn;
     }
 
