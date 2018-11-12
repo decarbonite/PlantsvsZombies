@@ -78,7 +78,5 @@ public class NodeButton<E> extends JButton {
         } else {
             this.stringToImageConverter(defaultImage);
         }
-
-
     }
 }

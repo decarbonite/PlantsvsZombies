@@ -18,15 +18,15 @@ public class View extends JFrame {
     private ImageIcon img;
     private JFrame frame;
 
-    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
-    protected static final String PLANT_ICON = PATH+"/plant.png";
-    protected static final String SUNFLOWER_ICON = PATH+"/sunflower.png";
-    protected static final String GRASS_IMAGE = PATH+"/grass.png";
-    protected static final String PLANT_IMAGE = PATH+"/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE = PATH+"/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = PATH+"/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE = PATH+"/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE = PATH+"/grassed_plant_zombie.png";
+    //protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
+    protected static final String PLANT_ICON = "./images/plant.png";
+    protected static final String SUNFLOWER_ICON = "./images/sunflower.png";
+    protected static final String GRASS_IMAGE = "./images/grass.png";
+    protected static final String PLANT_IMAGE = "./images/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE = "./images/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = "./images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE = "./images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE = "./images/grassed_plant_zombie.png";
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");

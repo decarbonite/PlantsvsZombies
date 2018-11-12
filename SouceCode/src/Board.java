@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,6 +47,10 @@ public class Board {
     protected int[] getZombieLocation() {
         int[] location = new int[totalZombies * 2];
 
+        for (int i = 0; i < location.length; i++) {
+            location[i] = -1;
+        }
+
         int y=0;
 
         for (int i = 0; i < boardRows; i++) {
@@ -58,6 +63,25 @@ public class Board {
             }
         }
         return location;
+    }
+
+    /**
+     * Checks if game ended
+     */
+    public void gameEnded() {
+        int[] arr = getZombieLocation();
+
+        if (zombiesToSpawn == 0 && arr[0] == -1){
+            JOptionPane.showMessageDialog(null, "You Won!");
+            System.exit(0);
+        }
+
+        for (int i = 1; i < arr.length; i += 2) {
+            if (arr[i] == 0) {
+                JOptionPane.showMessageDialog(null, "You Lost!");
+                System.exit(0);
+            }
+        }
     }
 
     /**
@@ -92,6 +116,7 @@ public class Board {
      */
     public void runBoard() {
         riseMoney();
+        gameEnded();
         fightPlantZombie();
         moveZombies();
         generateZombieSpawn();

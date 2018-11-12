@@ -17,7 +17,7 @@ public class Controller implements ActionListener {
 
     public Controller(View v) {
         this.view = v;
-        this.model = new Board(v.BOARD_ROWS, v.BOARD_COLS, 1, 100, 100);
+        this.model = new Board(v.BOARD_ROWS, v.BOARD_COLS, 5, 100, 500000);
 //        this.generateBoard();
     }
 
@@ -35,6 +35,7 @@ public class Controller implements ActionListener {
         model.runBoard();
         view.updateView();
     }
+
 
 //    public void generateZombie() {
 //        int[] coordinates = model.generateZombieSpawn();
