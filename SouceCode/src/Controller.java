@@ -16,9 +16,7 @@ public class Controller implements ActionListener {
     private Board model;
 
     public Controller(View v) {
-        this.view = v;
-        this.model = new Board(v.BOARD_ROWS, v.BOARD_COLS, 5, 100, 500000);
-//        this.generateBoard();
+        this(v, new Board(v.BOARD_ROWS, v.BOARD_COLS, 15, 0, 200));
     }
 
     public Controller(View v, Board m) {
@@ -31,9 +29,9 @@ public class Controller implements ActionListener {
     }
 
     public void updateBoard() {
-//        view.linkModelView(model.board);
         model.runBoard();
         view.updateView();
+        System.out.println("Money: "+ Board.money +" Score: "+ Board.score);
     }
 
 
@@ -121,10 +119,7 @@ public class Controller implements ActionListener {
         while (true) {
             try {
                 c.updateBoard();
-//                c.generateZombie();
                 TimeUnit.SECONDS.sleep(3);
-//                c.moveZombie();
-
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }

@@ -12,41 +12,60 @@ public class View extends JFrame {
     public static final int BOARD_COLS = 9;
     private JPanel gridPanel;
     private JPanel selectPanel;
+    private JPanel statsPanel;
     private static NodeButton<BoardNode>[][] btn;
     private JButton shootFlowerButton;
     private JButton sunflowerButton;
+    private JLabel scoreLabel;
+    private JLabel moneyLabel;
     private ImageIcon img;
     private JFrame frame;
 
-    //protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src/images";
-    protected static final String PLANT_ICON = "./images/plant.png";
-    protected static final String SUNFLOWER_ICON = "./images/sunflower.png";
-    protected static final String GRASS_IMAGE = "./images/grass.png";
-    protected static final String PLANT_IMAGE = "./images/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE = "./images/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = "./images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE = "./images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE = "./images/grassed_plant_zombie.png";
+    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src";
+    protected static final String PLANT_ICON = PATH+"/images/plant.png";
+    protected static final String SUNFLOWER_ICON = PATH+"/images/sunflower.png";
+    protected static final String GRASS_IMAGE = PATH+"/images/grass.png";
+    protected static final String PLANT_IMAGE = PATH+"/images/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE = PATH+"/images/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = PATH+"/images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE = PATH+"/images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE = PATH+"/images/grassed_plant_zombie.png";
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
+        Dimension labelDimention = new Dimension(50, 30);
+        statsPanel = new JPanel(new GridLayout(1,4,0,0));
 
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
 
-        gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,0));
+        gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
         btn = new NodeButton[BOARD_ROWS][BOARD_COLS];
 
         paintGrid();
+
+        scoreLabel = new JLabel("0");
+        moneyLabel = new JLabel("0");
+
+        scoreLabel.setMaximumSize(labelDimention);
+        moneyLabel.setMaximumSize(labelDimention);
+        statsPanel.add(new JLabel("Score: "));
+        statsPanel.add(scoreLabel);
+        statsPanel.add(new JLabel("Money: "));
+        statsPanel.add(moneyLabel);
 
         selectPanel.setSize(100,100);
 
         frame.setSize(800, 500);
 
-        frame.add(selectPanel, BorderLayout.NORTH);
+        JPanel gJP = new JPanel(new  BorderLayout());
+        gJP.add(statsPanel, BorderLayout.NORTH);
+        gJP.add(selectPanel, BorderLayout.CENTER);
+
+        frame.add(gJP, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
 
         frame.setLocationRelativeTo(null);//show gui in the middle of screen
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 
@@ -79,6 +98,9 @@ public class View extends JFrame {
     }
 
     public void linkModelView(ArrayList<BoardRow> b) {
+        scoreLabel.setText(Integer.toString(Board.score));
+        moneyLabel.setText(Integer.toString(Board.money));
+
         for (int i = 0; i < BOARD_ROWS; i++) {
             ArrayList<BoardNode> br = b.get(i).getRow();
             for (int j = 0; j < BOARD_COLS; j++) {
@@ -93,6 +115,9 @@ public class View extends JFrame {
                 btn[i][j].update();
             }
         }
+
+        scoreLabel.setText(Integer.toString(Board.score));
+        moneyLabel.setText(Integer.toString(Board.money));
     }
 
     public JFrame getFrame() {
