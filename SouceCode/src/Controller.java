@@ -58,6 +58,18 @@ public class Controller implements ActionListener {
 //
 //    }
 
+
+    public void gameEnded(){
+        if (model.hasWon()) {
+            JOptionPane.showMessageDialog(null, "You Won!");
+            System.exit(0);
+        }
+        if (model.hasLost()){
+            JOptionPane.showMessageDialog(null, "You Lost!");
+            System.exit(0);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -121,6 +133,7 @@ public class Controller implements ActionListener {
         while (true) {
             try {
                 c.updateBoard();
+                c.gameEnded();
 //                c.generateZombie();
                 TimeUnit.SECONDS.sleep(3);
 //                c.moveZombie();
