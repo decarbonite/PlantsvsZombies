@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,12 +9,23 @@ import static org.junit.Assert.*;
  */
 public class BoardNodeTest {
 
+    private BoardNode node = null;
+    @Before
+    public void setUp(){
+        node = new BoardNode();
+    }
     @Test
     public void destroyZombie() {
+        assertNull(node.destroyZombie());
+        node.addZombie(new Zombie("z", 1,2,"2"));
+        assertNotNull(node.destroyZombie());
     }
 
     @Test
     public void addPlant() {
+        assertNull(node.getPlant());
+        node.addPlant(new Plant("z", 1,2,"2"));
+        assertNotNull(node.getPlant());
     }
 
     @Test
@@ -26,6 +38,9 @@ public class BoardNodeTest {
 
     @Test
     public void addZombie() {
+        assertNull(node.getZombie());
+        node.addZombie(new Zombie("z", 1,2,"2"));
+        assertNotNull(node.getZombie());
     }
 
     @Test

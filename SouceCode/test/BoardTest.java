@@ -45,6 +45,7 @@ public class BoardTest {
 
     @Test
     public void generateZombieSpawn() {
+
     }
 
     @Test

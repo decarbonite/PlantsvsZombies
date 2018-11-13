@@ -12,8 +12,8 @@ public class BoardNode {
      * Default constructor that creates empty node with a specified coordinates
      */
     public BoardNode() {
-        plant = null;
-        zombie = null;
+        this.plant = null;
+        this.zombie = null;
     }
 
 
