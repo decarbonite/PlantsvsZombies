@@ -1,31 +1,32 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
  * @author Dmytro Sytnik (VanArman)
+ * @author Ahmed Romih (decarbonite)
  * @version 12 November, 2018
  */
 public class MoneyPlantTest {
-    String mpName = "Plant";
-    int mpHelth = 100;
-    int mpMoney = 20;
-    String mpImageURL = "imgUrl.png";
+    MoneyPlant mp = null;
+
+    @Before
+    public void setUp() {
+        mp = new MoneyPlant("Plant",200,20,"imgUrl.png");
+    }
 
     @Test
     public void getMoney() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-
-        Assert.assertEquals(mpMoney, mp.getMoney());
-        Assert.assertNotEquals(10, mp.getMoney());
+        assertEquals("Money should be 20.", 20, mp.getMoney());
+        assertNotEquals(10, mp.getMoney());
     }
 
     @Test
     public void isAlive() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-        Assert.assertEquals(true, mp.isAlive());
-        Assert.assertNotEquals(false, mp.isAlive());
+        assertEquals(true, mp.isAlive());
+        assertNotEquals(false, mp.isAlive());
 
         mp.setHealth(-2);
         Assert.assertEquals(false, mp.isAlive());
@@ -34,33 +35,29 @@ public class MoneyPlantTest {
 
     @Test
     public void getHealth() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-        Assert.assertEquals(mpHelth, mp.getHealth());
-        Assert.assertNotEquals(10, mp.getHealth());
+        assertEquals("Health should be 200.", 200, mp.getHealth());
+        assertNotEquals("Health should be 200.",100, mp.getHealth());
 
         mp.setHealth(20);
-        Assert.assertEquals(20, mp.getHealth());
-        Assert.assertNotEquals(10, mp.getHealth());
+        assertEquals("Health should be 20.",20, mp.getHealth());
+        assertNotEquals("Health should be 20.", 10, mp.getHealth());
     }
 
     @Test
     public void setHealth() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-        mp.setHealth(10);
-        Assert.assertEquals(10, mp.getHealth());
-        Assert.assertNotEquals(100, mp.getHealth());
+        mp.setHealth(5);
+        assertEquals("Health should be 5.", 5, mp.getHealth());
+        assertNotEquals("Health should be 5.",100, mp.getHealth());
     }
 
     @Test
     public void getAttackPower() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-        Assert.assertEquals(0, mp.getAttackPower());
-        Assert.assertNotEquals(10, mp.getAttackPower());
+        assertEquals(0, mp.getAttackPower());
+        assertNotEquals(10, mp.getAttackPower());
     }
 
     @Test
     public void getImgURL() {
-        MoneyPlant mp = new MoneyPlant(mpName, mpHelth, mpMoney, mpImageURL);
-        Assert.assertEquals(mpImageURL, mp.getImgURL());
+        assertEquals("Image URL should be imgUrl.png.","imgUrl.png", mp.getImgURL());
     }
 }
