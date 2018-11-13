@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,6 +9,7 @@ import java.util.Random;
  * @version 09 November, 2018
  */
 public class Board {
+
     private static int boardRows;
     private static int boardColumns;
     protected static int score;
@@ -68,20 +68,23 @@ public class Board {
     /**
      * Checks if game ended
      */
-    public void gameEnded() {
+    public boolean hasWon() {
         int[] arr = getZombieLocation();
 
         if (zombiesToSpawn == 0 && arr[0] == -1){
-            JOptionPane.showMessageDialog(null, "You Won!");
-            System.exit(0);
+            return true;
         }
+        return false;
+    }
 
+    public boolean hasLost(){
+        int[] arr = getZombieLocation();
         for (int i = 1; i < arr.length; i += 2) {
             if (arr[i] == 0) {
-                JOptionPane.showMessageDialog(null, "You Lost!");
-                System.exit(0);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -116,7 +119,6 @@ public class Board {
      */
     public void runBoard() {
         riseMoney();
-        gameEnded();
         fightPlantZombie();
         moveZombies();
         generateZombieSpawn();
@@ -199,5 +201,35 @@ public class Board {
         if (zombie != null) {
             board.get(x).addZombie(y, zombie);
         }
+    }
+
+    //some getters used for testing
+
+    public static int getBoardRows() {
+        return boardRows;
+    }
+
+    public static int getBoardColumns() {
+        return boardColumns;
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static int getMoney() {
+        return money;
+    }
+
+    public int getZombiesToSpawn() {
+        return zombiesToSpawn;
+    }
+
+    public int getTotalZombies() {
+        return totalZombies;
+    }
+
+    public static ArrayList<BoardRow> getBoard() {
+        return board;
     }
 }

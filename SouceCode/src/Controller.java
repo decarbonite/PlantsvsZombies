@@ -31,30 +31,18 @@ public class Controller implements ActionListener {
     public void updateBoard() {
         model.runBoard();
         view.updateView();
-        System.out.println("Money: "+ Board.money +" Score: "+ Board.score);
     }
 
-
-//    public void generateZombie() {
-//        int[] coordinates = model.generateZombieSpawn();
-//        if (coordinates != null) {
-//            if (view.getBtn()[coordinates[1]][coordinates[0]].getIcon().toString().equals(View.GRASS_IMAGE)) {
-//                view.getBtn()[coordinates[1]][coordinates[0]].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
-//            }
-//        }
-//    }
-
-//    public void moveZombie() {
-//
-//        int[] coordinates = model.getZombieLocation();
-//        for (int i = 0; i < coordinates.length-1; i+=2) {
-//            if (coordinates != null && coordinates[i+1] != 0 && view.getBtn()[coordinates[i]][coordinates[i+1] -1].getIcon().toString().equals(View.GRASS_IMAGE)) {
-//                view.getBtn()[coordinates[i]][coordinates[i+1]].setIcon(new ImageIcon(View.GRASS_IMAGE));
-//                view.getBtn()[coordinates[i]][coordinates[i+1]-1].setIcon(new ImageIcon(View.ZOMBIE_IMAGE));
-//            }
-//        }
-//
-//    }
+    public void gameEnded(){
+        if (model.hasWon()) {
+            JOptionPane.showMessageDialog(null, "You Won!");
+            System.exit(0);
+        }
+        if (model.hasLost()){
+            JOptionPane.showMessageDialog(null, "You Lost!");
+            System.exit(0);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -119,6 +107,7 @@ public class Controller implements ActionListener {
         while (true) {
             try {
                 c.updateBoard();
+                c.gameEnded();
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
