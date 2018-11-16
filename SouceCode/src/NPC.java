@@ -89,12 +89,4 @@ public abstract class NPC {
     public String getImgURL() {
         return imgURL;
     }
-
-    /**
-     * Forms String object with NPC's name and health
-     * @return String Returns a string containing NPC's name and health
-     */
-    public String toString() {
-        return name +" ("+health+")";
-    }
 }

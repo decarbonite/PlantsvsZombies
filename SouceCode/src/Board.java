@@ -6,12 +6,10 @@ import java.util.Random;
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
- * @version 09 November, 2018
+ * @version 16 November, 2018
  */
 public class Board {
 
-    private static int boardRows;
-    private static int boardColumns;
     protected static int score;
     protected static int money;
     private int zombiesToSpawn;
@@ -21,23 +19,19 @@ public class Board {
     /**
      * Default constructor
      *
-     * @param numberOfRows int number of rows
-     * @param numberOfColumns int number of BoardNode instances in each row
      * @param zombiesToSpawn int number of zombies that would be randomly generated
      * @param score int initial score for the game (round)
      * @param money int initial amount of money
      */
-    public Board(int numberOfRows, int numberOfColumns, int zombiesToSpawn, int score, int money) {
-        boardRows = numberOfRows;
-        boardColumns = numberOfColumns;
+    public Board(int zombiesToSpawn, int score, int money) {
         this.score = score;
         this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
-        totalZombies = zombiesToSpawn;
-        this.board = new ArrayList<>(boardRows);
+        this.totalZombies = zombiesToSpawn;
+        this.board = new ArrayList<>(View.BOARD_ROWS);
 
-        for (int i = 0; i < boardRows; i++) {
-            board.add(new BoardRow(boardColumns));
+        for (int i = 0; i < View.BOARD_ROWS; i++) {
+            board.add(new BoardRow());
         }
     }
 
@@ -53,8 +47,8 @@ public class Board {
 
         int y=0;
 
-        for (int i = 0; i < boardRows; i++) {
-            for (int j = 0; j < boardColumns; j++) {
+        for (int i = 0; i < View.BOARD_ROWS; i++) {
+            for (int j = 0; j < View.BOARD_COLS; j++) {
                 if (View.getBtn()[i][j].getIcon().toString().equals(View.ZOMBIE_IMAGE)){
                     location[y] = i;
                     location[y+1] = j;
@@ -97,9 +91,9 @@ public class Board {
     }
 
     /**
-     * Rise money if at least one of the rows contains MoneyFlower (if more, values added)
+     * Increment money if at least one of the rows contains MoneyFlower (if more, values added)
      */
-    private void riseMoney() {
+    private void incrementMoney() {
         for (BoardRow br : board){
             this.money = br.generateMoney(this.money);
         }
@@ -118,7 +112,7 @@ public class Board {
      * Main method that runs the Zombie generation, simulates fight method, moves zombies across board and prints board.
      */
     public void runBoard() {
-        riseMoney();
+        incrementMoney();
         fightPlantZombie();
         moveZombies();
         generateZombieSpawn();
@@ -160,11 +154,11 @@ public class Board {
         Random rand = new Random();
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(5) % 3 == 0) {
-                int randRow = rand.nextInt(boardRows);
-                if (!board.get(randRow).hasZombie(boardColumns - 1)) {
-                    addZombie(randRow, boardColumns - 1, new Zombie("Zombie", 10, 10, 10, View.ZOMBIE_IMAGE));
+                int randRow = rand.nextInt(View.BOARD_ROWS);
+                if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
+                    addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 10, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
-                    return new int[]{(boardColumns - 1), randRow};
+                    return new int[]{(View.BOARD_COLS - 1), randRow};
                 }
             }
         }
@@ -179,7 +173,7 @@ public class Board {
      * @return boolean true if plant has been added; false - otherwise
      */
     public boolean addPlant(int x, int y, Plant plant) {
-        if(money >= 50 && (x >= 0 && x < boardRows) && (y >= 0 && y < (boardColumns - 1))) {
+        if(money >= 50 && (x >= 0 && x < View.BOARD_COLS) && (y >= 0 && y < (View.BOARD_COLS - 1))) {
             if (plant != null) {
                 if(!board.get(x).hasPlant(y)) {
                     board.get(x).addPlant(y, plant);
@@ -205,28 +199,8 @@ public class Board {
 
     //some getters used for testing
 
-    public static int getBoardRows() {
-        return boardRows;
-    }
-
-    public static int getBoardColumns() {
-        return boardColumns;
-    }
-
-    public static int getScore() {
-        return score;
-    }
-
     public static int getMoney() {
         return money;
-    }
-
-    public int getZombiesToSpawn() {
-        return zombiesToSpawn;
-    }
-
-    public int getTotalZombies() {
-        return totalZombies;
     }
 
     public static ArrayList<BoardRow> getBoard() {

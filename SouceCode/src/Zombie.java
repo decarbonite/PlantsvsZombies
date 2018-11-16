@@ -8,7 +8,6 @@
  */
 public class Zombie extends NPC {
     private int scoreOnDeath;
-    private static int counter = 0;
 
     /**
      * Initializes a new zombie

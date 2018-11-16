@@ -11,49 +11,26 @@ import java.util.Random;
  */
 public class BoardRow {
     protected static boolean ZOMBIE_WON = false;
-    private static int COLUMNS_ON_BOARD = 9;
     private ArrayList<BoardNode> nodes;
 
     /**
-     * Default constructor
-     * @param numberOfColumns int number of columns
+     * Default constructor initializes a row of a board
      */
-    public BoardRow(int numberOfColumns) {
-        this.COLUMNS_ON_BOARD = numberOfColumns;
-        nodes = new ArrayList<>(COLUMNS_ON_BOARD);
+    public BoardRow() {
+        nodes = new ArrayList<>(View.BOARD_COLS);
 
-        for(int i = 0; i < COLUMNS_ON_BOARD; i++) {
+        for(int i = 0; i < View.BOARD_COLS; i++) {
             nodes.add(new BoardNode());
         }
     }
 
-    /**
-     * Returns String object of the row with plants and zombies on it (perforated)
-     * @return String object of all NPCs of each node
-     */
-    @Override
-    public String toString() {
-        String str = "";
-        for(BoardNode bn : nodes){
-            if(bn.hasZombie() && !bn.hasPlant()){
-                str += String.format("| %15s |", bn.getZombie());
-            } else if(bn.hasPlant() && !bn.hasZombie()) {
-                str += String.format("| %15s |", bn.getPlant());
-            } else if(bn.hasZombie() && bn.hasPlant()) {
-                str += String.format("| %15s |", "Z("+ bn.getZombie().getHealth() +") vs P("+ bn.getPlant().getHealth() +")");
-            } else {
-                str += String.format("| %15s |", "");
-            }
-        }
-        return str;
-    }
 
     /**
      * Moves zombies across plane (based on the number of node(s))
      * Assign ZOMBIE_WON to true if zombie stays on the first node (end of the board) and this node does not contain plant.
      */
     protected void moveZombie() {
-        for (int i = 0; i < COLUMNS_ON_BOARD - 1; i++) {
+        for (int i = 0; i < View.BOARD_COLS - 1; i++) {
             BoardNode current = nodes.get(i);
             BoardNode next = nodes.get(i + 1);
 
@@ -139,10 +116,10 @@ public class BoardRow {
      * @return int reward for the player when plant kills zombie
      */
     protected int fightPvsZ(int score) {
-        for (int i = 0; i < COLUMNS_ON_BOARD; i++) {
+        for (int i = 0; i < View.BOARD_COLS; i++) {
             BoardNode plantFind = nodes.get(i);
             if (plantFind.hasPlant()) {
-                for (int j = i; j < COLUMNS_ON_BOARD; j++) {
+                for (int j = i; j < View.BOARD_COLS; j++) {
                     BoardNode zombieFind = nodes.get(j);
                     if (plantFind == zombieFind && plantFind.hasZombie()) {
                         score += plantFind.plantFightZombie();

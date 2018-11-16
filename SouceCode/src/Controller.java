@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
-
 import static java.awt.Cursor.DEFAULT_CURSOR;
 
 /**
@@ -16,7 +14,7 @@ public class Controller implements ActionListener {
     private Board model;
 
     public Controller(View v) {
-        this(v, new Board(v.BOARD_ROWS, v.BOARD_COLS, 15, 0, 200));
+        this(v, new Board(10, 0, 200));
     }
 
     public Controller(View v, Board m) {
@@ -99,20 +97,5 @@ public class Controller implements ActionListener {
             }
             view.updateView();
         }
-    }
-
-    public static void main(String[] args) {
-        Controller c = new Controller(new View());
-        c.generateBoard();
-        while (true) {
-            try {
-                c.updateBoard();
-                c.gameEnded();
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
     }
 }

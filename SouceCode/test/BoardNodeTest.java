@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  * @author Dmytro Sytnik (VanArman)
+ * @author Ahmed Romih (decarbonite)
  * @version 12 November, 2018
  */
 public class BoardNodeTest {

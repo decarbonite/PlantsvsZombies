@@ -55,7 +55,7 @@ public class View extends JFrame {
 
         selectPanel.setSize(100,100);
 
-        frame.setSize(800, 500);
+        frame.setSize(930, 600);
 
         JPanel gJP = new JPanel(new  BorderLayout());
         gJP.add(statsPanel, BorderLayout.NORTH);
@@ -64,6 +64,7 @@ public class View extends JFrame {
         frame.add(gJP, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
 
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);//show gui in the middle of screen
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
@@ -134,10 +135,6 @@ public class View extends JFrame {
 
     public JButton getSunflowerButton() {
         return sunflowerButton;
-    }
-
-    public ImageIcon getImg() {
-        return img;
     }
 
     public void setImg(ImageIcon img) {

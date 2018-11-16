@@ -3,11 +3,10 @@
  * @version 13 October, 2018
  *
  * @author Ahmed Romih (decarbonite)
- * @version 26 October, 2018
+ * @version 16 Nov, 2018
  */
 
 public class Plant extends NPC {
-    private static int counter = 0;
 
     /**
      * Initializes a new Plant
@@ -28,8 +27,7 @@ public class Plant extends NPC {
      * @param imgURL String image of the plant on the board (GUI)
      */
     public Plant(String name, int health, int attackPower, String imgURL) {
-        super(name+""+counter, health, attackPower, imgURL);
-        counter++;
+        super(name, health, attackPower, imgURL);
     }
 
     /**

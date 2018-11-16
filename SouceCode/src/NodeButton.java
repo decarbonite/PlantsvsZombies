@@ -9,20 +9,9 @@ public class NodeButton<E> extends JButton {
     private E internalObj;
     private ImageIcon defaultImage;
 
-    public NodeButton() {
-        this(null, "");
-    }
 
     public NodeButton(String defaultImageURL)  {
         this(null, new ImageIcon(defaultImageURL));
-    }
-
-    public NodeButton(E obj) {
-        this.internalObj = obj;
-    }
-
-    public NodeButton(E obj, String defaultImageURL) {
-        this(obj, new ImageIcon(defaultImageURL));
     }
 
     private NodeButton(E obj, ImageIcon icon) {
@@ -47,14 +36,6 @@ public class NodeButton<E> extends JButton {
 
     public E getObject(){
         return this.internalObj;
-    }
-
-    public void setImage(String imageURL) {
-        this.setImage(new ImageIcon(imageURL));
-    }
-
-    public void setImage(ImageIcon imageIcon) {
-        stringToImageConverter(imageIcon);
     }
 
     public void update() {
