@@ -18,13 +18,13 @@ public class MoneyPlantTest {
     }
 
     @Test
-    public void getMoney() {
+    public void testGetMoney() {
         assertEquals("Money should be 20.", 20, mp.getMoney());
         assertNotEquals(10, mp.getMoney());
     }
 
     @Test
-    public void isAlive() {
+    public void testIsAlive() {
         assertEquals(true, mp.isAlive());
         assertNotEquals(false, mp.isAlive());
 
@@ -34,7 +34,7 @@ public class MoneyPlantTest {
     }
 
     @Test
-    public void getHealth() {
+    public void testGetHealth() {
         assertEquals("Health should be 200.", 200, mp.getHealth());
         assertNotEquals("Health should be 200.",100, mp.getHealth());
 
@@ -44,20 +44,20 @@ public class MoneyPlantTest {
     }
 
     @Test
-    public void setHealth() {
+    public void testSetHealth() {
         mp.setHealth(5);
         assertEquals("Health should be 5.", 5, mp.getHealth());
         assertNotEquals("Health should be 5.",100, mp.getHealth());
     }
 
     @Test
-    public void getAttackPower() {
+    public void testGetAttackPower() {
         assertEquals(0, mp.getAttackPower());
         assertNotEquals(10, mp.getAttackPower());
     }
 
     @Test
-    public void getImgURL() {
+    public void testGetImgURL() {
         assertEquals("Image URL should be imgUrl.png.","imgUrl.png", mp.getImgURL());
     }
 }

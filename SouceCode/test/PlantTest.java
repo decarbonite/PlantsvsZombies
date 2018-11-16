@@ -16,7 +16,7 @@ public class PlantTest {
     }
 
     @Test
-    public void isAlive() {
+    public void testIsAlive() {
         assertTrue(p.isAlive());
         assertFalse(!p.isAlive());
 
@@ -25,7 +25,7 @@ public class PlantTest {
     }
 
     @Test
-    public void getHealth() {
+    public void testGetHealth() {
 
         assertEquals("Health expected to be 100.",100, p.getHealth());
         assertNotEquals(10, p.getHealth());
@@ -36,21 +36,21 @@ public class PlantTest {
     }
 
     @Test
-    public void setHealth() {
+    public void testSetHealth() {
         p.setHealth(10);
         assertEquals(10, p.getHealth());
         assertNotEquals(100, p.getHealth());
     }
 
     @Test
-    public void getAttackPower() {
+    public void testGetAttackPower() {
         assertEquals(20, p.getAttackPower());
         assertNotEquals(10, p.getAttackPower());
     }
 
 
     @Test
-    public void getImgURL() {
+    public void testGetImgURL() {
         assertEquals("imgUrl.png", p.getImgURL());
     }
 }

@@ -19,13 +19,13 @@ public class ZombieTest {
     }
 
     @Test
-    public void getPointsWhenDead() {
+    public void testGetPointsWhenDead() {
         assertEquals(10, z.getPointsWhenDead());
         assertNotEquals(20, z.getPointsWhenDead());
     }
 
     @Test
-    public void isAlive() {
+    public void testIsAlive() {
         assertTrue("Expected to return true.", z.isAlive());
         assertFalse("Expected to return false.", !z.isAlive());
 
@@ -34,24 +34,24 @@ public class ZombieTest {
     }
 
     @Test
-    public void getHealth() {
+    public void testGetHealth() {
         assertEquals("Health expected to be 100.",100, z.getHealth());
     }
 
     @Test
-    public void setHealth() {
+    public void testSetHealth() {
         z.setHealth(20);
         assertNotEquals("Health expected to be 20.", 1, z.getHealth());
         assertEquals("Health expected to be 20.", 20, z.getHealth());
     }
 
     @Test
-    public void getAttackPower() {
+    public void testGetAttackPower() {
         assertEquals("Attack Power expected to be 20.",20, z.getAttackPower());
     }
 
     @Test
-    public void getImgURL() {
+    public void testGetImgURL() {
         assertEquals("Image URL should be imgUrl.png.", "imgUrl.png", z.getImgURL());
     }
 }
