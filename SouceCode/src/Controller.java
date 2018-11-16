@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import static java.awt.Cursor.DEFAULT_CURSOR;
 
 /**
+ * Connects model (Board) and visualisation to perform MVC model
+ * Listen for the events from the View, agrigates it calls and send signal for modification into the model and view.
+ *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
@@ -13,24 +16,45 @@ public class Controller implements ActionListener {
     private View view;
     private Board model;
 
+    /**
+     * Default constructor that requires only View to be passed
+     * Model creates automatically with 15 zombies to spawn, zerose player score and 200 in game money
+     *
+     * @param v View object
+     */
     public Controller(View v) {
         this(v, new Board(10, 0, 200));
     }
 
+    /**
+     * Default constructor that requires both Model and View objects in order make linkage between them.
+     *
+     * @param v View object
+     * @param m Model (Board) object
+     */
     public Controller(View v, Board m) {
         this.view = v;
         this.model = m;
     }
 
+    /**
+     * Sends command to the View object to generate initial board
+     */
     public void generateBoard() {
         view.linkModelView(model.board);
     }
 
+    /**
+     * Sends command to the Model and View in order to synchronize changes in model and view
+     */
     public void updateBoard() {
         model.runBoard();
         view.updateView();
     }
 
+    /**
+     * Chaeck if the condition for ending game is reached
+     */
     public void gameEnded(){
         if (model.hasWon()) {
             JOptionPane.showMessageDialog(null, "You Won!");
@@ -53,8 +77,6 @@ public class Controller implements ActionListener {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
                         createCustomCursor(new ImageIcon(View.PLANT_ICON).getImage(),
                                 new Point(0, 0), "plant"));
-                Image icon = new ImageIcon(View.PLANT_IMAGE).getImage();
-                view.setImg(new ImageIcon(icon));
                 return;
             }
         }
@@ -66,8 +88,6 @@ public class Controller implements ActionListener {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
                         createCustomCursor(new ImageIcon(View.SUNFLOWER_ICON).getImage(),
                                 new Point(0, 0), "sunflower"));
-                Image icon = new ImageIcon(View.SUNFLOWER_IMAGE).getImage();
-                view.setImg(new ImageIcon(icon));
                 return;
             }
         }

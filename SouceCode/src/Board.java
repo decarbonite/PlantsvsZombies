@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Creates board that contains BoardRows based on BoardNodes
+ * Generates board that contains BoardRows based on BoardNodes
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
@@ -177,12 +177,18 @@ public class Board {
         return false;
     }
 
-    //some getters used for testing
-
+    /**
+     * Return amount of money player currently have
+     * @return int amount of money
+     */
     public static int getMoney() {
         return money;
     }
 
+    /**
+     * Return whole board rows generated for a particular board
+     * @return ArrayList of BoardRows objects
+     */
     public static ArrayList<BoardRow> getBoard() {
         return board;
     }

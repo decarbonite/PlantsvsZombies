@@ -43,8 +43,7 @@ public abstract class NPC {
 
     /**
      * Returns true if the NPC's health is greater than 0, false otherwise
-     *
-     * @return boolean returns whether the NPC is alive or not
+     * @return boolean returns true if NPC alive; false - otherwise
      */
     public boolean isAlive(){
         if (this.getHealth() > 0) {

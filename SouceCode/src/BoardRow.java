@@ -159,6 +159,10 @@ public class BoardRow {
         return money;
     }
 
+    /**
+     * Return array of nodes that contain
+     * @return ArrayList of BoardNode's
+     */
     protected ArrayList<BoardNode> getRow() {
         if(nodes != null) {
             return nodes;

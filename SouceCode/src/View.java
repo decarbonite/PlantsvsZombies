@@ -3,6 +3,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * Default view component for the MVC model.
+ * This class builds GUI for the Plant vs Zombie game.
+ *
+ * Contains visual components such paths to the default images in the game.
+ *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
@@ -18,19 +23,22 @@ public class View extends JFrame {
     private JButton sunflowerButton;
     private JLabel scoreLabel;
     private JLabel moneyLabel;
-    private ImageIcon img;
     private JFrame frame;
 
-    //protected static final String PATH = System.getProperty("user.dir") + "/SouceCode/src";
-    protected static final String PLANT_ICON = "./src/images/plant.png";
-    protected static final String SUNFLOWER_ICON = "./src/images/sunflower.png";
-    protected static final String GRASS_IMAGE = "./src/images/grass.png";
-    protected static final String PLANT_IMAGE = "./src/images/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE = "./src/images/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = "./src/images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE = "./src/images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE = "./src/images/grassed_plant_zombie.png";
+    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode";
+    protected static final String PLANT_ICON = PATH + "/src/images/plant.png";
+    protected static final String SUNFLOWER_ICON = PATH + "/src/images/sunflower.png";
+    protected static final String GRASS_IMAGE = PATH + "/src/images/grass.png";
+    protected static final String PLANT_IMAGE = PATH + "/src/images/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE = PATH + "/src/images/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = PATH + "/src/images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE = PATH + "/src/images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE = PATH + "/src/images/grassed_plant_zombie.png";
 
+    /**
+     * Default constructor that initialized window with board,
+     * barr with the score and current amount of money, and control buttons to place plants into the board.
+     */
     public View() {
         frame = new JFrame("Plants Vs Zombies");
 
@@ -48,21 +56,27 @@ public class View extends JFrame {
         statsPanel.add(new JLabel("Money: "));
         statsPanel.add(moneyLabel);
 
-        selectPanel.setSize(100,100);
+        selectPanel.setMaximumSize(new Dimension(100,100));
 
         frame.setSize(925, 600);
         paintGrid();
 
-        frame.add(statsPanel, BorderLayout.NORTH);
-        frame.add(selectPanel, BorderLayout.CENTER);
-        frame.add(gridPanel, BorderLayout.SOUTH);
+        JPanel gJP = new JPanel(new  BorderLayout());
+        gJP.add(statsPanel, BorderLayout.NORTH);
+        gJP.add(selectPanel, BorderLayout.CENTER);
+
+        frame.add(gJP, BorderLayout.NORTH);
+        frame.add(gridPanel, BorderLayout.CENTER);
 
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);      //show gui in the middle of screen
-        frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
+    /**
+     * Generate control buttons to place plants into the board and board itself
+     */
     public void paintGrid(){
         shootFlowerButton = new JButton(new ImageIcon(PLANT_ICON));
         shootFlowerButton.setName("Plant");
@@ -77,6 +91,9 @@ public class View extends JFrame {
         generateBoard();
     }
 
+    /**
+     * Helper method that generates board out of the array of NodeButtons
+     */
     private void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
@@ -91,6 +108,10 @@ public class View extends JFrame {
         }
     }
 
+    /**
+     * Link each button on the board with the corresponding BoardNode object in the model
+     * @param b ArrayList of BoardRows - board itself
+     */
     public void linkModelView(ArrayList<BoardRow> b) {
         scoreLabel.setText(Integer.toString(Board.score));
         moneyLabel.setText(Integer.toString(Board.money));
@@ -103,6 +124,9 @@ public class View extends JFrame {
         }
     }
 
+    /**
+     * Synchronizes model and view by calling internal update method of the NodeButton
+     */
     public void updateView() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
@@ -114,23 +138,35 @@ public class View extends JFrame {
         moneyLabel.setText(Integer.toString(Board.money));
     }
 
+    /**
+     * Return main frame of the window
+     * @return JFrame main frame
+     */
     public JFrame getFrame() {
         return frame;
     }
 
+    /**
+     * Return two dimensional array of buttons
+     * @return array of NodeButtons
+     */
     public static NodeButton[][] getBtn() {
         return btn;
     }
 
+    /**
+     * Return object of shooting plant button from the control panel
+     * @return JButton of shooting plant
+     */
     public JButton getShootFlowerButton() {
         return shootFlowerButton;
     }
 
+    /**
+     * Return object of sunflower plant (one that generates money) button from the control panel
+     * @return JButton of sunflower plant
+     */
     public JButton getSunflowerButton() {
         return sunflowerButton;
-    }
-
-    public void setImg(ImageIcon img) {
-        this.img = img;
     }
 }
