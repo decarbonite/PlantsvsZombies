@@ -34,7 +34,7 @@ public class BoardTest {
     }
 
     @Test
-    public void generateZombieSpawn() {
+    public void testGenerateZombieSpawn() {
 
     }
 

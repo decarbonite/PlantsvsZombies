@@ -3,7 +3,8 @@ import java.awt.*;
 
 /**
  * @author Dmytro Sytnik (VanArman)
- * @version 09 November, 2018
+ * @author Ahmed Romih (decarbonite)
+ * @version 16 November, 2018
  */
 public class NodeButton<E> extends JButton {
     private E internalObj;
@@ -22,12 +23,10 @@ public class NodeButton<E> extends JButton {
 
     private void stringToImageConverter(ImageIcon icon){
         this.setIcon(icon);
-        //this.setMargin(new Insets(0, 0, 0, 0));
-        //this.setIconTextGap(0);
+        this.setMargin(new Insets(0, 0, 0, 0));
         this.setBorderPainted(false);
         this.setBorder(null);
-        //this.setText(null);
-        this.setSize(icon.getImage().getWidth(null), icon.getImage().getHeight(null));
+        this.setText(null);
     }
 
     public void setObject(E obj) {

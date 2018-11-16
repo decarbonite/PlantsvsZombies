@@ -20,22 +20,22 @@ public class ZombieTest {
 
     @Test
     public void testGetPointsWhenDead() {
-        assertEquals(10, z.getPointsWhenDead());
-        assertNotEquals(20, z.getPointsWhenDead());
+        assertEquals("Points should be 10", 10, z.getPointsWhenDead());
+        assertNotEquals("Points should be 10", 20, z.getPointsWhenDead());
     }
 
     @Test
     public void testIsAlive() {
-        assertTrue("Expected to return true.", z.isAlive());
-        assertFalse("Expected to return false.", !z.isAlive());
+        assertTrue("Should return true.", z.isAlive());
+        assertFalse("Should return false.", !z.isAlive());
 
         z.setHealth(-20);
-        assertFalse("Expected to return false.", z.isAlive());
+        assertFalse("Should return false.", z.isAlive());
     }
 
     @Test
     public void testGetHealth() {
-        assertEquals("Health expected to be 100.",100, z.getHealth());
+        assertEquals("Health should be 100.",100, z.getHealth());
     }
 
     @Test

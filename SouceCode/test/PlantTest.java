@@ -17,11 +17,11 @@ public class PlantTest {
 
     @Test
     public void testIsAlive() {
-        assertTrue(p.isAlive());
-        assertFalse(!p.isAlive());
+        assertTrue("Plant should be alive",p.isAlive());
+        assertFalse("Plant should not be alive",!p.isAlive());
 
         p.setHealth(-2);
-        assertFalse(p.isAlive());
+        assertFalse("Plant should not be alive", p.isAlive());
     }
 
     @Test
@@ -37,20 +37,24 @@ public class PlantTest {
 
     @Test
     public void testSetHealth() {
+
+        assertEquals("Health should be 100.",100, p.getHealth());
         p.setHealth(10);
-        assertEquals(10, p.getHealth());
-        assertNotEquals(100, p.getHealth());
+        assertNotEquals("Health should be 10.",100, p.getHealth());
+        assertEquals("Health should be 10.",10, p.getHealth());
     }
 
     @Test
     public void testGetAttackPower() {
-        assertEquals(20, p.getAttackPower());
-        assertNotEquals(10, p.getAttackPower());
+        assertEquals("Attack power should be 20.",20, p.getAttackPower());
+        assertNotEquals("Attack power should be 20.",10, p.getAttackPower());
     }
 
 
     @Test
     public void testGetImgURL() {
-        assertEquals("imgUrl.png", p.getImgURL());
+        assertEquals("Image URL should be imgURL.png", "imgUrl.png", p.getImgURL());
+        assertNotEquals("Image URL should be imgURL.png", "imgUrl.jpg", p.getImgURL());
+        assertNotEquals("Image URL should be imgURL.png", "imgURL.png", p.getImgURL());
     }
 }

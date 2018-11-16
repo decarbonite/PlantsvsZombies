@@ -126,8 +126,9 @@ public class Board {
 
     /**
      * Randomly generates zombies' spawn location on the board
+     * @return int[] returns int array contains the
      */
-    protected int[] generateZombieSpawn() {
+    protected void generateZombieSpawn() {
         Random rand = new Random();
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
@@ -135,11 +136,9 @@ public class Board {
                 if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
                     addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 10, 10, 10, View.ZOMBIE_IMAGE));
                     zombiesToSpawn--;
-                    return new int[]{(View.BOARD_COLS - 1), randRow};
                 }
             }
         }
-        return null;
     }
 
     /**
