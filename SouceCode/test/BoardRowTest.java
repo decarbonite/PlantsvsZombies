@@ -25,10 +25,6 @@ public class BoardRowTest {
     }
 
     @Test
-    public void hasZombie1() {
-    }
-
-    @Test
     public void hasPlant() {
     }
 

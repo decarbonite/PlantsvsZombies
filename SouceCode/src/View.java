@@ -33,21 +33,16 @@ public class View extends JFrame {
 
     public View() {
         frame = new JFrame("Plants Vs Zombies");
-        Dimension labelDimention = new Dimension(50, 30);
+
         statsPanel = new JPanel(new GridLayout(1,4,0,0));
-
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
-
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
-        btn = new NodeButton[BOARD_ROWS][BOARD_COLS];
 
-        paintGrid();
+        btn = new NodeButton[BOARD_ROWS][BOARD_COLS];
 
         scoreLabel = new JLabel("0");
         moneyLabel = new JLabel("0");
 
-        scoreLabel.setMaximumSize(labelDimention);
-        moneyLabel.setMaximumSize(labelDimention);
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));
@@ -55,17 +50,15 @@ public class View extends JFrame {
 
         selectPanel.setSize(100,100);
 
-        frame.setSize(930, 600);
+        frame.setSize(925, 600);
+        paintGrid();
 
-        JPanel gJP = new JPanel(new  BorderLayout());
-        gJP.add(statsPanel, BorderLayout.NORTH);
-        gJP.add(selectPanel, BorderLayout.CENTER);
-
-        frame.add(gJP, BorderLayout.NORTH);
-        frame.add(gridPanel, BorderLayout.CENTER);
+        frame.add(statsPanel, BorderLayout.NORTH);
+        frame.add(selectPanel, BorderLayout.CENTER);
+        frame.add(gridPanel, BorderLayout.SOUTH);
 
         frame.setResizable(false);
-        frame.setLocationRelativeTo(null);//show gui in the middle of screen
+        frame.setLocationRelativeTo(null);      //show gui in the middle of screen
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -87,7 +80,7 @@ public class View extends JFrame {
     private void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new NodeButton<BoardNode>(GRASS_IMAGE);
+                btn[i][j] = new NodeButton<>(GRASS_IMAGE);
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);

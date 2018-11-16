@@ -170,10 +170,12 @@ public class Board {
      * @param y      int column index
      * @param zombie Zombie object
      */
-    public void addZombie(int x, int y, Zombie zombie) {
-        if (zombie != null) {
+    public boolean addZombie(int x, int y, Zombie zombie) {
+        if (zombie != null && x >= 0 && x < 5 && y == 8) {
             board.get(x).addZombie(y, zombie);
+            return true;
         }
+        return false;
     }
 
     //some getters used for testing

@@ -22,11 +22,11 @@ public class NodeButton<E> extends JButton {
 
     private void stringToImageConverter(ImageIcon icon){
         this.setIcon(icon);
-        this.setMargin(new Insets(0, 0, 0, 0));
-        this.setIconTextGap(0);
+        //this.setMargin(new Insets(0, 0, 0, 0));
+        //this.setIconTextGap(0);
         this.setBorderPainted(false);
         this.setBorder(null);
-        this.setText(null);
+        //this.setText(null);
         this.setSize(icon.getImage().getWidth(null), icon.getImage().getHeight(null));
     }
 

@@ -84,14 +84,17 @@ public class Controller implements ActionListener {
                 return;
             }
             String toPlant = view.getFrame().getCursor().getName();
+            //Add shooting plant
             if(toPlant.equals("plant")) {
                 model.addPlant(row, col, new Plant("Plant", 100, 5, View.PLANT_IMAGE));
             }
 
+            //Add sunflower to generate money
             if(toPlant.equals("sunflower")) {
-                model.addPlant(row, col, new MoneyPlant("Sunflower", 100, 25,  View.SUNFLOWER_IMAGE));
+                model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25,  View.SUNFLOWER_IMAGE));
             }
 
+            //Change cursor back to default
             if (view.getFrame().getCursor().getType() != 0) {
                 view.getFrame().setCursor(DEFAULT_CURSOR);
             }
