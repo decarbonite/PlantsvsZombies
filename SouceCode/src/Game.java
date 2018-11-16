@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class Game{
 
     public static void main(String[] args) {
-        Controller c = new Controller(new View());
+        Controller c = new Controller(new View(), new Board(10, 0, 200));
         c.generateBoard();
         while (true) {
             try {
