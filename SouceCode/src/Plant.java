@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
@@ -14,7 +16,7 @@ public class Plant extends NPC {
      * @param health Plant's health
      * @param imgURL String image of the plant on the board (GUI)
      */
-    public Plant(String name, int health, String imgURL) {
+    public Plant(String name, int health, ImageIcon imgURL) {
         super(name, health, imgURL);
     }
 
@@ -26,7 +28,7 @@ public class Plant extends NPC {
      * @param attackPower Plant's attack power
      * @param imgURL String image of the plant on the board (GUI)
      */
-    public Plant(String name, int health, int attackPower, String imgURL) {
+    public Plant(String name, int health, int attackPower, ImageIcon imgURL) {
         super(name, health, attackPower, imgURL);
     }
 

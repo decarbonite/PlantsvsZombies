@@ -12,7 +12,6 @@ public class Game{
     public static void main(String[] args) {
         Controller c = new Controller(new View(), new Board(10, 0, 200));
         c.generateBoard();
-
         // A little delay before zombies start to appear
         try{
             TimeUnit.SECONDS.sleep(2);

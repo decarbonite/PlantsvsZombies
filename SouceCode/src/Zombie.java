@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * This class is responsible for making zombies and making them attack
  * @author Dmytro Sytnik (VanArman)
@@ -15,7 +17,7 @@ public class Zombie extends NPC {
      * @param health Zombie's health
      * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, String imgURL) {
+    public Zombie(String name, int health, ImageIcon imgURL) {
         super(name, health, imgURL);
     }
 
@@ -26,7 +28,7 @@ public class Zombie extends NPC {
      * @param attackPower zombie's attack power
      * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower, String imgURL) {
+    public Zombie(String name, int health, int attackPower, ImageIcon imgURL) {
         super(name, health, attackPower, imgURL);
     }
 
@@ -38,7 +40,7 @@ public class Zombie extends NPC {
      * @param scoreOnDeath score added to the player when zombie is died
      * @param imgURL image of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower, int scoreOnDeath, String imgURL) {
+    public Zombie(String name, int health, int attackPower, int scoreOnDeath, ImageIcon imgURL) {
         super(name, health, attackPower, imgURL);
         this.scoreOnDeath = scoreOnDeath;
     }

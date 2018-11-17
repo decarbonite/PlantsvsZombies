@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.swing.*;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -15,7 +18,7 @@ public class ZombieTest {
 
     @Before
     public void setUp() {
-        z = new Zombie("Zombie",100,20,10,"imgUrl.png");
+        z = new Zombie("Zombie",100,20,10,new ImageIcon("pic.png"));
     }
 
     @Test

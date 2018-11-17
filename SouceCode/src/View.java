@@ -25,15 +25,14 @@ public class View extends JFrame {
     private JLabel moneyLabel;
     private JFrame frame;
 
-    protected static final String PATH = System.getProperty("user.dir") + "/SouceCode";
-    protected static final String PLANT_ICON =  "./src/images/plant.png";
-    protected static final String SUNFLOWER_ICON=  "./src/images/sunflower.png";
-    protected static final String GRASS_IMAGE =  "./src/images/grass.png";
-    protected static final String PLANT_IMAGE =  "./src/images/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE =  "./src/images/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = "./src/images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE =  "./src/images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE =  "./src/images/grassed_plant_zombie.png";
+    protected static final String PLANT_ICON =  "images/plant.png";
+    protected static final String SUNFLOWER_ICON=  "images/sunflower.png";
+    protected static final String GRASS_IMAGE =  "images/grass.png";
+    protected static final String PLANT_IMAGE =  "images/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE =  "images/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = "images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE =  "images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE =  "images/grassed_plant_zombie.png";
 
     /**
      * Default constructor that initialized window with board,
@@ -78,12 +77,12 @@ public class View extends JFrame {
      * Generate control buttons to place plants into the board and board itself
      */
     public void paintGrid(){
-        shootFlowerButton = new JButton(new ImageIcon(PLANT_ICON));
+        shootFlowerButton = new JButton(new ImageIcon(this.getClass().getResource(PLANT_ICON)));
         shootFlowerButton.setName("Plant");
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
 
-        sunflowerButton = new JButton(new ImageIcon(SUNFLOWER_ICON));
+        sunflowerButton = new JButton(new ImageIcon(this.getClass().getResource(SUNFLOWER_ICON)));
         sunflowerButton.setName("Sunflower");
         sunflowerButton.addActionListener(new Controller(this));
         selectPanel.add(sunflowerButton);
@@ -97,7 +96,7 @@ public class View extends JFrame {
     private void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
-                btn[i][j] = new NodeButton<>(GRASS_IMAGE);
+                btn[i][j] = new NodeButton<>(new ImageIcon(this.getClass().getResource(GRASS_IMAGE)));
 
                 btn[i][j].putClientProperty("row", i);
                 btn[i][j].putClientProperty("column", j);

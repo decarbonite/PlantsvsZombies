@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  *
  * * NPC is a Non-Player Character which could be any kind of a plant or a zombie
@@ -10,7 +12,7 @@
  *
  */
 public abstract class NPC {
-    private String imgURL;
+    private ImageIcon imgURL;
     private int health;
     private String name;
     private int attackPower;
@@ -21,7 +23,7 @@ public abstract class NPC {
      * @param health NPC's health
      * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health, String imgURL) {
+    public NPC(String name, int health, ImageIcon imgURL) {
         this.name = name;
         this.health = health;
         this.imgURL = imgURL;
@@ -34,7 +36,7 @@ public abstract class NPC {
      * @param attackPower NPC's attack power
      * @param imgURL url of the image for NPS's on the board
      */
-    public NPC(String name, int health, int attackPower, String imgURL) {
+    public NPC(String name, int health, int attackPower, ImageIcon imgURL) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
@@ -85,7 +87,7 @@ public abstract class NPC {
      * Returns url to the image of NPC's
      * @return String url
      */
-    public String getImgURL() {
+    public ImageIcon getImgURL() {
         return imgURL;
     }
 }

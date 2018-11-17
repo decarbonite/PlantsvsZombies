@@ -15,10 +15,10 @@ public class NodeButton<E> extends JButton {
 
     /**
      * Default constructor that creates JButton with defined image
-     * @param defaultImageURL String image URL
+     * @param defaultImage ImageIcon image URL
      */
-    public NodeButton(String defaultImageURL)  {
-        this(null, new ImageIcon(defaultImageURL));
+    public NodeButton(ImageIcon defaultImage)  {
+        this(null, defaultImage);
     }
 
     /**
@@ -72,14 +72,14 @@ public class NodeButton<E> extends JButton {
 
         if(bn.hasZombie() && bn.hasPlant()) {
             if (bn.getPlant() instanceof MoneyPlant) {
-                this.stringToImageConverter(new ImageIcon(View.ZOMBIE_SUNFLOWER_IMAGE));
+                this.stringToImageConverter(new ImageIcon(this.getClass().getResource(View.ZOMBIE_SUNFLOWER_IMAGE)));
             } else {
-                this.stringToImageConverter(new ImageIcon(View.ZOMBIE_PLANT_IMAGE));
+                this.stringToImageConverter(new ImageIcon(this.getClass().getResource(View.ZOMBIE_PLANT_IMAGE)));
             }
         } else if (bn.hasPlant()) {
-                this.stringToImageConverter(new ImageIcon(bn.getPlant().getImgURL()));
+                this.stringToImageConverter(bn.getPlant().getImgURL());
         } else if (bn.hasZombie()) {
-            this.stringToImageConverter(new ImageIcon(bn.getZombie().getImgURL()));
+            this.stringToImageConverter(bn.getZombie().getImgURL());
         } else {
             this.stringToImageConverter(defaultImage);
         }

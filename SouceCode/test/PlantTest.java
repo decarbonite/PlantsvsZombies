@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.swing.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,7 +15,7 @@ public class PlantTest {
 
     @Before
     public void setUp() {
-        p = new Plant("Plant",100,20,"imgUrl.png");
+        p = new Plant("Plant",100,20,new ImageIcon("pic.png"));
     }
 
     @Test

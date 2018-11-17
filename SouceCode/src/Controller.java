@@ -75,7 +75,7 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon(View.PLANT_ICON).getImage(),
+                        createCustomCursor(new ImageIcon(this.getClass().getResource(View.PLANT_ICON)).getImage(),
                                 new Point(0, 0), "plant"));
                 return;
             }
@@ -86,7 +86,7 @@ public class Controller implements ActionListener {
                 return;
             } else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
-                        createCustomCursor(new ImageIcon(View.SUNFLOWER_ICON).getImage(),
+                        createCustomCursor(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_ICON)).getImage(),
                                 new Point(0, 0), "sunflower"));
                 return;
             }
@@ -106,12 +106,12 @@ public class Controller implements ActionListener {
             String toPlant = view.getFrame().getCursor().getName();
             //Add shooting plant
             if(toPlant.equals("plant")) {
-                model.addPlant(row, col, new Plant("Plant", 100, 20, View.PLANT_IMAGE));
+                model.addPlant(row, col, new Plant("Plant", 100, 20, new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE))));
             }
 
             //Add sunflower to generate money
             if(toPlant.equals("sunflower")) {
-                model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25,  View.SUNFLOWER_IMAGE));
+                model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25,  new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE))));
             }
 
             //Change cursor back to default

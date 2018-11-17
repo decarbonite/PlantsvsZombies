@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -20,8 +21,8 @@ public class BoardRowTest {
     @Before
     public void setUp() {
         br = new BoardRow();
-        z = new Zombie("Zombie", health,aPower, deathScore,"imgUrl.png");
-        p = new Plant("Plant", health, aPower, "imgUrl.png");
+        z = new Zombie("Zombie", health,aPower, deathScore,new ImageIcon("pic.png"));
+        p = new Plant("Plant", health, aPower, new ImageIcon("pic.png"));
     }
 
     @Test

@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.swing.*;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -31,25 +34,25 @@ public class BoardTest {
 
     @Test
     public void testAddPlant() {
-        assertFalse("Plant should not be added.",board.addPlant(-1,4, new Plant("p", 1,"pic.png")));
-        assertFalse("Plant should not be added.",board.addPlant(-1,-4, new Plant("p", 1,"pic.png")));
-        assertFalse("Plant should not be added.",board.addPlant(1,-4, new Plant("p", 1,"pic.png")));
-        assertFalse("Plant should not be added.",board.addPlant(2,9, new Plant("p", 1,"pic.png")));
-        assertFalse("Plant should not be added.",board.addPlant(10,4, new Plant("p", 1,"pic.png")));
+        assertFalse("Plant should not be added.",board.addPlant(-1,4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertFalse("Plant should not be added.",board.addPlant(-1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertFalse("Plant should not be added.",board.addPlant(1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertFalse("Plant should not be added.",board.addPlant(2,9, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertFalse("Plant should not be added.",board.addPlant(10,4, new Plant("p", 1,new ImageIcon("pic.png"))));
 
-        assertTrue("Plant should be added",board.addPlant(2,4, new Plant("p", 1,"pic.png")));
+        assertTrue("Plant should be added",board.addPlant(2,4, new Plant("p", 1,new ImageIcon("pic.png"))));
 
     }
 
     @Test
     public void testAddZombie() {
 
-        assertFalse("Zombie should not be added.",board.addZombie(-1,4, new Zombie("z", 1,"pic.png")));
-        assertFalse("Zombie should not be added.",board.addZombie(-1,-4, new Zombie("z", 1,"pic.png")));
-        assertFalse("Zombie should not be added.",board.addZombie(1,-4, new Zombie("z", 1,"pic.png")));
-        assertFalse("Zombie should not be added.",board.addZombie(2,9, new Zombie("z", 1,"pic.png")));
-        assertFalse("Zombie should not be added.",board.addZombie(10,4, new Zombie("z", 1,"pic.png")));
+        assertFalse("Zombie should not be added.",board.addZombie(-1,4, new Zombie("z", 1,new ImageIcon("pic.png"))));
+        assertFalse("Zombie should not be added.",board.addZombie(-1,-4, new Zombie("z", 1,new ImageIcon("pic.png"))));
+        assertFalse("Zombie should not be added.",board.addZombie(1,-4, new Zombie("z", 1,new ImageIcon("pic.png"))));
+        assertFalse("Zombie should not be added.",board.addZombie(2,9, new Zombie("z", 1,new ImageIcon("pic.png"))));
+        assertFalse("Zombie should not be added.",board.addZombie(10,4, new Zombie("z", 1,new ImageIcon("pic.png"))));
 
-        assertTrue("Zombie should be added", board.addZombie(2,8, new Zombie("z", 1,"pic.png")));
+        assertTrue("Zombie should be added", board.addZombie(2,8, new Zombie("z", 1,new ImageIcon("pic.png"))));
     }
 }
