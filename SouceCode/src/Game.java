@@ -10,8 +10,15 @@ import java.util.concurrent.TimeUnit;
 public class Game{
 
     public static void main(String[] args) {
-        Controller c = new Controller(new View(), new Board(10, 0, 200));
+        Controller c = new Controller(new View(), new Board(1, 0, 200));
         c.generateBoard();
+
+        try{
+            TimeUnit.SECONDS.sleep(0);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
+
         while (true) {
             try {
                 c.updateBoard();
