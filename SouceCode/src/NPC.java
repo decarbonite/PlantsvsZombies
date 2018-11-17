@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  *
  * * NPC is a Non-Player Character which could be any kind of a plant or a zombie
@@ -10,7 +12,7 @@
  *
  */
 public abstract class NPC {
-
+    private ImageIcon imgURL;
     private int health;
     private String name;
     private int attackPower;
@@ -19,10 +21,12 @@ public abstract class NPC {
      * Initializes a new NPC
      * @param name NPC's name
      * @param health NPC's health
+     * @param imgURL ImageIcon url of the image for NPS's on the board
      */
-    public NPC(String name, int health) {
+    public NPC(String name, int health, ImageIcon imgURL) {
         this.name = name;
         this.health = health;
+        this.imgURL = imgURL;
     }
 
     /**
@@ -30,17 +34,18 @@ public abstract class NPC {
      * @param name NPC's name
      * @param health NPC's health
      * @param attackPower NPC's attack power
+     * @param imgURL ImageIcon url of the image for NPS's on the board
      */
-    public NPC(String name, int health, int attackPower) {
+    public NPC(String name, int health, int attackPower, ImageIcon imgURL) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
+        this.imgURL = imgURL;
     }
 
     /**
      * Returns true if the NPC's health is greater than 0, false otherwise
-     *
-     * @return boolean returns whether the NPC is alive or not
+     * @return boolean returns true if NPC alive; false - otherwise
      */
     public boolean isAlive(){
         if (this.getHealth() > 0) {
@@ -79,10 +84,10 @@ public abstract class NPC {
     public abstract void attack(NPC npc);
 
     /**
-     * Forms String object with NPC's name and health
-     * @return String Returns a string containing NPC's name and health
+     * Returns url to the image of NPC's
+     * @return ImageIcon url
      */
-    public String toString() {
-        return name +" ("+health+")";
+    public ImageIcon getImgURL() {
+        return imgURL;
     }
 }

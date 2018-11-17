@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 /**
  * This class is responsible for making zombies and making them attack
  * @author Dmytro Sytnik (VanArman)
@@ -8,16 +10,15 @@
  */
 public class Zombie extends NPC {
     private int scoreOnDeath;
-    private static int counter = 0;
 
     /**
      * Initializes a new zombie
      * @param name Zombie's name
      * @param health Zombie's health
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health) {
-        super(name+""+counter, health);
-        counter++;
+    public Zombie(String name, int health, ImageIcon imgURL) {
+        super(name, health, imgURL);
     }
 
     /**
@@ -25,10 +26,10 @@ public class Zombie extends NPC {
      * @param name Zombie's name
      * @param health Zombie's health
      * @param attackPower zombie's attack power
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower) {
-        super(name+""+counter, health, attackPower);
-        counter++;
+    public Zombie(String name, int health, int attackPower, ImageIcon imgURL) {
+        super(name, health, attackPower, imgURL);
     }
 
     /**
@@ -37,19 +38,18 @@ public class Zombie extends NPC {
      * @param health Zombie's health
      * @param attackPower zombie's attack power
      * @param scoreOnDeath score added to the player when zombie is died
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
-    public Zombie(String name, int health, int attackPower, int scoreOnDeath) {
-        super(name+""+counter, health, attackPower);
+    public Zombie(String name, int health, int attackPower, int scoreOnDeath, ImageIcon imgURL) {
+        super(name, health, attackPower, imgURL);
         this.scoreOnDeath = scoreOnDeath;
-        counter++;
     }
 
+    /**
+     * Returns amount of points that would be added to the game score when zombie died
+     * @return int score when dead
+     */
     public int getPointsWhenDead() { return scoreOnDeath; }
-
-    /*public Zombie(String name, int health, int attackPower, int points) {
-        super(name+""+counter, health, attackPower);
-        counter++;
-    }*/
 
     /**
      * Allows the zombie to attack plants

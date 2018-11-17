@@ -7,24 +7,21 @@ SYSC 3110 - Third Year Project
 - Source - The project source code (.java files) and JUnit testing files
 
 ## Workload
-- [Dominic (Dominic Kocjan)](@DomK123)
-    * ~~Flower~~ -> Plant  
-    * ~~XYFlower~~ -> ~~XYPlant~~ - depreciated
-    * ~~MoneyFlower~~ -> MoneyPlant
 
-- [Ahmed (Ahmed Romih)](@decarbonite)
-    * ~~Beast~~ -> NPC
-    * Zombie
-
-- [Dima (Dmytro Sytnik)](@vanarman)
-    * Board
-    * BoardRow
-    * BoardNode
-    * Game
-
-- [Mrunal (Mrunal Patel)](@mrunal-patel1997)
-    * Player
-    * GameRound
+   * View           ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * Controller     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * NodeButton     ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * Plant          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * MoneyPlant     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * NPC            ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Zombie         ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Board          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * BoardRow       ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * BoardNode      ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * Game           ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Player         ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * GameRound      ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * Testing        ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
 
 ## Game specification and Design decisions
 
@@ -66,3 +63,30 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
    
    ![Lose](Documentation/images/lose.png)
    
+
+
+## UML Changes
+
+### Class Diagram
+
+1. A NodeButton class was added which extends JButton, it functions like JButton, however it is generic which makes it more flexible in storing objects in that NodeButton instance
+2. Model-View-Controller pattern is implemented in this milestone.
+3. View class was added which initializes the Graphical User Interface
+4. Controller class was added that manages the events coming from the view and the model
+
+### Sequence Diagram
+
+1. Added Controller, View and NodeButton Object classes
+2. Updated diagram to reflect on the entity, boundary and control classes
+3. Created sequence for Controller and View to implement GUI
+4. Unlinked classes no longer in use/refactoring old classes and merged with the new
+
+   
+## Known Issues
+
+1. Plants are shooting at the zombies across the row, but there is no graphical image of the actual shooting, like peas getting thrown at the zombie.
+
+2. On MacOS platform there happens to be a problem when the JOptionPane that appears declaring winning or losing at the end of the game. If the MacOS user click on the "OK" button to close it, it SOMETIMES shows the problem below. However, this doesn't affect the game experience in any way.
+This issue doesn't happen on other platforms and after some research it happens to be a known issue with MacOS.
+
+![Issue](Documentation/images/issue.png)

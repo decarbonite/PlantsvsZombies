@@ -1,21 +1,23 @@
+import javax.swing.*;
+
 /**
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
  *
  * @author Ahmed Romih (decarbonite)
- * @version 26 October, 2018
+ * @version 16 Nov, 2018
  */
 
 public class Plant extends NPC {
-    private static int counter = 0;
 
     /**
      * Initializes a new Plant
      * @param name Plant's name
      * @param health Plant's health
+     * @param imgURL ImageIcon image of the plant on the board (GUI)
      */
-    public Plant(String name, int health) {
-        super(name, health);
+    public Plant(String name, int health, ImageIcon imgURL) {
+        super(name, health, imgURL);
     }
 
 
@@ -24,10 +26,10 @@ public class Plant extends NPC {
      * @param name Plant's name
      * @param health Plant's health
      * @param attackPower Plant's attack power
+     * @param imgURL ImageIcon image of the plant on the board (GUI)
      */
-    public Plant(String name, int health, int attackPower) {
-        super(name+""+counter, health, attackPower);
-        counter++;
+    public Plant(String name, int health, int attackPower, ImageIcon imgURL) {
+        super(name, health, attackPower, imgURL);
     }
 
     /**
@@ -36,7 +38,7 @@ public class Plant extends NPC {
      */
     @Override
     public void attack(NPC npc) {
-        if (npc != null){
+        if (npc != null && npc.getHealth() > 0) {
             npc.setHealth(npc.getHealth() - this.getAttackPower());
         }
     }
