@@ -1,4 +1,7 @@
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -7,36 +10,108 @@ import static org.junit.Assert.*;
  * @version 12 November, 2018
  */
 public class BoardRowTest {
+    private BoardRow br = null;
+    private Zombie z = null;
+    private Plant p = null;
+    private int rowNumber = View.BOARD_COLS;
+    private int health = 100;
+    private int aPower = 10;
+    private int deathScore = 10;
 
-    @Test
-    public void moveZombie() {
+    @Before
+    public void setUp() {
+        br = new BoardRow();
+        z = new Zombie("Zombie", health,aPower, deathScore,"imgUrl.png");
+        p = new Plant("Plant", health, aPower, "imgUrl.png");
     }
 
     @Test
-    public void addZombie() {
+    public void testAddZombie() {
+        int index = 6;
+        br.addZombie(index, z);
+        for(int i = 0; i < rowNumber; i++){
+            if(i == index){
+                assertTrue("Zombie is on cell index: "+i, br.hasZombie(i));
+            } else {
+                assertFalse("Zombie is not on cell index: " + i, br.hasZombie(i));
+            }
+        }
     }
 
     @Test
-    public void addPlant() {
+    public void testMoveZombie() {
+        br.addZombie(4, z);
+        br.moveZombie();
+        assertFalse("Zombie moved from 4", br.hasZombie(4));
+        assertTrue("Zombie now is on 3", br.hasZombie(3));
     }
 
     @Test
-    public void hasZombie() {
+    public void testAddPlant() {
+        int index = 2;
+        br.addPlant(index, p);
+        for(int i = 0; i < rowNumber; i++){
+            if(i == index){
+                assertTrue("Plant is on cell index: "+i, br.hasPlant(i));
+            } else {
+                assertFalse("Plant is not on cell index: " + i, br.hasPlant(i));
+            }
+        }
     }
 
     @Test
-    public void hasPlant() {
+    public void testHasZombie() {
+        for(int i = 0; i < rowNumber; i++){
+            assertFalse("Zombie is not on cell index: " + i, br.hasZombie(i));
+        }
     }
 
     @Test
-    public void fightPvsZ() {
+    public void testHasPlant() {
+        for(int i = 0; i < rowNumber; i++){
+            assertFalse("Plant is not on cell index: " + i, br.hasPlant(i));
+        }
     }
 
     @Test
-    public void generateMoney() {
+    public void testFightPvsZInOneCell() {
+        int score = 0;
+        br.addPlant(0, p);
+        br.addZombie(0, z);
+        br.fightPvsZ(score);
+        assertTrue("Plant fight Zombie", z.getHealth() == health - aPower);
+        assertTrue("Zombie fight Plant", p.getHealth() == health - aPower);
     }
 
     @Test
-    public void getRow() {
+    public void testFightPvsZOnDistance() {
+        int score = 0;
+        br.addPlant(0, p);
+        br.addZombie(4, z);
+        br.fightPvsZ(score);
+
+        assertTrue("Plant fight Zombie on distance. Should be 90.  Is: "+ z.getHealth(), z.getHealth() == health - aPower);
+        assertTrue("Plant fight Zombie on distance. Should be 100. Is: "+ p.getHealth(), p.getHealth() == health);
+    }
+
+    @Test
+    public void testGenerateMoney() {
+        z.setHealth(aPower);
+        br.addPlant(0, p);
+        br.addZombie(4, z);
+
+        int score = 0;
+        score = br.fightPvsZ(score);
+        assertTrue("Score raised for killing Zombie. Should be "+ deathScore +". Is: "+ score, score == deathScore);
+    }
+
+    @Test
+    public void testGetRow() {
+        ArrayList<BoardNode> rowReturn = br.getRow();
+        for(int i = 0; i < rowNumber; i++){
+            assertTrue("Is BoardNode instance", rowReturn.get(i) instanceof BoardNode);
+        }
+
+        assertTrue("Number of columns in the row is matched", rowReturn.size() == rowNumber);
     }
 }

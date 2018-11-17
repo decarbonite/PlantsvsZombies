@@ -83,22 +83,6 @@ public class BoardRow {
     }
 
     /**
-     * Check if the Zombie exists in the current row
-     * @return boolean true if zombie exists in this row; false - otherwise
-     */
-    protected boolean hasZombie() {
-        boolean containsZombie = false;
-        for(BoardNode bn : nodes){
-            if(bn.hasZombie() && !containsZombie) {
-                containsZombie = true;
-                continue;
-            }
-        }
-
-        return containsZombie;
-    }
-
-    /**
      * Check if the Plant exists in a specific position
      * @param index position to check Plant instance
      * @return boolean true if plant exists in the specified position; false - otherwise

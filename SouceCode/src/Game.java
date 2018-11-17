@@ -16,7 +16,7 @@ public class Game{
             try {
                 c.updateBoard();
                 c.gameEnded();
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(0);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
