@@ -53,7 +53,7 @@ public class Controller implements ActionListener {
     }
 
     /**
-     * Chaeck if the condition for ending game is reached
+     * Check if the condition for ending game is reached
      */
     public void gameEnded(){
         if (model.hasWon()) {
