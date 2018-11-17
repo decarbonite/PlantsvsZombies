@@ -8,20 +8,20 @@ SYSC 3110 - Third Year Project
 
 ## Workload
 
-    * View           ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
-    * Controller     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
-    * NodeButton     ->    [Dima (Dmytro Sytnik)](@vanarman)
-    * Plant          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
-    * MoneyPlant     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
-    * NPC            ->    [Ahmed (Ahmed Romih)](@decarbonite)
-    * Zombie         ->    [Ahmed (Ahmed Romih)](@decarbonite)
-    * Board          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
-    * BoardRow       ->    [Dima (Dmytro Sytnik)](@vanarman)
-    * BoardNode      ->    [Dima (Dmytro Sytnik)](@vanarman)
-    * Game           ->    [Ahmed (Ahmed Romih)](@decarbonite)
-    * Player         ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
-    * GameRound      ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
-    * Testing        ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * View           ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * Controller     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * NodeButton     ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * Plant          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * MoneyPlant     ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman) & [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * NPC            ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Zombie         ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Board          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * BoardRow       ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * BoardNode      ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * Game           ->    [Ahmed (Ahmed Romih)](@decarbonite)
+   * Player         ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * GameRound      ->    [Mrunal (Mrunal Patel)](@mrunal-patel1997)
+   * Testing        ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
 
 ## Game specification and Design decisions
 
