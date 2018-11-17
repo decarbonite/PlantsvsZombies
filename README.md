@@ -63,7 +63,24 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
    
    ![Lose](Documentation/images/lose.png)
    
-   
+
+
+## UML Changes
+
+### Class Diagram
+
+1. A NodeButton class was added which extends JButton, it functions like JButton, however it is generic which makes it more flexible in storing objects in that NodeButton instance
+2. Model-View-Controller pattern is implemented in this milestone.
+3. View class was added which initializes the Graphical User Interface
+4. Controller class was added that manages the events coming from the view and the model
+
+### Sequence Diagram
+
+1. Added Controller, View and NodeButton Object classes
+2. Updated diagram to reflect on the entity, boundary and control classes
+3. Created sequence for Controller and View to implement GUI
+4. Unlinked classes no longer in use/refactoring old classes and merged with the new
+
    
 ## Known Issues
 
