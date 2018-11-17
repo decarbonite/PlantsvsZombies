@@ -15,7 +15,7 @@ public class Zombie extends NPC {
      * Initializes a new zombie
      * @param name Zombie's name
      * @param health Zombie's health
-     * @param imgURL image of the zombie on the board (GUI)
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
     public Zombie(String name, int health, ImageIcon imgURL) {
         super(name, health, imgURL);
@@ -26,7 +26,7 @@ public class Zombie extends NPC {
      * @param name Zombie's name
      * @param health Zombie's health
      * @param attackPower zombie's attack power
-     * @param imgURL image of the zombie on the board (GUI)
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
     public Zombie(String name, int health, int attackPower, ImageIcon imgURL) {
         super(name, health, attackPower, imgURL);
@@ -38,7 +38,7 @@ public class Zombie extends NPC {
      * @param health Zombie's health
      * @param attackPower zombie's attack power
      * @param scoreOnDeath score added to the player when zombie is died
-     * @param imgURL image of the zombie on the board (GUI)
+     * @param imgURL ImageIcon of the zombie on the board (GUI)
      */
     public Zombie(String name, int health, int attackPower, int scoreOnDeath, ImageIcon imgURL) {
         super(name, health, attackPower, imgURL);

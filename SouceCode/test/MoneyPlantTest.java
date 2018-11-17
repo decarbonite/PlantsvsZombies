@@ -60,6 +60,6 @@ public class MoneyPlantTest {
 
     @Test
     public void testGetImgURL() {
-        assertEquals("Image URL should be imgUrl.png.","imgUrl.png", mp.getImgURL());
+        assertEquals("Image URL should be imgUrl.png.", "pic.png", mp.getImgURL().toString());
     }
 }

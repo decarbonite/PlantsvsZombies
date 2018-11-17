@@ -56,8 +56,8 @@ public class PlantTest {
 
     @Test
     public void testGetImgURL() {
-        assertEquals("Image URL should be imgURL.png", "imgUrl.png", p.getImgURL());
-        assertNotEquals("Image URL should be imgURL.png", "imgUrl.jpg", p.getImgURL());
-        assertNotEquals("Image URL should be imgURL.png", "imgURL.png", p.getImgURL());
+        assertEquals("Image URL should be imgURL.png", "pic.png", p.getImgURL().toString());
+        assertNotEquals("Image URL should be imgURL.png", "pic.jpg", p.getImgURL().toString());
+        assertNotEquals("Image URL should be imgURL.png", "pic.gif", p.getImgURL().toString());
     }
 }

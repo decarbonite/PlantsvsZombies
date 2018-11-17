@@ -38,6 +38,7 @@ public class Board {
 
     /**
      * Gets all zombies locations on the board
+     * @return int array of generated zombie locations
      */
     protected int[] getZombieLocation() {
         int[] location = new int[totalZombies * 2];
@@ -127,7 +128,6 @@ public class Board {
 
     /**
      * Randomly generates zombies' spawn location on the board
-     * @return int[] returns int array contains the
      */
     protected void generateZombieSpawn() {
         Random rand = new Random();
@@ -169,6 +169,7 @@ public class Board {
      * @param x      int row index
      * @param y      int column index
      * @param zombie Zombie object
+     * @return boolean true if zombie added; false - otherwise
      */
     public boolean addZombie(int x, int y, Zombie zombie) {
         if (zombie != null && x >= 0 && x < 5 && y == 8) {

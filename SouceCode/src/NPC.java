@@ -21,7 +21,7 @@ public abstract class NPC {
      * Initializes a new NPC
      * @param name NPC's name
      * @param health NPC's health
-     * @param imgURL url of the image for NPS's on the board
+     * @param imgURL ImageIcon url of the image for NPS's on the board
      */
     public NPC(String name, int health, ImageIcon imgURL) {
         this.name = name;
@@ -34,7 +34,7 @@ public abstract class NPC {
      * @param name NPC's name
      * @param health NPC's health
      * @param attackPower NPC's attack power
-     * @param imgURL url of the image for NPS's on the board
+     * @param imgURL ImageIcon url of the image for NPS's on the board
      */
     public NPC(String name, int health, int attackPower, ImageIcon imgURL) {
         this.name = name;
@@ -85,7 +85,7 @@ public abstract class NPC {
 
     /**
      * Returns url to the image of NPC's
-     * @return String url
+     * @return ImageIcon url
      */
     public ImageIcon getImgURL() {
         return imgURL;
