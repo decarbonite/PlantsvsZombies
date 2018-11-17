@@ -13,7 +13,6 @@ public class BoardRowTest {
     private BoardRow br = null;
     private Zombie z = null;
     private Plant p = null;
-    private int rowNumber = View.BOARD_COLS;
     private int health = 100;
     private int aPower = 10;
     private int deathScore = 10;
@@ -29,7 +28,7 @@ public class BoardRowTest {
     public void testAddZombie() {
         int index = 6;
         br.addZombie(index, z);
-        for(int i = 0; i < rowNumber; i++){
+        for(int i = 0; i < View.BOARD_COLS; i++){
             if(i == index){
                 assertTrue("Zombie is on cell index: "+i, br.hasZombie(i));
             } else {
@@ -50,7 +49,7 @@ public class BoardRowTest {
     public void testAddPlant() {
         int index = 2;
         br.addPlant(index, p);
-        for(int i = 0; i < rowNumber; i++){
+        for(int i = 0; i < View.BOARD_COLS; i++){
             if(i == index){
                 assertTrue("Plant is on cell index: "+i, br.hasPlant(i));
             } else {
@@ -61,14 +60,14 @@ public class BoardRowTest {
 
     @Test
     public void testHasZombie() {
-        for(int i = 0; i < rowNumber; i++){
+        for(int i = 0; i < View.BOARD_COLS; i++){
             assertFalse("Zombie is not on cell index: " + i, br.hasZombie(i));
         }
     }
 
     @Test
     public void testHasPlant() {
-        for(int i = 0; i < rowNumber; i++){
+        for(int i = 0; i < View.BOARD_COLS; i++){
             assertFalse("Plant is not on cell index: " + i, br.hasPlant(i));
         }
     }
@@ -108,10 +107,12 @@ public class BoardRowTest {
     @Test
     public void testGetRow() {
         ArrayList<BoardNode> rowReturn = br.getRow();
-        for(int i = 0; i < rowNumber; i++){
+        for(int i = 0; i < View.BOARD_COLS; i++){
             assertTrue("Is BoardNode instance", rowReturn.get(i) instanceof BoardNode);
         }
 
-        assertTrue("Number of columns in the row is matched", rowReturn.size() == rowNumber);
+        assertTrue("Number of columns in the row is matched", rowReturn.size() == View.BOARD_COLS
+
+        );
     }
 }
