@@ -26,14 +26,14 @@ public class View extends JFrame {
     private JFrame frame;
 
     protected static final String PATH = System.getProperty("user.dir") + "/SouceCode";
-    protected static final String PLANT_ICON = PATH + "/src/images/plant.png";
-    protected static final String SUNFLOWER_ICON = PATH + "/src/images/sunflower.png";
-    protected static final String GRASS_IMAGE = PATH + "/src/images/grass.png";
-    protected static final String PLANT_IMAGE = PATH + "/src/images/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE = PATH + "/src/images/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = PATH + "/src/images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE = PATH + "/src/images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE = PATH + "/src/images/grassed_plant_zombie.png";
+    protected static final String PLANT_ICON =  "./src/images/plant.png";
+    protected static final String SUNFLOWER_ICON=  "./src/images/sunflower.png";
+    protected static final String GRASS_IMAGE =  "./src/images/grass.png";
+    protected static final String PLANT_IMAGE =  "./src/images/grassed_plant.png";
+    protected static final String SUNFLOWER_IMAGE =  "./src/images/grassed_sunflower.png";
+    protected static final String ZOMBIE_IMAGE = "./src/images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE =  "./src/images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE =  "./src/images/grassed_plant_zombie.png";
 
     /**
      * Default constructor that initialized window with board,
