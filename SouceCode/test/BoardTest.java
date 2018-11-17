@@ -30,15 +30,6 @@ public class BoardTest {
     }
 
     @Test
-    public void runBoard() {
-    }
-
-    @Test
-    public void testGenerateZombieSpawn() {
-
-    }
-
-    @Test
     public void testAddPlant() {
         assertFalse("Plant should not be added.",board.addPlant(-1,4, new Plant("p", 1,"pic.png")));
         assertFalse("Plant should not be added.",board.addPlant(-1,-4, new Plant("p", 1,"pic.png")));

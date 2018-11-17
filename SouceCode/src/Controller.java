@@ -106,7 +106,7 @@ public class Controller implements ActionListener {
             String toPlant = view.getFrame().getCursor().getName();
             //Add shooting plant
             if(toPlant.equals("plant")) {
-                model.addPlant(row, col, new Plant("Plant", 100, 5, View.PLANT_IMAGE));
+                model.addPlant(row, col, new Plant("Plant", 100, 20, View.PLANT_IMAGE));
             }
 
             //Add sunflower to generate money
