@@ -14,7 +14,7 @@ public class Game{
         c.generateBoard();
 
         try{
-            TimeUnit.SECONDS.sleep(0);
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
