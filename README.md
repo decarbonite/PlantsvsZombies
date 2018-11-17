@@ -90,4 +90,3 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
 This issue doesn't happen on other platforms and after some research it happens to be a known issue with MacOS.
 
 ![Issue](Documentation/images/issue.png)
-
