@@ -64,6 +64,7 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
    ![Lose](Documentation/images/lose.png)
    
    
+   
 ## Known Issues
 
 1. Plants are shooting at the zombies across the row, but there is no graphical image of the actual shooting, like peas getting thrown at the zombie.
