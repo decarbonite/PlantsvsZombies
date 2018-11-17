@@ -69,7 +69,7 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
 
 1. Plants are shooting at the zombies across the row, but there is no graphical image of the actual shooting, like peas getting thrown at the zombie.
 
-2. On MacOS platform there happens to be a problem when the JOptionPane appears declaring winning or losing. If the MacOS user click on the "OK" button to close it, it SOMETIMES shows the problem below. However, this doesn't affect the game experience in any way.
+2. On MacOS platform there happens to be a problem when the JOptionPane that appears declaring winning or losing at the end of the game. If the MacOS user click on the "OK" button to close it, it SOMETIMES shows the problem below. However, this doesn't affect the game experience in any way.
 This issue doesn't happen on other platforms and after some research it happens to be a known issue with MacOS.
 
 ![Issue](Documentation/images/issue.png)
