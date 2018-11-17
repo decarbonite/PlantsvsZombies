@@ -4,7 +4,7 @@ SYSC 3110 - Third Year Project
 ## Folders description
 - Documentation - Java doc generated from classes
 - Diagrams - UML diagrams (Class and Sequence)
-- Source - The project source code (.java files)
+- Source - The project source code (.java files) and JUnit testing files
 
 ## Workload
 - [Dominic (Dominic Kocjan)](@DomK123)
@@ -28,58 +28,40 @@ SYSC 3110 - Third Year Project
 
 ## Game specification and Design decisions
 
-The current game is a step-by-step strategy game (simulation of the existing **Plats vs Zombies** game). In the current stage, 
-the game is working in the console mode and does not have a dynamic component.
-Plants are placed by the Player at the beginning of the game and after each step of the game. In order to win the game, 
-Plants should kill all Zombies on a board. Currently, the game has only one round that generates, 20, one type of Zombies. 
-Zombies are generating randomly at the beginning (right side) of the board.
+The current game is a step-by-step strategy game (simulation of the existing **Plats vs Zombies** game). In the current version, 
+the game is working in real-time, using delay function to delay zombie's movement and the plants' shooting which makes it dynamic.
+Plants are placed by the Player at anytime of the game as long as the money is sufficient. In order to win the game, 
+Plants should kill all Zombies on a board. Currently, the game has only one round that generates 10 Zombies which could be changed by changing the value passed to zombiesToSpawn parameter in the Board initialization in Game class. 
+Zombies are generated randomly at the beginning (right side) of the board.
 
-The player can add plants to against Zombies and able to choose out of two types of plants:   
+The player can add plants to fight against Zombies and able to choose out of two types of plants:   
 * **Plant** - Attack first available Zombie across a row were Plant is placed and damage it with 15 damage points.
-* **Sun Flower** - Cannot attack Zombies but generates in-game money. In each step of the game, one Sun Flower generates with 50% of chance 25 money points.
+* **MoneyPlant** - Cannot attack Zombies but generates in-game money which helps the player to buy more plants. In each step of the game, if a MoneyPlant is placed, it has 50% chance to increase money by 25 money points.
 
 Each time Plant kills Zombie Player will be rewarded by score point (each Zombie worth 10 points).
-Game continue until Plants will kill all Zombies (20) or at least one Zombie reaches the end of the board 
+Game continue until Plants will kill all Zombies (10) or at least one Zombie reaches the end of the board 
 (left side) and kills the Plant in the last cell if exists.
 
 ##  User manual
-1. In order to start the game Player should specify its name as on-screen bellow.
+1. When the game starts, the first look is like the picture below.
 
-    ![New Player Image](Documentation/images/PlayersName.png)
+    ![Initial Game Look](Documentation/images/initialgame.jpg)
 
-2. At the beginning of the game, the player can place first plant (either fighting Plant or Sun Flower)
+2. At the beginning of the game, the player has a few seconds to place plants before zombies start to appear on the board.
+By clicking once on the Plant you want to choose from the top panel, the cursor image changes to that Plant image, then the player can choose which a cell on the board to place it by clicking on that cell as long as there is no other object already placed there. 
+
+    ![Plants Placement](Documentation/images/plantsplacing.png)
     
-    ![Start game](Documentation/images/GameStart.png)
-    
-    * 1 - Add a Plant (Adding fighting plant: **Health** 200; **Attack Power** 15; **Price** 50)
-    
-        When Player choose adding Plant, system will offer to specify where to place it:
-        *  Enter row position (1 -> 5): eg. 1
-        ![Enter Row Position](Documentation/images/EnterRowPosition.png)
-        * Enter column position (1 -> 9): eg. 1
-        ![Enter Row Position](Documentation/images/EnterColumnPosition.png)        
+3. After the time delay is over the zombies will start to appear from the right side of the board, automatically moving towards the left side of the board.
             
-    ![Board display 1](Documentation/images/BoardDisplay1.png)
-        
-    * 2 - Add Sun Flower (Adding money-generator Plant that cannot fight with zombies: **Health** 75; **Price** 50; **Money generates** 25 (50% chance per board update))
-      
-        When Player choose adding Sun Flower, system will offer to specify where to place it:
-        *  Enter row position (1 -> 5): eg. 1
-        ![Enter Row Position](Documentation/images/EnterRowPosition.png)
-        * Enter column position (1 -> 9): eg. 1
-        ![Enter Row Position](Documentation/images/EnterColumnPosition.png)
-                
-    ![Board display 2](Documentation/images/BoardDisplay2.png)
-    
-    * 3 - Continue step (Continue with existing plants - next move)
-    
-        When Player choose to play with no plants, the system will print current board
-        
-    ![Board display 3](Documentation/images/BoardDisplay3.png) 
+    ![Zombies Display](Documentation/images/zombies.png)
 
-    * 4 - Quit Game (Ends the game)
-    
-        When Player choose to Quit the game, game will ended and system will print massage shown bellow.
-        
-    ![Quit game 3](Documentation/images/QuitGame.png) 
-3. The game will loop step 2. until Plants will kill all Zombies or at least one Zombie reaches the end of the board with no Plant on the last cell.
+4. The game ends either by the player winning; killing all zombies on the board and no more zombies are left to spawn, or losing in case of a zombie reaching the last cell at the left side of the board.
+
+   When the player wins, a message pops up indicating victory like the picture below.
+   
+   ![Victory](Documentation/images/victory.png)
+
+   When the player loses, a message pops up indicating that the player has lost like the picture below.
+   
+   ![Lose](Documentation/images/lose.png)
