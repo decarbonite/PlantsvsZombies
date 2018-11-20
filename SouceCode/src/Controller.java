@@ -18,10 +18,10 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
 public class Controller implements ActionListener {
     private View view;
     private Board model;
-    private static Stack<String> undoStack;
-    private static Stack<Plant> redoStack;        //stack of the plants that were undo-ed
-    private static Stack<Integer> undoCoordinate;
-    private static Stack<Integer> redoCoordinate;
+    private static Stack<Plant> undoStack;          //stack with all plants added to board or redo-ed
+    private static Stack<Plant> redoStack;          //stack of the plants that were undo-ed
+    private static Stack<Integer> undoCoordinate;   //x,y position of plants being added or redo-ed
+    private static Stack<Integer> redoCoordinate;   //x,y position of plants being that were undo-ed
 
     /**
      * Default constructor that requires only View to be passed
@@ -110,20 +110,17 @@ public class Controller implements ActionListener {
                 return;
             }
 
-            String event = undoStack.pop();
+            undoStack.pop();
             int i = undoCoordinate.pop();      // button x location
             int j = undoCoordinate.pop();      // button y location
             redoCoordinate.push(j);
             redoCoordinate.push(i);
-            if (event.equals("Plant")) {
-                redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
-                //to make the removal instant, could be removed,
-                //but it would wait for the model to update to automatically remove the plant
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
-            } else if (event.equals("Sunflower")) {
-                redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant());
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
-            }
+
+            redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
+            //to make the removal instant, could be removed,
+            //but it would wait for the model to update to automatically remove the plant
+            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
+
         }
 
         //Redo clicked
@@ -137,27 +134,17 @@ public class Controller implements ActionListener {
             int i = redoCoordinate.pop();
             int j = redoCoordinate.pop();
 
-            //if its sunflower
-            if (plant instanceof MoneyPlant){
-                Board.getBoard().get(i).getRow().get(j).addPlant(plant);
-                undoStack.push("Sunflower");
-                undoCoordinate.push(j);
-                undoCoordinate.push(i);
-                //to make the adding instant, could be removed,
-                //but it would wait for the model to update to automatically add the plant
+            undoStack.push(Board.getBoard().get(i).getRow().get(j).addPlant(plant));
+            //undoStack.push("Sunflower");
+            undoCoordinate.push(j);
+            undoCoordinate.push(i);
+            //to make the addition to GUI instant, could be removed,
+            //but the GUI would wait for the model to update to automatically add the plant
+            if (plant instanceof MoneyPlant) {
                 View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
+                return;
             }
-            //if its normal shooting plant
-            else {
-
-                Board.getBoard().get(i).getRow().get(j).addPlant(plant);
-                undoStack.push("Plant");
-                undoCoordinate.push(j);
-                undoCoordinate.push(i);
-                //to make the adding instant, could be removed,
-                //but it would wait for the model to update to automatically add the plant
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
-            }
+            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
         }
 
         //Placing Plants
@@ -176,18 +163,16 @@ public class Controller implements ActionListener {
                 String toPlant = view.getFrame().getCursor().getName();
                 //Add shooting plant
                 if (toPlant.equals("plant")) {
-                    undoStack.push("Plant");
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
-                    model.addPlant(row, col, new Plant("Plant", 100, 20, new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE))));
+                    undoStack.push(model.addPlant(row, col, new Plant("Plant", 100, 20, new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)))));
                 }
 
                 //Add sunflower to generate money
                 if (toPlant.equals("sunflower")) {
-                    undoStack.push("Sunflower");
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
-                    model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE))));
+                    undoStack.push(model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)))));
                 }
 
                 //Change cursor back to default

@@ -35,12 +35,12 @@ public class BoardNode {
      * @param plant new Plant
      * @return boolean true - if plant was added; false otherwise
      */
-    public boolean addPlant(Plant plant) {
+    public Plant addPlant(Plant plant) {
         if (this.plant == null) {
             this.plant = plant;
-            return true;
+            return this.plant;
         }
-        return false;
+        return null;
     }
 
     /**

@@ -129,8 +129,8 @@ public class View extends JFrame {
             for (int j = 0; j < BOARD_COLS; j++) {
                 btn[i][j] = new NodeButton<>(new ImageIcon(this.getClass().getResource(GRASS_IMAGE)));
 
-                btn[i][j].putClientProperty("row", i);
-                btn[i][j].putClientProperty("column", j);
+                btn[i][j].putClientProperty("row", i);              //to save i and j for that specific button,
+                btn[i][j].putClientProperty("column", j);           // helps when dealing with actions in controller
                 btn[i][j].addActionListener(new Controller(this));
 
                 gridPanel.add(btn[i][j]);

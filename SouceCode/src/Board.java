@@ -150,17 +150,17 @@ public class Board {
      * @param plant Plant object
      * @return boolean true if plant has been added; false - otherwise
      */
-    public boolean addPlant(int x, int y, Plant plant) {
+    public Plant addPlant(int x, int y, Plant plant) {
         if (money >= 50 && (x >= 0 && x < View.BOARD_COLS) && (y >= 0 && y < (View.BOARD_COLS - 1))) {
             if (plant != null) {
                 if (!board.get(x).hasPlant(y)) {
                     board.get(x).addPlant(y, plant);
                     money -= 50;
-                    return true;
+                    return plant;
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /**
