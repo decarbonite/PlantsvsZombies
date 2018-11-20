@@ -90,11 +90,7 @@ public class BoardRow {
         return false;
     }
 
-    public void removePlant(int index){
-        if (hasPlant(index)){
-            nodes.get(index).removePlant();
-        }
-    }
+
 
     /**
      * Simulates fighting between Plant and Zombie

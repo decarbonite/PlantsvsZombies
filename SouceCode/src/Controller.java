@@ -2,9 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.beans.JavaBean;
-import java.util.IllegalFormatCodePointException;
 import java.util.Stack;
 
 import static java.awt.Cursor.DEFAULT_CURSOR;
@@ -17,11 +14,15 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
  * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
  */
+@SuppressWarnings("Duplicates")
 public class Controller implements ActionListener {
     private View view;
     private Board model;
-    private static Stack<String> stack;
-    private static Stack<Integer> coordinateStack;
+    private static Stack<String> undoStack;
+    private static Stack<Plant> redoStack;        //stack of the plants that were undo-ed
+    private static Stack<Integer> undoCoordinate;
+    private static Stack<Integer> redoCoordinate;
+
     /**
      * Default constructor that requires only View to be passed
      * Model creates automatically with 10 zombies to spawn, zero score and 200 in-game money
@@ -41,8 +42,10 @@ public class Controller implements ActionListener {
     public Controller(View v, Board m) {
         this.view = v;
         this.model = m;
-        stack = new Stack<>();
-        coordinateStack = new Stack<>();
+        undoStack = new Stack<>();
+        undoCoordinate = new Stack<>();
+        redoStack = new Stack<>();
+        redoCoordinate = new Stack<>();
     }
 
     /**
@@ -63,12 +66,12 @@ public class Controller implements ActionListener {
     /**
      * Check if the condition for ending game is reached
      */
-    public void gameEnded(){
+    public void gameEnded() {
         if (model.hasWon()) {
             JOptionPane.showMessageDialog(null, "You Won!");
             System.exit(0);
         }
-        if (model.hasLost()){
+        if (model.hasLost()) {
             JOptionPane.showMessageDialog(null, "You Lost!");
             System.exit(0);
         }
@@ -101,32 +104,64 @@ public class Controller implements ActionListener {
         }
 
         //Undo clicked
-        if (e.getSource() == view.getUndo()){
-            if (stack.isEmpty()){
+        if (e.getSource() == view.getUndo()) {
+            if (undoStack.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Nothing to undo");
                 return;
             }
 
-            String event = stack.pop();
-            int i = coordinateStack.pop();      // button x location
-            int j = coordinateStack.pop();      // button y location
-            if (event.equals("Plant")){
-                Board.getBoard().get(i).getRow().get(j).removePlant();
-                //to make the removal instant
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE))); //= new NodeButton<>(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
-            }else if (event.equals("Sunflower")){
-                Board.getBoard().get(i).getRow().get(j).removePlant();
+            String event = undoStack.pop();
+            int i = undoCoordinate.pop();      // button x location
+            int j = undoCoordinate.pop();      // button y location
+            redoCoordinate.push(j);
+            redoCoordinate.push(i);
+            if (event.equals("Plant")) {
+                redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
+                //to make the removal instant, could be removed,
+                //but it would wait for the model to update to automatically remove the plant
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
+            } else if (event.equals("Sunflower")) {
+                redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant());
                 View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
             }
         }
 
         //Redo clicked
-        if (e.getSource() == view.getRedo()){
+        if (e.getSource() == view.getRedo()) {
+            if (redoStack.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nothing to redo");
+                return;
+            }
 
+            Plant plant = redoStack.pop();
+            int i = redoCoordinate.pop();
+            int j = redoCoordinate.pop();
+
+            //if its sunflower
+            if (plant instanceof MoneyPlant){
+                Board.getBoard().get(i).getRow().get(j).addPlant(plant);
+                undoStack.push("Sunflower");
+                undoCoordinate.push(j);
+                undoCoordinate.push(i);
+                //to make the adding instant, could be removed,
+                //but it would wait for the model to update to automatically add the plant
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
+            }
+            //if its normal shooting plant
+            else {
+
+                Board.getBoard().get(i).getRow().get(j).addPlant(plant);
+                undoStack.push("Plant");
+                undoCoordinate.push(j);
+                undoCoordinate.push(i);
+                //to make the adding instant, could be removed,
+                //but it would wait for the model to update to automatically add the plant
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
+            }
         }
 
         //Placing Plants
-        if (e.getSource() instanceof JButton){
+        if (e.getSource() instanceof JButton) {
             JButton btn = (JButton) e.getSource();
             int row = (int) btn.getClientProperty("row");
             int col = (int) btn.getClientProperty("column");
@@ -140,19 +175,19 @@ public class Controller implements ActionListener {
                 }
                 String toPlant = view.getFrame().getCursor().getName();
                 //Add shooting plant
-                if(toPlant.equals("plant")) {
-                    stack.push("Plant");
-                    coordinateStack.push(col);
-                    coordinateStack.push(row);
+                if (toPlant.equals("plant")) {
+                    undoStack.push("Plant");
+                    undoCoordinate.push(col);
+                    undoCoordinate.push(row);
                     model.addPlant(row, col, new Plant("Plant", 100, 20, new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE))));
                 }
 
                 //Add sunflower to generate money
-                if(toPlant.equals("sunflower")) {
-                    stack.push("Sunflower");
-                    coordinateStack.push(col);
-                    coordinateStack.push(row);
-                    model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25,  new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE))));
+                if (toPlant.equals("sunflower")) {
+                    undoStack.push("Sunflower");
+                    undoCoordinate.push(col);
+                    undoCoordinate.push(row);
+                    model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE))));
                 }
 
                 //Change cursor back to default

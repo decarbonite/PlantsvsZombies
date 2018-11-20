@@ -142,7 +142,9 @@ public class BoardNode {
         return false;
     }
 
-    public void removePlant(){
+    public Plant removePlant(){
+        Plant p = this.plant;
         this.plant = null;
+        return p;
     }
 }
