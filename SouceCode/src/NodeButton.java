@@ -37,6 +37,7 @@ public class NodeButton<E> extends JButton {
      * @param icon ImageIcon object
      */
     public void stringToImageConverter(ImageIcon icon){
+        this.setIcon(null);
         this.setIcon(icon);
         this.setMargin(new Insets(0, 0, 0, 0));
         this.setBorderPainted(false);

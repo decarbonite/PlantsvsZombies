@@ -102,20 +102,21 @@ public class Controller implements ActionListener {
 
         //Undo clicked
         if (e.getSource() == view.getUndo()){
-            String event="";
-            int i=-1,j=-1;
             if (stack.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Nothing to undo");
-            }else {
-                event = stack.pop();
-                i = coordinateStack.pop();      // button x location
-                j = coordinateStack.pop();      // button y location
+                return;
             }
 
+            String event = stack.pop();
+            int i = coordinateStack.pop();      // button x location
+            int j = coordinateStack.pop();      // button y location
             if (event.equals("Plant")){
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE))); //= new NodeButton<>(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
+                Board.getBoard().get(i).getRow().get(j).removePlant();
+                //to make the removal instant
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE))); //= new NodeButton<>(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
             }else if (event.equals("Sunflower")){
-                View.getBtn()[i][j] = new NodeButton<>(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
+                Board.getBoard().get(i).getRow().get(j).removePlant();
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
             }
         }
 
@@ -149,8 +150,8 @@ public class Controller implements ActionListener {
                 //Add sunflower to generate money
                 if(toPlant.equals("sunflower")) {
                     stack.push("Sunflower");
-                    coordinateStack.push(row);
                     coordinateStack.push(col);
+                    coordinateStack.push(row);
                     model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 25,  new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE))));
                 }
 

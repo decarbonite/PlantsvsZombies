@@ -141,4 +141,8 @@ public class BoardNode {
         }
         return false;
     }
+
+    public void removePlant(){
+        this.plant = null;
+    }
 }

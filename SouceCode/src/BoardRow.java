@@ -10,7 +10,7 @@ import java.util.Random;
  * @version 24 October, 2018
  */
 public class BoardRow {
-    protected static boolean ZOMBIE_WON = false;
+
     private ArrayList<BoardNode> nodes;
 
     /**
@@ -36,10 +36,6 @@ public class BoardRow {
 
             if(current.hasZombie() && current.hasPlant()){
                 continue;
-            }
-
-            if (i == 0 && current.hasZombie() && !current.hasPlant()) {
-                ZOMBIE_WON = true;
             }
 
             if (next.hasZombie() && !current.hasZombie() && !next.hasPlant()) {
@@ -92,6 +88,12 @@ public class BoardRow {
             return nodes.get(index).hasPlant();
         }
         return false;
+    }
+
+    public void removePlant(int index){
+        if (hasPlant(index)){
+            nodes.get(index).removePlant();
+        }
     }
 
     /**
@@ -147,7 +149,7 @@ public class BoardRow {
      * Return array of nodes that contain
      * @return ArrayList of BoardNode's
      */
-    protected ArrayList<BoardNode> getRow() {
+    public ArrayList<BoardNode> getRow() {
         if(nodes != null) {
             return nodes;
         } else {
