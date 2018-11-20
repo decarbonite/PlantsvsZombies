@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
@@ -20,13 +22,21 @@ public class View extends JFrame {
     private JPanel statsPanel;
     private static NodeButton<BoardNode>[][] btn;
     private JButton shootFlowerButton;
+    private JButton strongPlant;
     private JButton sunflowerButton;
+    private JButton dblSunflowerButton;
     private JLabel scoreLabel;
     private JLabel moneyLabel;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem undo;
+    private JMenuItem redo;
     private JFrame frame;
 
     protected static final String PLANT_ICON =  "images/plant.png";
-    protected static final String SUNFLOWER_ICON=  "images/sunflower.png";
+    protected static final String PLANT2_ICON =  "images/plant2.png";
+    protected static final String SUNFLOWER_ICON =  "images/sunflower.png";
+    protected static final String SUNFLOWER2_ICON =  "images/sunflower2.png";
     protected static final String GRASS_IMAGE =  "images/grass.png";
     protected static final String PLANT_IMAGE =  "images/grassed_plant.png";
     protected static final String SUNFLOWER_IMAGE =  "images/grassed_sunflower.png";
@@ -41,6 +51,17 @@ public class View extends JFrame {
     public View() {
         frame = new JFrame("Plants Vs Zombies");
 
+        menuBar = new JMenuBar();
+        menu = new JMenu("Undo/Redo");
+        undo = new JMenuItem("Undo");
+        redo = new JMenuItem("Redo");
+        undo.addActionListener(new Controller(this));
+        redo.addActionListener(new Controller(this));
+        menu.add(undo);
+        menu.add(redo);
+        menuBar.add(menu);
+
+
         statsPanel = new JPanel(new GridLayout(1,4,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
@@ -49,7 +70,6 @@ public class View extends JFrame {
 
         scoreLabel = new JLabel("0");
         moneyLabel = new JLabel("0");
-
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));
@@ -64,6 +84,7 @@ public class View extends JFrame {
         gJP.add(statsPanel, BorderLayout.NORTH);
         gJP.add(selectPanel, BorderLayout.CENTER);
 
+        frame.setJMenuBar(menuBar);
         frame.add(gJP, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
 
@@ -81,6 +102,16 @@ public class View extends JFrame {
         shootFlowerButton.setName("Plant");
         shootFlowerButton.addActionListener(new Controller(this));
         selectPanel.add(shootFlowerButton);
+
+        strongPlant = new JButton(new ImageIcon(this.getClass().getResource(PLANT2_ICON)));
+        strongPlant.setName("Strong Plant");
+        strongPlant.addActionListener(new Controller(this));
+        selectPanel.add(strongPlant);
+
+        dblSunflowerButton = new JButton(new ImageIcon(this.getClass().getResource(SUNFLOWER2_ICON)));
+        dblSunflowerButton.setName("Double Sunflower");
+        dblSunflowerButton.addActionListener(new Controller(this));
+        selectPanel.add(dblSunflowerButton);
 
         sunflowerButton = new JButton(new ImageIcon(this.getClass().getResource(SUNFLOWER_ICON)));
         sunflowerButton.setName("Sunflower");
@@ -167,5 +198,13 @@ public class View extends JFrame {
      */
     public JButton getSunflowerButton() {
         return sunflowerButton;
+    }
+
+    public JMenuItem getUndo() {
+        return undo;
+    }
+
+    public JMenuItem getRedo() {
+        return redo;
     }
 }

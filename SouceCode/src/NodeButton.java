@@ -36,7 +36,7 @@ public class NodeButton<E> extends JButton {
      * Helper method to clear all styles and add image to it
      * @param icon ImageIcon object
      */
-    private void stringToImageConverter(ImageIcon icon){
+    public void stringToImageConverter(ImageIcon icon){
         this.setIcon(icon);
         this.setMargin(new Insets(0, 0, 0, 0));
         this.setBorderPainted(false);
@@ -83,5 +83,9 @@ public class NodeButton<E> extends JButton {
         } else {
             this.stringToImageConverter(defaultImage);
         }
+    }
+    public void setDefaultImage(ImageIcon image){
+        this.defaultImage = image;
+        stringToImageConverter(this.defaultImage);
     }
 }
