@@ -33,16 +33,25 @@ public class View extends JFrame {
     private JMenuItem redo;
     private JFrame frame;
 
-    protected static final String PLANT_ICON =  "images/plant.png";
-    protected static final String PLANT2_ICON =  "images/plant2.png";
-    protected static final String SUNFLOWER_ICON =  "images/sunflower.png";
-    protected static final String SUNFLOWER2_ICON =  "images/sunflower2.png";
-    protected static final String GRASS_IMAGE =  "images/grass.png";
-    protected static final String PLANT_IMAGE =  "images/grassed_plant.png";
-    protected static final String SUNFLOWER_IMAGE =  "images/grassed_sunflower.png";
-    protected static final String ZOMBIE_IMAGE = "images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE =  "images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE =  "images/grassed_plant_zombie.png";
+    protected static final String PLANT_ICON               =  "images/plant.png";
+    protected static final String PLANT2_ICON              =  "images/plant2.png";
+    protected static final String SUNFLOWER_ICON           =  "images/sunflower.png";
+    protected static final String SUNFLOWER2_ICON          =  "images/sunflower2.png";
+    protected static final String GRASS_IMAGE              =  "images/grass.png";
+    protected static final String PLANT_IMAGE              =  "images/grassed_plant.png";
+    protected static final String PLANT2_IMAGE             =  "images/grassed_plant2.png";
+    protected static final String SUNFLOWER_IMAGE          =  "images/grassed_sunflower.png";
+    protected static final String SUNFLOWER2_IMAGE         =  "images/grassed_sunflower2.png";
+    protected static final String ZOMBIE_IMAGE             = "images/grassed_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER_IMAGE   =  "images/grassed_sunflower_zombie.png";
+    protected static final String ZOMBIE_SUNFLOWER2_IMAGE  =  "images/grassed_sunflower2_zombie.png";
+    protected static final String ZOMBIE_PLANT_IMAGE       =  "images/grassed_plant_zombie.png";
+    protected static final String ZOMBIE_PLANT2_IMAGE      =  "images/grassed_plant2_zombie.png";
+    protected static final String ZOMBIE2_IMAGE            = "images/grassed_zombie2.png";
+    protected static final String ZOMBIE2_SUNFLOWER_IMAGE  =  "images/grassed_sunflower_zombie2.png";
+    protected static final String ZOMBIE2_SUNFLOWER2_IMAGE =  "images/grassed_sunflower2_zombie2.png";
+    protected static final String ZOMBIE2_PLANT_IMAGE      =  "images/grassed_plant_zombie2.png";
+    protected static final String ZOMBIE2_PLANT2_IMAGE     =  "images/grassed_plant2_zombie2.png";
 
     /**
      * Default constructor that initialized window with board,
@@ -56,7 +65,6 @@ public class View extends JFrame {
         undo = new JMenuItem("Undo");
         redo = new JMenuItem("Redo");
         undo.addActionListener(new Controller(this));
-       // undo.addKeyListener(new Controller(this));
         redo.addActionListener(new Controller(this));
         menu.add(undo);
         menu.add(redo);
@@ -124,7 +132,7 @@ public class View extends JFrame {
     /**
      * Helper method that generates board out of the array of NodeButtons
      */
-    private void generateBoard() {
+    public void generateBoard() {
         for (int i = 0; i < BOARD_ROWS; i++) {
             for (int j = 0; j < BOARD_COLS; j++) {
                 btn[i][j] = new NodeButton<>(new ImageIcon(this.getClass().getResource(GRASS_IMAGE)));
@@ -206,5 +214,13 @@ public class View extends JFrame {
 
     public JMenuItem getRedo() {
         return redo;
+    }
+
+    public JButton getStrongPlant() {
+        return strongPlant;
+    }
+
+    public JButton getDblSunflowerButton() {
+        return dblSunflowerButton;
     }
 }
