@@ -56,11 +56,11 @@ public class View extends JFrame {
         undo = new JMenuItem("Undo");
         redo = new JMenuItem("Redo");
         undo.addActionListener(new Controller(this));
+       // undo.addKeyListener(new Controller(this));
         redo.addActionListener(new Controller(this));
         menu.add(undo);
         menu.add(redo);
         menuBar.add(menu);
-
 
         statsPanel = new JPanel(new GridLayout(1,4,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));

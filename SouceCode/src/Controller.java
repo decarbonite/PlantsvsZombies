@@ -14,7 +14,7 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
  * @author Ahmed Romih (decarbonite)
  * @version 08 November, 2018
  */
-@SuppressWarnings("Duplicates")
+
 public class Controller implements ActionListener {
     private View view;
     private Board model;
@@ -77,6 +77,46 @@ public class Controller implements ActionListener {
         }
     }
 
+    public void undo() {
+        if (undoStack.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nothing to undo");
+            return;
+        }
+
+        undoStack.pop();
+        int i = undoCoordinate.pop();      // button x location
+        int j = undoCoordinate.pop();      // button y location
+        redoCoordinate.push(j);
+        redoCoordinate.push(i);
+
+        redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
+        //to make the removal instant, could be removed,
+        //but it would wait for the model to update to automatically remove the plant
+        View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
+    }
+
+    public void redo() {
+        if (redoStack.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nothing to redo");
+            return;
+        }
+
+        Plant plant = redoStack.pop();
+        int i = redoCoordinate.pop();   //x coordinate of plant on board
+        int j = redoCoordinate.pop();   //y coordinate of plant on board
+
+        undoStack.push(Board.getBoard().get(i).getRow().get(j).addPlant(plant));
+        undoCoordinate.push(j);
+        undoCoordinate.push(i);
+        //to make the addition to GUI instant, could be removed,
+        //but the GUI would wait for the model to update to automatically add the plant
+        if (plant instanceof MoneyPlant) {
+            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
+            return;
+        }
+        View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -105,46 +145,12 @@ public class Controller implements ActionListener {
 
         //Undo clicked
         if (e.getSource() == view.getUndo()) {
-            if (undoStack.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nothing to undo");
-                return;
-            }
-
-            undoStack.pop();
-            int i = undoCoordinate.pop();      // button x location
-            int j = undoCoordinate.pop();      // button y location
-            redoCoordinate.push(j);
-            redoCoordinate.push(i);
-
-            redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
-            //to make the removal instant, could be removed,
-            //but it would wait for the model to update to automatically remove the plant
-            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
-
+            undo();
         }
 
         //Redo clicked
         if (e.getSource() == view.getRedo()) {
-            if (redoStack.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Nothing to redo");
-                return;
-            }
-
-            Plant plant = redoStack.pop();
-            int i = redoCoordinate.pop();   //x coordinate of plant on board
-            int j = redoCoordinate.pop();   //y coordinate of plant on board
-
-            undoStack.push(Board.getBoard().get(i).getRow().get(j).addPlant(plant));
-            //undoStack.push("Sunflower");
-            undoCoordinate.push(j);
-            undoCoordinate.push(i);
-            //to make the addition to GUI instant, could be removed,
-            //but the GUI would wait for the model to update to automatically add the plant
-            if (plant instanceof MoneyPlant) {
-                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
-                return;
-            }
-            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
+            redo();
         }
 
         //Placing Plants
