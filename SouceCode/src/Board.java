@@ -148,7 +148,7 @@ public class Board {
      * @param x     int column index
      * @param y     int row index
      * @param plant Plant object
-     * @return boolean true if plant has been added; false - otherwise
+     * @return Plant returns the plant if it was added, null otherwise
      */
     public Plant addPlant(int x, int y, Plant plant) {
         if (money >= 50 && (x >= 0 && x < View.BOARD_COLS) && (y >= 0 && y < (View.BOARD_COLS - 1))) {

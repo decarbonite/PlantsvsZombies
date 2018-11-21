@@ -131,8 +131,8 @@ public class Controller implements ActionListener {
             }
 
             Plant plant = redoStack.pop();
-            int i = redoCoordinate.pop();
-            int j = redoCoordinate.pop();
+            int i = redoCoordinate.pop();   //x coordinate of plant on board
+            int j = redoCoordinate.pop();   //y coordinate of plant on board
 
             undoStack.push(Board.getBoard().get(i).getRow().get(j).addPlant(plant));
             //undoStack.push("Sunflower");

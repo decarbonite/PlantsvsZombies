@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import javax.swing.*;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 
 /**
@@ -37,14 +35,14 @@ public class BoardTest {
 
     @Test
     public void testAddPlant() {
-        /*assertFalse("Plant should not be added.",board.addPlant(-1,4, new Plant("p", 1,new ImageIcon("pic.png"))));
-        assertFalse("Plant should not be added.",board.addPlant(-1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
-        assertFalse("Plant should not be added.",board.addPlant(1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
-        assertFalse("Plant should not be added.",board.addPlant(2,9, new Plant("p", 1,new ImageIcon("pic.png"))));
-        assertFalse("Plant should not be added.",board.addPlant(10,4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertNull("Plant should not be added.",board.addPlant(-1,4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertNull("Plant should not be added.",board.addPlant(-1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertNull("Plant should not be added.",board.addPlant(1,-4, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertNull("Plant should not be added.",board.addPlant(2,9, new Plant("p", 1,new ImageIcon("pic.png"))));
+        assertNull("Plant should not be added.",board.addPlant(10,4, new Plant("p", 1,new ImageIcon("pic.png"))));
 
-        assertTrue("Plant should be added",board.addPlant(2,4, new Plant("p", 1,new ImageIcon("pic.png"))));
-*/
+        board.addPlant(2,4, new Plant("p", 1,new ImageIcon("pic.png")));
+        assertTrue("Plant should be added", Board.getBoard().get(2).getRow().get(4).hasPlant());
     }
 
     @Test

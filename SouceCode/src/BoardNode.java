@@ -33,7 +33,7 @@ public class BoardNode {
     /**
      * Adds Plant instance to the current node
      * @param plant new Plant
-     * @return boolean true - if plant was added; false otherwise
+     * @return Plant returns the plant if it was added, null otherwise
      */
     public Plant addPlant(Plant plant) {
         if (this.plant == null) {
