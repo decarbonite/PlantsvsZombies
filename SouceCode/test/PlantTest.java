@@ -60,4 +60,6 @@ public class PlantTest {
         assertNotEquals("Image URL should be imgURL.png", "pic.jpg", p.getImgURL().toString());
         assertNotEquals("Image URL should be imgURL.png", "pic.gif", p.getImgURL().toString());
     }
+
+    // Get name
 }

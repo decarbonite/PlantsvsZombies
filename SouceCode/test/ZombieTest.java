@@ -57,4 +57,6 @@ public class ZombieTest {
     public void testGetImgURL() {
         assertEquals("Image URL should be imgUrl.png.", "pic.png", z.getImgURL().toString());
     }
+
+    // Get name
 }

@@ -71,19 +71,42 @@ public class NodeButton<E> extends JButton {
 
         BoardNode bn = (BoardNode) internalObj;
 
-        if(bn.hasZombie() && bn.hasPlant()) {
-            if (bn.getPlant() instanceof MoneyPlant) {
-                this.stringToImageConverter(new ImageIcon(this.getClass().getResource(View.ZOMBIE_SUNFLOWER_IMAGE)));
-            } else {
-                this.stringToImageConverter(new ImageIcon(this.getClass().getResource(View.ZOMBIE_PLANT_IMAGE)));
+        String path = "images/grassed";
+
+        if(bn.hasPlant()) {
+            switch (bn.getPlant().getName()) {
+                case "Sunflower":
+                    path += "Sunflower";
+                    break;
+                case "Sunflower2":
+                    path += "Sunflower2";
+                    break;
+                case "Plant":
+                    path += "Plant";
+                    break;
+                case "Plant2":
+                    path += "Plant2";
+                    break;
+                default:
+                    break;
             }
-        } else if (bn.hasPlant()) {
-                this.stringToImageConverter(bn.getPlant().getImgURL());
-        } else if (bn.hasZombie()) {
-            this.stringToImageConverter(bn.getZombie().getImgURL());
-        } else {
-            this.stringToImageConverter(defaultImage);
         }
+
+        if(bn.hasZombie()) {
+            switch (bn.getZombie().getName()) {
+                case "Zombie":
+                    path += "Zombie";
+                    break;
+                case "Zombie2":
+                    path += "Zombie2";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        this.stringToImageConverter(new ImageIcon(this.getClass().getResource(path+".png")));
+
     }
     public void setDefaultImage(ImageIcon image){
         this.defaultImage = image;

@@ -135,7 +135,11 @@ public class Board {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
                 int randRow = rand.nextInt(View.BOARD_ROWS);
                 if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
-                    addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 100, 30, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                    if(rand.nextInt(2) == 0) {
+                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                    } else {
+                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
+                    }
                     zombiesToSpawn--;
                 }
             }

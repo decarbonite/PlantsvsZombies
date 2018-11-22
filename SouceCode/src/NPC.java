@@ -90,4 +90,12 @@ public abstract class NPC {
     public ImageIcon getImgURL() {
         return imgURL;
     }
+
+    /**
+     * Return that name of the NPC's
+     * @return String name
+     */
+    public String getName() {
+        return name;
+    }
 }

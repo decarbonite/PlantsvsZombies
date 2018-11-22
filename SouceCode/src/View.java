@@ -37,21 +37,13 @@ public class View extends JFrame {
     protected static final String PLANT2_ICON              =  "images/plant2.png";
     protected static final String SUNFLOWER_ICON           =  "images/sunflower.png";
     protected static final String SUNFLOWER2_ICON          =  "images/sunflower2.png";
-    protected static final String GRASS_IMAGE              =  "images/grass.png";
-    protected static final String PLANT_IMAGE              =  "images/grassed_plant.png";
-    protected static final String PLANT2_IMAGE             =  "images/grassed_plant2.png";
-    protected static final String SUNFLOWER_IMAGE          =  "images/grassed_sunflower.png";
-    protected static final String SUNFLOWER2_IMAGE         =  "images/grassed_sunflower2.png";
-    protected static final String ZOMBIE_IMAGE             = "images/grassed_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER_IMAGE   =  "images/grassed_sunflower_zombie.png";
-    protected static final String ZOMBIE_SUNFLOWER2_IMAGE  =  "images/grassed_sunflower2_zombie.png";
-    protected static final String ZOMBIE_PLANT_IMAGE       =  "images/grassed_plant_zombie.png";
-    protected static final String ZOMBIE_PLANT2_IMAGE      =  "images/grassed_plant2_zombie.png";
-    protected static final String ZOMBIE2_IMAGE            = "images/grassed_zombie2.png";
-    protected static final String ZOMBIE2_SUNFLOWER_IMAGE  =  "images/grassed_sunflower_zombie2.png";
-    protected static final String ZOMBIE2_SUNFLOWER2_IMAGE =  "images/grassed_sunflower2_zombie2.png";
-    protected static final String ZOMBIE2_PLANT_IMAGE      =  "images/grassed_plant_zombie2.png";
-    protected static final String ZOMBIE2_PLANT2_IMAGE     =  "images/grassed_plant2_zombie2.png";
+    protected static final String GRASS_IMAGE              =  "images/grassed.png";
+    protected static final String PLANT_IMAGE              =  "images/grassedPlant.png";
+    protected static final String PLANT2_IMAGE             =  "images/grassedPlant2.png";
+    protected static final String SUNFLOWER_IMAGE          =  "images/grassedSunflower.png";
+    protected static final String SUNFLOWER2_IMAGE         =  "images/grassedSunflower2.png";
+    protected static final String ZOMBIE_IMAGE             = "images/grassedZombie.png";
+    protected static final String ZOMBIE2_IMAGE             = "images/grassedZombie2.png";
 
     /**
      * Default constructor that initialized window with board,
