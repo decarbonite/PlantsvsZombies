@@ -37,7 +37,8 @@ public class Board {
     }
 
     /**
-     * Gets all zombies locations on the board
+     * Gets all zombies locations on the board.
+     * Even indices of the array represent x location of zombies, odd are y; [1,2,5,4] means zombie at (1,2) and another at (5,4)
      * @return int array of generated zombie locations
      */
     protected int[] getZombieLocation() {
@@ -51,7 +52,7 @@ public class Board {
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
             for (int j = 0; j < View.BOARD_COLS; j++) {
-                if (board.get(i).hasZombie(j)){
+                if (!board.get(i).hasPlant(j) && board.get(i).hasZombie(j)){
                     location[y] = i;
                     location[y + 1] = j;
                     y += 2;

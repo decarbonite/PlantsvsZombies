@@ -16,7 +16,7 @@ public class MoneyPlantTest {
 
     @Before
     public void setUp() {
-        mp = new MoneyPlant("Plant",200,20,new ImageIcon("pic.png"));
+        mp = new MoneyPlant("Money Plant",200,20,new ImageIcon("pic.png"));
     }
 
     @Test
@@ -63,5 +63,8 @@ public class MoneyPlantTest {
         assertEquals("Image URL should be imgUrl.png.", "pic.png", mp.getImgURL().toString());
     }
 
-    // Get name
+    @Test
+    public void testGetName() {
+        assertEquals("Money Plant's name should be 'Money Plant'", "Money Plant", mp.getName());
+    }
 }

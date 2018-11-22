@@ -61,5 +61,8 @@ public class PlantTest {
         assertNotEquals("Image URL should be imgURL.png", "pic.gif", p.getImgURL().toString());
     }
 
-    // Get name
+    @Test
+    public void testGetName() {
+        assertEquals("Plant's name should be 'Plant'", "Plant", p.getName());
+    }
 }

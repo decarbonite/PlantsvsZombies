@@ -58,5 +58,8 @@ public class ZombieTest {
         assertEquals("Image URL should be imgUrl.png.", "pic.png", z.getImgURL().toString());
     }
 
-    // Get name
+    @Test
+    public void testGetName(){
+        assertEquals("Zombie's name should be 'Zombie'", "Zombie", z.getName());
+    }
 }

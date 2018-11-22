@@ -12,14 +12,13 @@ import java.util.ArrayList;
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
- * @version 08 November, 2018
+ * @version 21 November, 2018
  */
 public class View extends JFrame {
     public static final int BOARD_ROWS = 5;
     public static final int BOARD_COLS = 9;
     private JPanel gridPanel;
     private JPanel selectPanel;
-    private JPanel statsPanel;
     private static NodeButton<BoardNode>[][] btn;
     private JButton shootFlowerButton;
     private JButton strongPlant;
@@ -27,23 +26,21 @@ public class View extends JFrame {
     private JButton dblSunflowerButton;
     private JLabel scoreLabel;
     private JLabel moneyLabel;
-    private JMenuBar menuBar;
-    private JMenu menu;
     private JMenuItem undo;
     private JMenuItem redo;
     private JFrame frame;
 
-    protected static final String PLANT_ICON               =  "images/plant.png";
-    protected static final String PLANT2_ICON              =  "images/plant2.png";
-    protected static final String SUNFLOWER_ICON           =  "images/sunflower.png";
-    protected static final String SUNFLOWER2_ICON          =  "images/sunflower2.png";
-    protected static final String GRASS_IMAGE              =  "images/grassed.png";
-    protected static final String PLANT_IMAGE              =  "images/grassedPlant.png";
-    protected static final String PLANT2_IMAGE             =  "images/grassedPlant2.png";
-    protected static final String SUNFLOWER_IMAGE          =  "images/grassedSunflower.png";
-    protected static final String SUNFLOWER2_IMAGE         =  "images/grassedSunflower2.png";
-    protected static final String ZOMBIE_IMAGE             = "images/grassedZombie.png";
-    protected static final String ZOMBIE2_IMAGE             = "images/grassedZombie2.png";
+    protected static final String PLANT_ICON       = "images/plant.png";
+    protected static final String PLANT2_ICON      = "images/plant2.png";
+    protected static final String SUNFLOWER_ICON   = "images/sunflower.png";
+    protected static final String SUNFLOWER2_ICON  = "images/sunflower2.png";
+    protected static final String GRASS_IMAGE      = "images/grassed.png";
+    protected static final String PLANT_IMAGE      = "images/grassedPlant.png";
+    protected static final String PLANT2_IMAGE     = "images/grassedPlant2.png";
+    protected static final String SUNFLOWER_IMAGE  = "images/grassedSunflower.png";
+    protected static final String SUNFLOWER2_IMAGE = "images/grassedSunflower2.png";
+    protected static final String ZOMBIE_IMAGE     = "images/grassedZombie.png";
+    protected static final String ZOMBIE2_IMAGE    = "images/grassedZombie2.png";
 
     /**
      * Default constructor that initialized window with board,
@@ -52,8 +49,8 @@ public class View extends JFrame {
     public View() {
         frame = new JFrame("Plants Vs Zombies");
 
-        menuBar = new JMenuBar();
-        menu = new JMenu("Undo/Redo");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Undo/Redo");
         undo = new JMenuItem("Undo");
         redo = new JMenuItem("Redo");
         undo.addActionListener(new Controller(this));
@@ -62,7 +59,7 @@ public class View extends JFrame {
         menu.add(redo);
         menuBar.add(menu);
 
-        statsPanel = new JPanel(new GridLayout(1,4,0,0));
+        JPanel statsPanel = new JPanel(new GridLayout(1,4,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
 

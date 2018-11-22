@@ -12,7 +12,7 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
- * @version 08 November, 2018
+ * @version 21 November, 2018
  */
 
 public class Controller implements ActionListener {
@@ -111,10 +111,24 @@ public class Controller implements ActionListener {
         //to make the addition to GUI instant, could be removed,
         //but the GUI would wait for the model to update to automatically add the plant
         if (plant instanceof MoneyPlant) {
-            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
+            if (plant.getName().equals("Sunflower")) {
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
+                return;
+            }
+            if (plant.getName().equals("Sunflower2")){
+                View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER2_IMAGE)));
+                return;
+            }
+        }
+        if (plant.getName().equals("Plant")){
+            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
             return;
         }
-        View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
+        if (plant.getName().equals("Plant2")){
+            View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT2_IMAGE)));
+            return;
+        }
+
     }
 
     @Override
@@ -224,6 +238,5 @@ public class Controller implements ActionListener {
                 view.updateView();
             }
         }
-
     }
 }
