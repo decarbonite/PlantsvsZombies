@@ -32,7 +32,7 @@ Plants should kill all Zombies on a board. Currently, the game has only one roun
 Zombies are generated randomly at the beginning (right side) of the board.
 
 Unlimited undo and redo functionality was added in Milestone 3. Stacks were used to track the last plants that were added to the board and their coordinates. In case of undo, you pop from the stack and remove from board, if it's redo, you add back the plant and its coordinate into the stacks.
-As the instructions of implementing the undo/redo were not very clear, the way I implemeted it in case of placing a plant at (x,y) and clicking undo, then placing a different plant at same position (x,y) and doing redo would not allow the redo because there is already another plant there, therefore this plant needs to be killed to be able to do redo again.
+As the instructions of implementing the undo/redo were not very clear, the way I implemeted it in case of placing a plant at (x,y) and clicking undo, then placing a different plant at same position (x,y) and doing redo would not allow the redo because there is already another plant there, therefore this plant needs to be killed to be able to do redo again. Moreover, undo also gives back the money you spent on the plant that was undo-ed, and redo would decrease your money.
 
 The player can add plants to fight against Zombies and able to choose out of two types of plants:   
 * **Plant** - Attack first available Zombie across a row were Plant is placed and damage it with 15 damage points.
