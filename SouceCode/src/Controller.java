@@ -21,7 +21,7 @@ public class Controller implements ActionListener {
     private static Stack<Plant> undoStack;          //stack with all plants added to board or redo-ed
     private static Stack<Plant> redoStack;          //stack of the plants that were undo-ed
     private static Stack<Integer> undoCoordinate;   //x,y position of plants being added or redo-ed
-    private static Stack<Integer> redoCoordinate;   //x,y position of plants being that were undo-ed
+    private static Stack<Integer> redoCoordinate;   //x,y position of plants that were undo-ed
 
     /**
      * Default constructor that requires only View to be passed
@@ -114,17 +114,14 @@ public class Controller implements ActionListener {
             if (plant.getName().equals("Sunflower")) {
                 View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)));
                 return;
-            }
-            if (plant.getName().equals("Sunflower2")){
+            } else if (plant.getName().equals("Sunflower2")) {
                 View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.SUNFLOWER2_IMAGE)));
                 return;
             }
-        }
-        if (plant.getName().equals("Plant")){
+        } else if (plant.getName().equals("Plant")) {
             View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT_IMAGE)));
             return;
-        }
-        if (plant.getName().equals("Plant2")){
+        } else if (plant.getName().equals("Plant2")) {
             View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.PLANT2_IMAGE)));
             return;
         }
@@ -135,10 +132,13 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == view.getShootFlowerButton()) {
+            // if cursor is a custom image(plant) and reclicked on a plant, change back to default cursor
             if (view.getFrame().getCursor().getType() != 0) {
                 view.getFrame().setCursor(DEFAULT_CURSOR);
                 return;
-            } else {
+            }
+            // change cursor to plant image
+            else {
                 view.getFrame().setCursor(Toolkit.getDefaultToolkit().
                         createCustomCursor(new ImageIcon(this.getClass().getResource(View.PLANT_ICON)).getImage(),
                                 new Point(0, 0), "plant"));
@@ -229,7 +229,7 @@ public class Controller implements ActionListener {
                 if (toPlant.equals("sunflower2")) {
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
-                    undoStack.push(model.addPlant(row, col, new MoneyPlant("Sunflower2", 100,25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER2_IMAGE)))));
+                    undoStack.push(model.addPlant(row, col, new MoneyPlant("Sunflower2", 100, 25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER2_IMAGE)))));
                 }
                 //Change cursor back to default
                 if (view.getFrame().getCursor().getType() != 0) {

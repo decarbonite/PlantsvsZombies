@@ -9,7 +9,7 @@ public class BoardNode {
     private Zombie zombie;
 
     /**
-     * Default constructor that creates empty node with a specified coordinates
+     * Default constructor that creates empty node
      */
     public BoardNode() {
         this.plant = null;
@@ -51,7 +51,7 @@ public class BoardNode {
         this.plant.attack(this.zombie);
 
         if (this.zombie.getHealth() <= 0) {
-            int score = this.zombie.getPointsWhenDead();
+            int score = this.zombie.getPointsOnDeath();
             this.zombie = null;
             return score;
         }

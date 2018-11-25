@@ -22,9 +22,9 @@ public class ZombieTest {
     }
 
     @Test
-    public void testGetPointsWhenDead() {
-        assertEquals("Points should be 10", 10, z.getPointsWhenDead());
-        assertNotEquals("Points should be 10", 20, z.getPointsWhenDead());
+    public void testGetPointsOnDeath() {
+        assertEquals("Points should be 10", 10, z.getPointsOnDeath());
+        assertNotEquals("Points should be 10", 20, z.getPointsOnDeath());
     }
 
     @Test

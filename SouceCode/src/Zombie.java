@@ -49,7 +49,7 @@ public class Zombie extends NPC {
      * Returns amount of points that would be added to the game score when zombie died
      * @return int score when dead
      */
-    public int getPointsWhenDead() { return scoreOnDeath; }
+    public int getPointsOnDeath() { return scoreOnDeath; }
 
     /**
      * Allows the zombie to attack plants

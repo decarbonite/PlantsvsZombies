@@ -15,15 +15,17 @@ public class NodeButton<E> extends JButton {
 
     /**
      * Default constructor that creates JButton with defined image
+     *
      * @param defaultImage ImageIcon image URL
      */
-    public NodeButton(ImageIcon defaultImage)  {
+    public NodeButton(ImageIcon defaultImage) {
         this(null, defaultImage);
     }
 
     /**
      * Default constructor that creates JButton with the background image and linked defined object to it
-     * @param obj E linking object
+     *
+     * @param obj  E linking object
      * @param icon ImageIcon object
      */
     private NodeButton(E obj, ImageIcon icon) {
@@ -34,9 +36,10 @@ public class NodeButton<E> extends JButton {
 
     /**
      * Helper method to clear all styles and add image to it
+     *
      * @param icon ImageIcon object
      */
-    public void stringToImageConverter(ImageIcon icon){
+    public void stringToImageConverter(ImageIcon icon) {
         this.setIcon(null);
         this.setIcon(icon);
         this.setMargin(new Insets(0, 0, 0, 0));
@@ -47,6 +50,7 @@ public class NodeButton<E> extends JButton {
 
     /**
      * Link new object to the button
+     *
      * @param obj E object to link
      */
     public void setObject(E obj) {
@@ -55,9 +59,10 @@ public class NodeButton<E> extends JButton {
 
     /**
      * Get instance of the linked object
+     *
      * @return E object
      */
-    public E getObject(){
+    public E getObject() {
         return this.internalObj;
     }
 
@@ -65,7 +70,7 @@ public class NodeButton<E> extends JButton {
      * Updates the button based on the object (Works only if linked object is BoardNode)
      */
     public void update() {
-        if(!(internalObj instanceof BoardNode)){
+        if (!(internalObj instanceof BoardNode)) {
             return;
         }
 
@@ -73,7 +78,7 @@ public class NodeButton<E> extends JButton {
 
         String path = "images/grassed";
 
-        if(bn.hasPlant()) {
+        if (bn.hasPlant()) {
             switch (bn.getPlant().getName()) {
                 case "Sunflower":
                     path += "Sunflower";
@@ -92,7 +97,7 @@ public class NodeButton<E> extends JButton {
             }
         }
 
-        if(bn.hasZombie()) {
+        if (bn.hasZombie()) {
             switch (bn.getZombie().getName()) {
                 case "Zombie":
                     path += "Zombie";
@@ -104,8 +109,6 @@ public class NodeButton<E> extends JButton {
                     break;
             }
         }
-
-        this.stringToImageConverter(new ImageIcon(this.getClass().getResource(path+".png")));
-
+        this.stringToImageConverter(new ImageIcon(this.getClass().getResource(path + ".png")));
     }
 }

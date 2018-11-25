@@ -110,7 +110,7 @@ public class BoardRow {
                         Zombie z = plantFind.plantFightZombie(zombieFind.destroyZombie());
                         if(z.getHealth() <= 0){
                             zombieFind.addZombie(null);
-                            score += z.getPointsWhenDead();
+                            score += z.getPointsOnDeath();
                         } else {
                             zombieFind.addZombie(z);
                         }
