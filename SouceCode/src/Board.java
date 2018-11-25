@@ -156,7 +156,7 @@ public class Board {
      * @return Plant returns the plant if it was added, null otherwise
      */
     public Plant addPlant(int x, int y, Plant plant) {
-        if (money >= 50 && (x >= 0 && x < View.BOARD_COLS) && (y >= 0 && y < (View.BOARD_COLS - 1))) {
+        if (money >= 50 && (x >= 0 && x < View.BOARD_COLS) && (y >= 0 && y < (View.BOARD_COLS))) {
             if (plant != null) {
                 if (!board.get(x).hasPlant(y)) {
                     board.get(x).addPlant(y, plant);

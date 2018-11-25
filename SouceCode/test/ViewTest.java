@@ -21,7 +21,7 @@ public class ViewTest {
     public void testView(){
         for (int i = 0; i < View.BOARD_ROWS; i++) {
             for (int j = 0; j < View.BOARD_COLS; j++) {
-                assertTrue("Should be equal", View.getBtn()[i][j].isDisplayable());
+                assertTrue("Should be true", View.getBtn()[i][j].isDisplayable());
             }
         }
     }

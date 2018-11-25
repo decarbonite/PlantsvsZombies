@@ -96,7 +96,7 @@ public class BoardNode {
 
     /**
      * Check if the current node contain Plant object
-     * @return true - node contain plant instance; false - otherwise
+     * @return boolean returns true if this board node has a plant, false otherwise
      */
     public boolean hasPlant() {
         if (plant != null) {
@@ -142,6 +142,10 @@ public class BoardNode {
         return false;
     }
 
+    /**
+     * Removes this plant from the board and returns it
+     * @return Plant returns the removed plant
+     */
     public Plant removePlant(){
         Plant p = this.plant;
         this.plant = null;

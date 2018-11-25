@@ -108,8 +108,4 @@ public class NodeButton<E> extends JButton {
         this.stringToImageConverter(new ImageIcon(this.getClass().getResource(path+".png")));
 
     }
-    public void setDefaultImage(ImageIcon image){
-        this.defaultImage = image;
-        stringToImageConverter(this.defaultImage);
-    }
 }
