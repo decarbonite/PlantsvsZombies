@@ -12,7 +12,7 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
  *
  * @author Dmytro Sytnik (VanArman)
  * @author Ahmed Romih (decarbonite)
- * @version 21 November, 2018
+ * @version 24 November, 2018
  */
 
 public class Controller implements ActionListener {
@@ -132,7 +132,7 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == view.getShootFlowerButton()) {
-            // if cursor is a custom image(plant) and reclicked on a plant, change back to default cursor
+            // if cursor image is a custom image(plant) and clicked on a plant, change back to default cursor
             if (view.getFrame().getCursor().getType() != 0) {
                 view.getFrame().setCursor(DEFAULT_CURSOR);
                 return;
@@ -201,8 +201,13 @@ public class Controller implements ActionListener {
             if (view.getFrame().getCursor().getType() != 0) {
                 //Only place it if cell is empty
                 BoardNode bn = (BoardNode) View.getBtn()[row][col].getObject();
-                if (bn.hasPlant() || bn.hasZombie()) {
+                if (Board.getMoney() < 50) {
+                    JOptionPane.showMessageDialog(null, "Not Sufficient Money");
+                    view.getFrame().setCursor(DEFAULT_CURSOR);
+                    return;
+                }else if (bn.hasPlant() || bn.hasZombie()) {
                     JOptionPane.showMessageDialog(null, "This cell is occupied");
+                    view.getFrame().setCursor(DEFAULT_CURSOR);
                     return;
                 }
                 String toPlant = view.getFrame().getCursor().getName();
@@ -214,27 +219,25 @@ public class Controller implements ActionListener {
                 }
 
                 //Add sunflower to generate money
-                if (toPlant.equals("sunflower")) {
+                else if (toPlant.equals("sunflower")) {
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
                     undoStack.push(model.addPlant(row, col, new MoneyPlant("Sunflower", 60, 15, new ImageIcon(this.getClass().getResource(View.SUNFLOWER_IMAGE)))));
                 }
 
-                if (toPlant.equals("plant2")) {
+                else if (toPlant.equals("plant2")) {
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
                     undoStack.push(model.addPlant(row, col, new Plant("Plant2", 150, 30, new ImageIcon(this.getClass().getResource(View.PLANT2_IMAGE)))));
                 }
 
-                if (toPlant.equals("sunflower2")) {
+                else if (toPlant.equals("sunflower2")) {
                     undoCoordinate.push(col);
                     undoCoordinate.push(row);
                     undoStack.push(model.addPlant(row, col, new MoneyPlant("Sunflower2", 100, 25, new ImageIcon(this.getClass().getResource(View.SUNFLOWER2_IMAGE)))));
                 }
-                //Change cursor back to default
-                if (view.getFrame().getCursor().getType() != 0) {
-                    view.getFrame().setCursor(DEFAULT_CURSOR);
-                }
+                //Change cursor back to default after placing the plant
+                view.getFrame().setCursor(DEFAULT_CURSOR);
                 view.updateView();
             }
         }
