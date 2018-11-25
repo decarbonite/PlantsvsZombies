@@ -42,10 +42,10 @@ Game continue until Plants will kill all Zombies (10) or at least one Zombie rea
 ##  User manual
 1. When the game starts, the first look is like the picture below.
 
-    ![Initial Game Look](Documentation/images/initialgame.JPG)
+    ![Initial Game Look](Documentation/images/initialgame.png)
 
 2. At the beginning of the game, the player has a few seconds to place plants before zombies start to appear on the board.
-By clicking once on the Plant you want to choose from the top panel, the cursor image changes to that Plant image, then the player can choose which a cell on the board to place it by clicking on that cell as long as there is no other object already placed there. 
+By clicking once on the Plant you want to choose from the top panel, the cursor image changes to that Plant image, then the player can choose which cell on the board to place it by clicking on that cell as long as there is no other object already placed there. 
 
     ![Plants Placement](Documentation/images/Plantsplacing.png)
     
