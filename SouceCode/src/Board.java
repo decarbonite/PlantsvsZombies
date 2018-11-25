@@ -193,6 +193,14 @@ public class Board {
     }
 
     /**
+     * Sets the amount of money the player gets
+     * @param money amount of money to set
+     */
+    public static void setMoney(int money) {
+        Board.money = money;
+    }
+
+    /**
      * Return whole board rows generated for a particular board
      * @return ArrayList of BoardRows objects
      */

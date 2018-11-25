@@ -141,7 +141,7 @@ public class View extends JFrame {
      */
     public void linkModelView(ArrayList<BoardRow> b) {
         scoreLabel.setText(Integer.toString(Board.score));
-        moneyLabel.setText(Integer.toString(Board.money));
+        moneyLabel.setText(Integer.toString(Board.getMoney()));
 
         for (int i = 0; i < BOARD_ROWS; i++) {
             ArrayList<BoardNode> br = b.get(i).getRow();
@@ -162,7 +162,7 @@ public class View extends JFrame {
         }
 
         scoreLabel.setText(Integer.toString(Board.score));
-        moneyLabel.setText(Integer.toString(Board.money));
+        moneyLabel.setText(Integer.toString(Board.getMoney()));
     }
 
     /**
@@ -211,5 +211,13 @@ public class View extends JFrame {
 
     public JButton getDblSunflowerButton() {
         return dblSunflowerButton;
+    }
+
+    public JLabel getMoneyLabel() {
+        return moneyLabel;
+    }
+
+    public void setMoneyLabel(JLabel moneyLabel) {
+        this.moneyLabel = moneyLabel;
     }
 }

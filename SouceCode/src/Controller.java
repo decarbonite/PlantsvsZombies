@@ -90,8 +90,13 @@ public class Controller implements ActionListener {
         redoCoordinate.push(i);
 
         redoStack.push(Board.getBoard().get(i).getRow().get(j).removePlant()); //remove from board and push to stack
-        //to make the removal instant, could be removed,
-        //but it would wait for the model to update to automatically remove the plant
+        //decrease money by 50 on undo because everything cost 50 points
+        Board.setMoney(Board.getMoney() + 50);
+
+        //Next 2 lines are not necessary. It makes the visual update instant, However,
+        // the model would update the view from the previous line of code
+        // but it would wait 3 seconds because of the delay function
+        view.getMoneyLabel().setText(Integer.toString(Board.getMoney()));
         View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
     }
 
@@ -105,7 +110,19 @@ public class Controller implements ActionListener {
         int i = redoCoordinate.pop();   //x coordinate of plant on board
         int j = redoCoordinate.pop();   //y coordinate of plant on board
 
+        BoardNode node = (BoardNode) View.getBtn()[i][j].getObject();
+        // if doing redo on a cell that is full now, bring back what was popped from the stack as if nothing changed
+        if(node.hasPlant() || node.hasZombie()){
+            redoStack.push(plant);
+            redoCoordinate.push(j);
+            redoCoordinate.push(i);
+            JOptionPane.showMessageDialog(null, "Cant redo because the cell is currently occupied");
+            return;
+        }
+
         undoStack.push(Board.getBoard().get(i).getRow().get(j).addPlant(plant));
+        Board.setMoney(Board.getMoney() - 50);
+        view.getMoneyLabel().setText(Integer.toString(Board.getMoney()));
         undoCoordinate.push(j);
         undoCoordinate.push(i);
         //to make the addition to GUI instant, could be removed,
