@@ -77,6 +77,7 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
 3. Added tests for Controller and View.
 4. Overall refactoring.
 5. Changes to the UML diagrams according to the changes noted above.
+6. We changed the sequence diagram to be done on multiple pages for each event because it was not clear in milestone 2 and we were advised by the teaching assistant to do it this way.
 
    
 ## Known Issues
