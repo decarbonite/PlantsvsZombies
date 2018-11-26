@@ -198,6 +198,7 @@ public class View extends JFrame {
     }
 
     /**
+     * Returns the instance of the Undo button in the main menu
      * @return JMenuItem returns the undo Menu item
      */
     public JMenuItem getUndo() {
@@ -205,21 +206,31 @@ public class View extends JFrame {
     }
 
     /**
+     * Returns the instance of the Redo button in the main menu
      * @return JMenuItem returns the redo Menu item
      */
     public JMenuItem getRedo() {
         return redo;
     }
 
+    /**
+     * Returns the instance of the strong plant from the select panel
+     * @return JButton instance of strong plant button
+     */
     public JButton getStrongPlant() {
         return strongPlant;
     }
 
+    /**
+     * Returns the instance of the double sunflower plant from the select panel
+     * @return JButton instance of double sunflower plant button
+     */
     public JButton getDblSunflowerButton() {
         return dblSunflowerButton;
     }
 
     /**
+     * Return the instance of the label that contains information about monue and score that the player has
      * @return JLabel returns the money label which contains the amount of money the player has
      */
     public JLabel getMoneyLabel() {
