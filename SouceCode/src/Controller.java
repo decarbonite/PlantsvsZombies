@@ -77,11 +77,7 @@ public class Controller implements ActionListener {
         }
     }
 
-    /**
-     * Performed undo operation for the plant placed on the board.
-     * Delete last added plant from the board and returns money to the user.
-     */
-    public void undo() {
+    private void undo() {
         if (undoStack.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nothing to undo");
             return;
@@ -104,11 +100,7 @@ public class Controller implements ActionListener {
         View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
     }
 
-    /**
-     * Performed redo operation for the plant placed on the board.
-     * Add the previously "undo" plant on the board into the same cell (location).
-     */
-    public void redo() {
+    private void redo() {
         if (redoStack.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nothing to redo");
             return;

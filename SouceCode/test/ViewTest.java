@@ -29,13 +29,13 @@ public class ViewTest {
 
     @Test
     public void testGetUndo(){
-        assertEquals("", "Undo" ,view.getUndo().getText());
-        assertNotEquals("", "Redo" ,view.getUndo().getText());
+        assertEquals("Name of the label should be 'Undo'", "Undo" ,view.getUndo().getText());
+        assertNotEquals("Name of the label should be 'Undo'", "Redo" ,view.getUndo().getText());
     }
 
     @Test
     public void testGetRedo(){
-        assertEquals("", "Redo" ,view.getRedo().getText());
-        assertNotEquals("", "Undo" ,view.getRedo().getText());
+        assertEquals("Name of the label should be 'Redo'", "Redo" ,view.getRedo().getText());
+        assertNotEquals("Name of the label should be 'Redo'", "Undo" ,view.getRedo().getText());
     }
 }
