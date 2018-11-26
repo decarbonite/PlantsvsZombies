@@ -197,10 +197,16 @@ public class View extends JFrame {
         return sunflowerButton;
     }
 
+    /**
+     * @return JMenuItem returns the undo Menu item
+     */
     public JMenuItem getUndo() {
         return undo;
     }
 
+    /**
+     * @return JMenuItem returns the redo Menu item
+     */
     public JMenuItem getRedo() {
         return redo;
     }
@@ -213,11 +219,10 @@ public class View extends JFrame {
         return dblSunflowerButton;
     }
 
+    /**
+     * @return JLabel returns the money label which contains the amount of money the player has
+     */
     public JLabel getMoneyLabel() {
         return moneyLabel;
-    }
-
-    public void setMoneyLabel(JLabel moneyLabel) {
-        this.moneyLabel = moneyLabel;
     }
 }

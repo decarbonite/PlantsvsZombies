@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.Assert.*;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * @author Dmytro Sytnik (VanArman)
@@ -24,5 +25,17 @@ public class ViewTest {
                 assertTrue("Should be true", View.getBtn()[i][j].isDisplayable());
             }
         }
+    }
+
+    @Test
+    public void testGetUndo(){
+        assertEquals("", "Undo" ,view.getUndo().getText());
+        assertNotEquals("", "Redo" ,view.getUndo().getText());
+    }
+
+    @Test
+    public void testGetRedo(){
+        assertEquals("", "Redo" ,view.getRedo().getText());
+        assertNotEquals("", "Undo" ,view.getRedo().getText());
     }
 }
