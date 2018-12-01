@@ -1,9 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-
 import static junit.framework.Assert.*;
 
 /**

@@ -1,7 +1,5 @@
 import javax.swing.*;
-import javax.swing.undo.UndoManager;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +26,8 @@ public class View extends JFrame {
     private JLabel moneyLabel;
     private JMenuItem undo;
     private JMenuItem redo;
+    private JMenuItem load;
+    private JMenuItem save;
     private JFrame frame;
 
     protected static final String PLANT_ICON       = "images/plant.png";
@@ -53,10 +53,18 @@ public class View extends JFrame {
         JMenu menu = new JMenu("Undo/Redo");
         undo = new JMenuItem("Undo");
         redo = new JMenuItem("Redo");
+        JMenu menu2 = new JMenu("Menu");
+        load = new JMenuItem("Load");
+        save = new JMenuItem("Save");
+        load.addActionListener(new Controller(this));
+        save.addActionListener(new Controller(this));
         undo.addActionListener(new Controller(this));
         redo.addActionListener(new Controller(this));
+        menu2.add(save);
+        menu2.add(load);
         menu.add(undo);
         menu.add(redo);
+        menuBar.add(menu2);
         menuBar.add(menu);
 
         JPanel statsPanel = new JPanel(new GridLayout(1,4,0,0));
@@ -235,5 +243,13 @@ public class View extends JFrame {
      */
     public JLabel getMoneyLabel() {
         return moneyLabel;
+    }
+
+    public JMenuItem getLoad() {
+        return load;
+    }
+
+    public JMenuItem getSave() {
+        return save;
     }
 }

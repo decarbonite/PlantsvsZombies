@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  *
@@ -11,7 +12,7 @@ import javax.swing.*;
  * @version 17 October, 2018
  *
  */
-public abstract class NPC {
+public abstract class NPC implements Serializable {
     private ImageIcon imgURL;
     private int health;
     private String name;

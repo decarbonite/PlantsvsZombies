@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,11 +10,10 @@ import java.util.Random;
  * @author Ahmed Romih (decarbonite)
  * @version 16 November, 2018
  */
-public class Board {
-
+public class Board implements Serializable{
     protected static int score;
     protected static int money;
-    private int zombiesToSpawn;
+    private static int zombiesToSpawn;
     private int totalZombies;
     protected static ArrayList<BoardRow> board;
 
@@ -39,6 +39,7 @@ public class Board {
     /**
      * Gets all zombies locations on the board.
      * Even indices of the array represent x location of zombies, odd are y; [1,2,5,4] means zombie at (1,2) and another at (5,4)
+     *
      * @return int array of generated zombie locations
      */
     protected int[] getZombieLocation() {
@@ -52,7 +53,35 @@ public class Board {
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
             for (int j = 0; j < View.BOARD_COLS; j++) {
-                if (!board.get(i).hasPlant(j) && board.get(i).hasZombie(j)){
+                if (!board.get(i).hasPlant(j) && board.get(i).hasZombie(j)) {
+                    location[y] = i;
+                    location[y + 1] = j;
+                    y += 2;
+                }
+            }
+        }
+        return location;
+    }
+
+    /**
+     * Gets all plants locations on the board.
+     * Even indices of the array represent x location of zombies, odd are y; [1,2,5,4] means zombie at (1,2) and another at (5,4)
+     *
+     * @return int array of generated zombie locations
+     */
+    protected int[] getPlantLocation() {
+
+        int[] location = new int[45]; //number of cells; max numbers of possible plants
+
+        for (int i = 0; i < location.length; i++) {
+            location[i] = -1;
+        }
+
+        int y = 0;
+
+        for (int i = 0; i < View.BOARD_ROWS; i++) {
+            for (int j = 0; j < View.BOARD_COLS; j++) {
+                if (board.get(i).hasPlant(j)) {
                     location[y] = i;
                     location[y + 1] = j;
                     y += 2;
@@ -64,13 +93,13 @@ public class Board {
 
     /**
      * Checks if player won the game
-     * @return returns a boolean, true for win
      *
+     * @return returns a boolean, true for win
      */
     public boolean hasWon() {
         int[] arr = getZombieLocation();
 
-        if (zombiesToSpawn == 0 && arr[0] == -1){
+        if (zombiesToSpawn == 0 && arr[0] == -1) {
             return true;
         }
         return false;
@@ -78,6 +107,7 @@ public class Board {
 
     /**
      * Checks if player lost the game
+     *
      * @return returns a boolean, true for loss
      */
     public boolean hasLost() {
@@ -136,7 +166,7 @@ public class Board {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
                 int randRow = rand.nextInt(View.BOARD_ROWS);
                 if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
-                    if(rand.nextInt(2) == 0) {
+                    if (rand.nextInt(2) == 0) {
                         addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
                     } else {
                         addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
@@ -184,8 +214,31 @@ public class Board {
         return false;
     }
 
+    public void saveGame() {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ecksdee.txt"));
+            out.writeObject(board);
+            out.writeObject(Board.getMoney());
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGame() {
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("ecksdee.txt"));
+            board = (ArrayList<BoardRow>) in.readObject();
+            money = (int) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Return amount of money player currently have
+     *
      * @return int amount of money
      */
     public static int getMoney() {
@@ -194,6 +247,7 @@ public class Board {
 
     /**
      * Sets the amount of money the player gets
+     *
      * @param money amount of money to set
      */
     public static void setMoney(int money) {
@@ -202,6 +256,7 @@ public class Board {
 
     /**
      * Return whole board rows generated for a particular board
+     *
      * @return ArrayList of BoardRows objects
      */
     public static ArrayList<BoardRow> getBoard() {

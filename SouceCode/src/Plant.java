@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * @author Dmytro Sytnik (VanArman)
@@ -8,7 +9,7 @@ import javax.swing.*;
  * @version 16 Nov, 2018
  */
 
-public class Plant extends NPC {
+public class Plant extends NPC implements Serializable {
 
     /**
      * Initializes a new Plant

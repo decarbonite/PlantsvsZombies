@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Board node is holding information about NPCs on it.
  *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
  */
-public class BoardNode {
+public class BoardNode implements Serializable {
     private Plant plant;
     private Zombie zombie;
 

@@ -209,6 +209,17 @@ public class Controller implements ActionListener {
             redo();
         }
 
+        if (e.getSource() == view.getSave()){
+            model.saveGame();
+        }
+
+        if (e.getSource() == view.getLoad()){
+            model.loadGame();
+            view.linkModelView(Board.getBoard());
+            view.updateView();
+            //updateBoard();
+        }
+
         //Placing Plants
         if (e.getSource() instanceof JButton) {
             JButton btn = (JButton) e.getSource();
