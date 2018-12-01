@@ -216,9 +216,10 @@ public class Board implements Serializable{
 
     public void saveGame() {
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ecksdee.txt"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Save.txt"));
             out.writeObject(board);
             out.writeObject(Board.getMoney());
+            out.writeObject(Board.score);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,9 +228,10 @@ public class Board implements Serializable{
 
     public void loadGame() {
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("ecksdee.txt"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Save.txt"));
             board = (ArrayList<BoardRow>) in.readObject();
             money = (int) in.readObject();
+            score = (int) in.readObject();
             in.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
