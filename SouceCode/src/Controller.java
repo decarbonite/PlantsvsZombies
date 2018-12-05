@@ -217,7 +217,6 @@ public class Controller implements ActionListener {
             model.loadGame();
             view.linkModelView(Board.getBoard());
             view.updateView();
-            //updateBoard();
         }
 
         //Placing Plants

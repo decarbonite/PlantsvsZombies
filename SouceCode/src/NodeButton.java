@@ -99,8 +99,8 @@ public class NodeButton<E> extends JButton {
 
         if (bn.hasZombie()) {
             switch (bn.getZombie().getName()) {
-                case "Zombie":
-                    path += "Zombie";
+                case "Zombie1":
+                    path += "Zombie1";
                     break;
                 case "Zombie2":
                     path += "Zombie2";

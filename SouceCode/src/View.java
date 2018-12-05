@@ -39,7 +39,7 @@ public class View extends JFrame {
     protected static final String PLANT2_IMAGE     = "images/grassedPlant2.png";
     protected static final String SUNFLOWER_IMAGE  = "images/grassedSunflower.png";
     protected static final String SUNFLOWER2_IMAGE = "images/grassedSunflower2.png";
-    protected static final String ZOMBIE_IMAGE     = "images/grassedZombie.png";
+    protected static final String ZOMBIE_IMAGE     = "images/grassedZombie1.png";
     protected static final String ZOMBIE2_IMAGE    = "images/grassedZombie2.png";
 
     /**

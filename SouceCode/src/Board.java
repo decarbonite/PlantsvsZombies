@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Random;
  * @version 16 November, 2018
  */
 public class Board implements Serializable{
+    Map<String, Integer> zombieScope = null;
     protected static int score;
     protected static int money;
     private static int zombiesToSpawn;
@@ -27,6 +29,34 @@ public class Board implements Serializable{
     public Board(int zombiesToSpawn, int score, int money) {
         this.score = score;
         this.money = money;
+        this.zombiesToSpawn = zombiesToSpawn;
+        this.totalZombies = zombiesToSpawn;
+        this.board = new ArrayList<>(View.BOARD_ROWS);
+
+        for (int i = 0; i < View.BOARD_ROWS; i++) {
+            board.add(new BoardRow());
+        }
+    }
+
+    /**
+     * Default constructor with level builder functionality that initializes model for 5x9 board
+     *
+     * @param zombieScope Map where key is name of the zombie, value - number of zombies of this type to spawn
+     * @param score          int initial score for the game (round)
+     * @param money          int initial amount of money
+     */
+    public Board(Map<String, Integer> zombieScope, int score, int money) {
+        this.score = score;
+        this.money = money;
+        this.zombieScope = zombieScope;
+
+        int zombiesToSpawn = 0;
+        for(String key : zombieScope.keySet().toArray(new String[0])) {
+            int temp = Integer.valueOf(zombieScope.get(key));
+            zombiesToSpawn += temp;
+        }
+
+
         this.zombiesToSpawn = zombiesToSpawn;
         this.totalZombies = zombiesToSpawn;
         this.board = new ArrayList<>(View.BOARD_ROWS);
@@ -161,17 +191,31 @@ public class Board implements Serializable{
      * Randomly generates zombies' spawn location on the board
      */
     protected void generateZombieSpawn() {
+
         Random rand = new Random();
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
                 int randRow = rand.nextInt(View.BOARD_ROWS);
                 if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
-                    if (rand.nextInt(2) == 0) {
-                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                    if(!zombieScope.isEmpty()){
+                        String[] keys = zombieScope.keySet().toArray(new String[0]);
+                        for(String key : keys) {
+                            if (rand.nextInt(2) == 0 && zombieScope.get(key) > 0) {
+                                int multiplier = Integer.valueOf(String.valueOf(key.toCharArray()[key.length()-1]));
+                                addZombie(randRow, View.BOARD_COLS - 1, new Zombie(key, multiplier * 100, multiplier * (1/2) * 10, multiplier * 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                                zombieScope.put(key, (zombieScope.get(key) - 1));
+                                zombiesToSpawn--;
+                                break;
+                            }
+                        }
                     } else {
-                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
+                        if (rand.nextInt(2) == 0) {
+                            addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie1", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                        } else {
+                            addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
+                        }
+                        zombiesToSpawn--;
                     }
-                    zombiesToSpawn--;
                 }
             }
         }
