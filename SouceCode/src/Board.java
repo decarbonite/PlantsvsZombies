@@ -94,34 +94,6 @@ public class Board implements Serializable{
     }
 
     /**
-     * Gets all plants locations on the board.
-     * Even indices of the array represent x location of zombies, odd are y; [1,2,5,4] means zombie at (1,2) and another at (5,4)
-     *
-     * @return int array of generated zombie locations
-     */
-    protected int[] getPlantLocation() {
-
-        int[] location = new int[45]; //number of cells; max numbers of possible plants
-
-        for (int i = 0; i < location.length; i++) {
-            location[i] = -1;
-        }
-
-        int y = 0;
-
-        for (int i = 0; i < View.BOARD_ROWS; i++) {
-            for (int j = 0; j < View.BOARD_COLS; j++) {
-                if (board.get(i).hasPlant(j)) {
-                    location[y] = i;
-                    location[y + 1] = j;
-                    y += 2;
-                }
-            }
-        }
-        return location;
-    }
-
-    /**
      * Checks if player won the game
      *
      * @return returns a boolean, true for win
@@ -258,6 +230,9 @@ public class Board implements Serializable{
         return false;
     }
 
+    /**
+     * Saves current state of the game
+     */
     public void saveGame() {
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Save.txt"));
@@ -270,6 +245,9 @@ public class Board implements Serializable{
         }
     }
 
+    /**
+     * Loads last saved instance of the game
+     */
     public void loadGame() {
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Save.txt"));

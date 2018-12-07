@@ -21,7 +21,7 @@ public class Game{
         this.m = rl.readLevelFromXML(currentLevel);
 
         if(m == null){
-            this.m = new Board(15, 0, 200);
+            this.m = new Board(5, 0, 200);
         }
 
         this.c = new Controller(v, m);
@@ -36,19 +36,15 @@ public class Game{
             System.out.println(e.getMessage());
         }
 
-        while (true) {
+        while (!c.gameEnded()) {
             try {
                 c.updateBoard();
-                c.gameEnded();
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    public void loaadLevel() {
-
+        System.exit(0);
     }
 
     public static void main(String[] args) {

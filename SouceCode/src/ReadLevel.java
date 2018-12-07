@@ -20,7 +20,7 @@ public class ReadLevel {
         Map<String, Integer> zombieScope = new HashMap<String, Integer>();
         // TODO Make as a method of the Game class with score and current level input
         try {
-            File fXmlFile = new File("SouceCode/src/LevelBuilder.xml");
+            File fXmlFile = new File("./src/LevelBuilder.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -52,9 +52,5 @@ public class ReadLevel {
             System.out.println("Exception message: "+e.getLocalizedMessage());
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        new ReadLevel().readLevelFromXML(0);
     }
 }
