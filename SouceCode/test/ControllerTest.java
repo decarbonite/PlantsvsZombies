@@ -1,9 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-
 import static junit.framework.Assert.*;
 
 /**
@@ -19,7 +16,7 @@ public class ControllerTest {
 
     @Before
     public void setUp() {
-        view = new View();
+        view = new View("Player");
         model = new Board(0, 0, 100);
 
         controller = new Controller(view, model);

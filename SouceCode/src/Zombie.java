@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
  * This class is responsible for making zombies and making them attack
@@ -8,7 +9,7 @@ import javax.swing.*;
  * @author Ahmed Romih (decarbonite)
  * @version 17 October, 2018
  */
-public class Zombie extends NPC {
+public class Zombie extends NPC implements Serializable {
     private int scoreOnDeath;
 
     /**

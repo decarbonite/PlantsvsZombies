@@ -1,8 +1,8 @@
 import javax.swing.*;
+import java.io.Serializable;
 
 /**
- *
- * * NPC is a Non-Player Character which could be any kind of a plant or a zombie
+ * NPC is a Non-Player Character which could be any kind of a plant or a zombie
  *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
@@ -11,7 +11,7 @@ import javax.swing.*;
  * @version 17 October, 2018
  *
  */
-public abstract class NPC {
+public abstract class NPC implements Serializable {
     private ImageIcon imgURL;
     private int health;
     private String name;

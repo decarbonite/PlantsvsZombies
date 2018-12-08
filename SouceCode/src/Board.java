@@ -1,5 +1,7 @@
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -9,11 +11,11 @@ import java.util.Random;
  * @author Ahmed Romih (decarbonite)
  * @version 16 November, 2018
  */
-public class Board {
-
+public class Board implements Serializable{
+    Map<String, Integer> zombieScope = null;
     protected static int score;
     protected static int money;
-    private int zombiesToSpawn;
+    private static int zombiesToSpawn;
     private int totalZombies;
     protected static ArrayList<BoardRow> board;
 
@@ -29,6 +31,36 @@ public class Board {
         this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
         this.totalZombies = zombiesToSpawn;
+
+        this.board = new ArrayList<>(View.BOARD_ROWS);
+
+        for (int i = 0; i < View.BOARD_ROWS; i++) {
+            board.add(new BoardRow());
+        }
+    }
+
+    /**
+     * Default constructor with level builder functionality that initializes model for 5x9 board
+     *
+     * @param zombieScope Map where key is name of the zombie, value - number of zombies of this type to spawn
+     * @param score          int initial score for the game (round)
+     * @param money          int initial amount of money
+     */
+    public Board(Map<String, Integer> zombieScope, int score, int money) {
+        this.score = score;
+        this.money = money;
+        this.zombieScope = zombieScope;
+
+        int zombiesToSpawn = 0;
+        for(String key : zombieScope.keySet().toArray(new String[0])) {
+            int temp = Integer.valueOf(zombieScope.get(key));
+            zombiesToSpawn += temp;
+        }
+
+
+        this.zombiesToSpawn = zombiesToSpawn;
+        this.totalZombies = zombiesToSpawn;
+
         this.board = new ArrayList<>(View.BOARD_ROWS);
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
@@ -39,6 +71,7 @@ public class Board {
     /**
      * Gets all zombies locations on the board.
      * Even indices of the array represent x location of zombies, odd are y; [1,2,5,4] means zombie at (1,2) and another at (5,4)
+     *
      * @return int array of generated zombie locations
      */
     protected int[] getZombieLocation() {
@@ -52,7 +85,7 @@ public class Board {
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
             for (int j = 0; j < View.BOARD_COLS; j++) {
-                if (!board.get(i).hasPlant(j) && board.get(i).hasZombie(j)){
+                if (!board.get(i).hasPlant(j) && board.get(i).hasZombie(j)) {
                     location[y] = i;
                     location[y + 1] = j;
                     y += 2;
@@ -64,13 +97,12 @@ public class Board {
 
     /**
      * Checks if player won the game
-     * @return returns a boolean, true for win
      *
+     * @return returns a boolean, true for win
      */
     public boolean hasWon() {
         int[] arr = getZombieLocation();
-
-        if (zombiesToSpawn == 0 && arr[0] == -1){
+        if (zombiesToSpawn == 0 && arr[0] == -1) {
             return true;
         }
         return false;
@@ -78,6 +110,7 @@ public class Board {
 
     /**
      * Checks if player lost the game
+     *
      * @return returns a boolean, true for loss
      */
     public boolean hasLost() {
@@ -136,12 +169,25 @@ public class Board {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
                 int randRow = rand.nextInt(View.BOARD_ROWS);
                 if (!board.get(randRow).hasZombie(View.BOARD_COLS - 1)) {
-                    if(rand.nextInt(2) == 0) {
-                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                    if(!zombieScope.isEmpty()){
+                        String[] keys = zombieScope.keySet().toArray(new String[0]);
+                        for(String key : keys) {
+                            if (rand.nextInt(2) == 0 && zombieScope.get(key) > 0) {
+                                int multiplier = Integer.valueOf(String.valueOf(key.toCharArray()[key.length()-1]));
+                                addZombie(randRow, View.BOARD_COLS - 1, new Zombie(key, multiplier * 100, multiplier * (1/2) * 10, multiplier * 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                                zombieScope.put(key, (zombieScope.get(key) - 1));
+                                zombiesToSpawn--;
+                                break;
+                            }
+                        }
                     } else {
-                        addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
+                        if (rand.nextInt(2) == 0) {
+                            addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie1", 100, 20, 10, new ImageIcon(this.getClass().getResource((View.ZOMBIE_IMAGE)))));
+                        } else {
+                            addZombie(randRow, View.BOARD_COLS - 1, new Zombie("Zombie2", 200, 15, 20, new ImageIcon(this.getClass().getResource((View.ZOMBIE2_IMAGE)))));
+                        }
+                        zombiesToSpawn--;
                     }
-                    zombiesToSpawn--;
                 }
             }
         }
@@ -185,7 +231,38 @@ public class Board {
     }
 
     /**
+     * Saves current state of the game
+     */
+    public void saveGame() {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Save.txt"));
+            out.writeObject(board);
+            out.writeObject(Board.getMoney());
+            out.writeObject(Board.score);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads last saved instance of the game
+     */
+    public void loadGame() {
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Save.txt"));
+            board = (ArrayList<BoardRow>) in.readObject();
+            money = (int) in.readObject();
+            score = (int) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Return amount of money player currently have
+     *
      * @return int amount of money
      */
     public static int getMoney() {
@@ -194,6 +271,7 @@ public class Board {
 
     /**
      * Sets the amount of money the player gets
+     *
      * @param money amount of money to set
      */
     public static void setMoney(int money) {
@@ -202,6 +280,7 @@ public class Board {
 
     /**
      * Return whole board rows generated for a particular board
+     *
      * @return ArrayList of BoardRows objects
      */
     public static ArrayList<BoardRow> getBoard() {

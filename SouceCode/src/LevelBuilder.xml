@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+    <level id="0" money="200">
+        <zombies>
+            <zombie name="Zombie1" numberToSpawn="5" />
+        </zombies>
+    </level>
+    <level id="1" money="200">
+        <zombies>
+            <zombie name="Zombie1" numberToSpawn="10" />
+            <zombie name="Zombie2" numberToSpawn="5" />
+        </zombies>
+    </level>
+    <level id="2" money="300">
+        <zombies>
+            <zombie name="Zombie1" numberToSpawn="15" />
+            <zombie name="Zombie2" numberToSpawn="10" />
+        </zombies>
+    </level>
+</game>

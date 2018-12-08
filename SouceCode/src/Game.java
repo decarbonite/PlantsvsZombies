@@ -1,4 +1,5 @@
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
+import javax.swing.*;
 
 /**
  * Main class that initializes the model, view and controller
@@ -6,29 +7,99 @@ import java.util.concurrent.TimeUnit;
  * @author Ahmed Romih
  * @version 16, Nov 2018
  */
-
 public class Game{
+    private static String playerName;
+    private static int currentLevel;
+    private View v;
+    private Board m;
+    private Controller c;
+    private boolean storyMode;
 
-    public static void main(String[] args) {
-        Controller c = new Controller(new View(), new Board(10, 0, 200));
-        c.generateBoard();
-        // A little delay before zombies start to appear
-        try{
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
+    /**
+     * Default constructor that start welcome screen
+     */
+    public Game() {
+        this.storyMode = false;
+        currentLevel = 0;
+        new InitialScreenController(new InitialScreen(this));
+    }
 
-        while (true) {
-            try {
-                c.updateBoard();
-                c.gameEnded();
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+    /**
+     * Generate game from the specified scope
+     * @param scope Map structure with the zombie types and amounts
+     */
+    protected void generateGame(Map<String, Integer> scope) {
+
+        if(scope != null){
+            this.m = new Board(scope, 0, 200);
+        } else {
+            this.storyMode = true;
+            ReadLevel rl = new ReadLevel();
+            this.m = rl.readLevelFromXML(currentLevel, 0);
+
+            if(m == null) {
+                m = new Board(15, 0, 200);
             }
         }
 
+        this.v = new View(playerName);
+        this.c = new Controller(v, m);
+        c.generateBoard();
+
+        runGame();
+    }
+
+    /**
+     * Run game with initial delay of 1s and 3s between steps
+     */
+    private void runGame() {
+        Timer timer = new Timer(3000, e -> {
+            if(c.gameEnded() == 1 && storyMode){
+                currentLevel++;
+                ReadLevel rl = new ReadLevel();
+                m = rl.readLevelFromXML(currentLevel, m.score);
+                v.getFrame().dispose();
+
+                if(m == null) {
+                    JOptionPane.showMessageDialog(v.getFrame(), "You Won!");
+                    System.exit(0);
+                }
+
+                v = new View(playerName);
+                c = new Controller(v, m);
+                c.generateBoard();
+            }
+
+            c.updateBoard();
+            v.repaint();
+        });
+
+        timer.setRepeats(true);
+        timer.setCoalesce(true);
+        // A little delay before zombies start to appear
+        timer.setInitialDelay(1000);
+        timer.start();
+    }
+
+    /**
+     * Setting player name
+     * @param playerName String player name
+     */
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+
+    /**
+     * Returns the current level of the game
+     *  @return int current level
+     */
+    public static int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public static void main(String[] args) {
+        new Game();
     }
 
 }

@@ -1,7 +1,5 @@
 import javax.swing.*;
-import javax.swing.undo.UndoManager;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +26,8 @@ public class View extends JFrame {
     private JLabel moneyLabel;
     private JMenuItem undo;
     private JMenuItem redo;
+    private JMenuItem load;
+    private JMenuItem save;
     private JFrame frame;
 
     protected static final String PLANT_ICON       = "images/plant.png";
@@ -39,27 +39,50 @@ public class View extends JFrame {
     protected static final String PLANT2_IMAGE     = "images/grassedPlant2.png";
     protected static final String SUNFLOWER_IMAGE  = "images/grassedSunflower.png";
     protected static final String SUNFLOWER2_IMAGE = "images/grassedSunflower2.png";
-    protected static final String ZOMBIE_IMAGE     = "images/grassedZombie.png";
+    protected static final String ZOMBIE_IMAGE     = "images/grassedZombie1.png";
     protected static final String ZOMBIE2_IMAGE    = "images/grassedZombie2.png";
 
     /**
      * Default constructor that initialized window with board,
      * barr with the score and current amount of money, and control buttons to place plants into the board.
+     *
+     * @param playerName String name of the player
      */
-    public View() {
+    public View(String playerName) {
         frame = new JFrame("Plants Vs Zombies");
 
+        buildGameBoard(playerName);
+
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);      //show gui in the middle of screen
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    /**
+     * Subsystem that builds board
+     * @param name String name of the player
+     */
+    private void buildGameBoard(String name) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Undo/Redo");
         undo = new JMenuItem("Undo");
         redo = new JMenuItem("Redo");
+        JMenu menu2 = new JMenu("Menu");
+        load = new JMenuItem("Load");
+        save = new JMenuItem("Save");
+        load.addActionListener(new Controller(this));
+        save.addActionListener(new Controller(this));
         undo.addActionListener(new Controller(this));
         redo.addActionListener(new Controller(this));
+        menu2.add(save);
+        menu2.add(load);
         menu.add(undo);
         menu.add(redo);
+        menuBar.add(menu2);
         menuBar.add(menu);
 
-        JPanel statsPanel = new JPanel(new GridLayout(1,4,0,0));
+        JPanel statsPanel = new JPanel(new GridLayout(1,6,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
 
@@ -67,6 +90,10 @@ public class View extends JFrame {
 
         scoreLabel = new JLabel("0");
         moneyLabel = new JLabel("0");
+        statsPanel.add(new JLabel("Player Name: "));
+        statsPanel.add(new JLabel(name));
+        statsPanel.add(new JLabel("Level: "));
+        statsPanel.add(new JLabel(String.valueOf(Game.getCurrentLevel() +1)));
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));
@@ -81,14 +108,11 @@ public class View extends JFrame {
         gJP.add(statsPanel, BorderLayout.NORTH);
         gJP.add(selectPanel, BorderLayout.CENTER);
 
+        frame.revalidate();
+        frame.repaint();
         frame.setJMenuBar(menuBar);
         frame.add(gJP, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
-
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);      //show gui in the middle of screen
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     /**
@@ -235,5 +259,13 @@ public class View extends JFrame {
      */
     public JLabel getMoneyLabel() {
         return moneyLabel;
+    }
+
+    public JMenuItem getLoad() {
+        return load;
+    }
+
+    public JMenuItem getSave() {
+        return save;
     }
 }

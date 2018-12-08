@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ import java.util.Random;
  * @author Ahmed Romih (decarbonite)
  * @version 24 October, 2018
  */
-public class BoardRow {
+public class BoardRow implements Serializable {
 
     private ArrayList<BoardNode> nodes;
 
@@ -89,8 +90,6 @@ public class BoardRow {
         }
         return false;
     }
-
-
 
     /**
      * Simulates fighting between Plant and Zombie

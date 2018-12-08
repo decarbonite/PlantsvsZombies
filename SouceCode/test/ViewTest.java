@@ -10,11 +10,11 @@ import static org.junit.Assert.assertNotEquals;
  */
 public class ViewTest {
 
-    View view = null;
+    private View view = null;
 
     @Before
     public void setUp(){
-        view = new View();
+        view = new View("Player");
     }
 
 
