@@ -89,13 +89,6 @@ public class Game{
         this.playerName = playerName;
     }
 
-    /**
-     * Returns name of the player
-     * @return String returns name of the player
-     */
-    public static String getPlayerName() {
-        return playerName;
-    }
 
     /**
      * Returns the current level of the game

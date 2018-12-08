@@ -92,6 +92,8 @@ public class View extends JFrame {
         moneyLabel = new JLabel("0");
         statsPanel.add(new JLabel("Player Name: "));
         statsPanel.add(new JLabel(name));
+        statsPanel.add(new JLabel("Level: "));
+        statsPanel.add(new JLabel(String.valueOf(Game.getCurrentLevel() +1)));
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));
