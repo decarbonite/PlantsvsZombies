@@ -2,20 +2,19 @@
 <game>
     <level id="0" money="200">
         <zombies>
-            <zombie name="Zombie1" numberToSpawn="1" />
+            <zombie name="Zombie1" numberToSpawn="5" />
         </zombies>
     </level>
     <level id="1" money="200">
         <zombies>
-            <zombie name="Zombie1" numberToSpawn="1" />
-            <zombie name="Zombie2" numberToSpawn="1" />
-            <RB name="RB1" numberToSpawn="1" />
+            <zombie name="Zombie1" numberToSpawn="8" />
+            <zombie name="Zombie2" numberToSpawn="2" />
         </zombies>
     </level>
     <level id="2" money="300">
         <zombies>
-            <zombie name="Zombie1" numberToSpawn="1" />
-            <zombie name="Zombie2" numberToSpawn="1" />
+            <zombie name="Zombie1" numberToSpawn="10" />
+            <zombie name="Zombie2" numberToSpawn="4" />
         </zombies>
     </level>
 </game>

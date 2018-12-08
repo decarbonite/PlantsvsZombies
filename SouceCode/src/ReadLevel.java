@@ -27,7 +27,7 @@ public class ReadLevel {
     public Board readLevelFromXML(int l, int previousScore) {
         Map<String, Integer> zombieScope = new HashMap<String, Integer>();
         try {
-            File fXmlFile = new File("SouceCode/src/LevelBuilder.xml");
+            File fXmlFile = new File("./src/LevelBuilder.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
