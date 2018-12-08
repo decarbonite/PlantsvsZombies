@@ -17,7 +17,7 @@ import static java.awt.Cursor.DEFAULT_CURSOR;
 
 public class Controller implements ActionListener {
     private View view;
-    private Board model;
+    private static Board model;
     private static Stack<Plant> undoStack;          //stack with all plants added to board or redo-ed
     private static Stack<Plant> redoStack;          //stack of the plants that were undo-ed
     private static Stack<Integer> undoCoordinate;   //x,y position of plants being added or redo-ed
@@ -30,7 +30,7 @@ public class Controller implements ActionListener {
      * @param v View object
      */
     public Controller(View v) {
-        this(v, new Board(10, 0, 200));
+        this(v, null);
     }
 
     /**
@@ -66,23 +66,20 @@ public class Controller implements ActionListener {
     /**
      * Check if the condition for ending game is reached
      */
-    public boolean gameEnded() {
+    public void gameEnded() {
         if (model.hasWon()) {
-           // JOptionPane.showMessageDialog(null, "You Won!");
-            //System.exit(0);
-            return false;
+            JOptionPane.showMessageDialog(view.getFrame(), "You Won!");
+            System.exit(0);
         }
         if (model.hasLost()) {
-            //JOptionPane.showMessageDialog(null, "You Lost!");
-            //System.exit(0);
-            return true;
+            JOptionPane.showMessageDialog(view.getFrame(), "You Lost!");
+            System.exit(0);
         }
-        return false;
     }
 
     private void undo() {
         if (undoStack.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nothing to undo");
+            JOptionPane.showMessageDialog(view.getFrame(), "Nothing to undo");
             return;
         }
 

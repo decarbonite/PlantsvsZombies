@@ -49,6 +49,15 @@ public class View extends JFrame {
     public View() {
         frame = new JFrame("Plants Vs Zombies");
 
+        buildGameBoard();
+
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);      //show gui in the middle of screen
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public void buildGameBoard() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Undo/Redo");
         undo = new JMenuItem("Undo");
@@ -89,14 +98,11 @@ public class View extends JFrame {
         gJP.add(statsPanel, BorderLayout.NORTH);
         gJP.add(selectPanel, BorderLayout.CENTER);
 
+        frame.revalidate();
+        frame.repaint();
         frame.setJMenuBar(menuBar);
         frame.add(gJP, BorderLayout.NORTH);
         frame.add(gridPanel, BorderLayout.CENTER);
-
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);      //show gui in the middle of screen
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     /**

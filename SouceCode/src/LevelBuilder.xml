@@ -8,14 +8,14 @@
     </level>
     <level id="1" money="200">
         <zombies>
-            <zombie name="Zombie" numberToSpawn="10" />
+            <zombie name="Zombie1" numberToSpawn="10" />
             <zombie name="Zombie2" numberToSpawn="5" />
             <RB name="RB1" numberToSpawn="1" />
         </zombies>
     </level>
     <level id="2" money="300">
         <zombies>
-            <zombie name="Zombie" numberToSpawn="15" />
+            <zombie name="Zombie1" numberToSpawn="15" />
             <zombie name="Zombie2" numberToSpawn="10" />
             <RB name="RB2" numberToSpawn="1" />
         </zombies>

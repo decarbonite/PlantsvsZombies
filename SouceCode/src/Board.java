@@ -31,6 +31,7 @@ public class Board implements Serializable{
         this.money = money;
         this.zombiesToSpawn = zombiesToSpawn;
         this.totalZombies = zombiesToSpawn;
+
         this.board = new ArrayList<>(View.BOARD_ROWS);
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
@@ -59,6 +60,7 @@ public class Board implements Serializable{
 
         this.zombiesToSpawn = zombiesToSpawn;
         this.totalZombies = zombiesToSpawn;
+
         this.board = new ArrayList<>(View.BOARD_ROWS);
 
         for (int i = 0; i < View.BOARD_ROWS; i++) {
@@ -100,7 +102,6 @@ public class Board implements Serializable{
      */
     public boolean hasWon() {
         int[] arr = getZombieLocation();
-
         if (zombiesToSpawn == 0 && arr[0] == -1) {
             return true;
         }
@@ -163,7 +164,6 @@ public class Board implements Serializable{
      * Randomly generates zombies' spawn location on the board
      */
     protected void generateZombieSpawn() {
-
         Random rand = new Random();
         if (zombiesToSpawn > 0) {
             if (rand.nextInt(2) == 0) {     //  50/50 chance to spawn a zombie
