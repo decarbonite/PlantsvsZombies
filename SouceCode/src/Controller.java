@@ -65,6 +65,7 @@ public class Controller implements ActionListener {
 
     /**
      * Check if the condition for ending game is reached
+     * @return 1 if player won current level; 0 - zombies won
      */
     public int gameEnded() {
         if (model.hasWon()) {

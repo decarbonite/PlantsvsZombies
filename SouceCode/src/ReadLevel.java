@@ -21,6 +21,7 @@ public class ReadLevel {
     /**
      * Default constructor
      * @param l int Level number
+     * @param previousScore int score obtained from previous levels
      * @return Board instance of the board class formed from XML file, null if cannot read file
      */
     public Board readLevelFromXML(int l, int previousScore) {

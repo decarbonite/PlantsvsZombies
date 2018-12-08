@@ -42,7 +42,7 @@ public class Game{
             }
         }
 
-        this.v = new View();
+        this.v = new View(playerName);
         this.c = new Controller(v, m);
         c.generateBoard();
 
@@ -65,7 +65,7 @@ public class Game{
                     System.exit(0);
                 }
 
-                v = new View();
+                v = new View(playerName);
                 c = new Controller(v, m);
                 c.generateBoard();
             }

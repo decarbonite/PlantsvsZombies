@@ -14,7 +14,7 @@ public class ViewTest {
 
     @Before
     public void setUp(){
-        view = new View();
+        view = new View("Player");
     }
 
 

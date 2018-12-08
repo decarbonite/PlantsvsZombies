@@ -45,11 +45,13 @@ public class View extends JFrame {
     /**
      * Default constructor that initialized window with board,
      * barr with the score and current amount of money, and control buttons to place plants into the board.
+     *
+     * @param playerName String name of the player
      */
-    public View() {
+    public View(String playerName) {
         frame = new JFrame("Plants Vs Zombies");
 
-        buildGameBoard();
+        buildGameBoard(playerName);
 
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);      //show gui in the middle of screen
@@ -59,8 +61,9 @@ public class View extends JFrame {
 
     /**
      * Subsystem that builds board
+     * @param name String name of the player
      */
-    public void buildGameBoard() {
+    private void buildGameBoard(String name) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Undo/Redo");
         undo = new JMenuItem("Undo");
@@ -79,7 +82,7 @@ public class View extends JFrame {
         menuBar.add(menu2);
         menuBar.add(menu);
 
-        JPanel statsPanel = new JPanel(new GridLayout(1,4,0,0));
+        JPanel statsPanel = new JPanel(new GridLayout(1,6,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
 
@@ -87,6 +90,8 @@ public class View extends JFrame {
 
         scoreLabel = new JLabel("0");
         moneyLabel = new JLabel("0");
+        statsPanel.add(new JLabel("Player Name: "));
+        statsPanel.add(new JLabel(name));
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));

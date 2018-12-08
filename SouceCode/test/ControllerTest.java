@@ -16,7 +16,7 @@ public class ControllerTest {
 
     @Before
     public void setUp() {
-        view = new View();
+        view = new View("Player");
         model = new Board(0, 0, 100);
 
         controller = new Controller(view, model);

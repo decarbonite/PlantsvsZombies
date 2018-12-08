@@ -63,39 +63,39 @@ public class InitialScreen {
                 possibilities,
                 "Zombie1");
 
-        while(true) {
-            String s = (String) JOptionPane.showInputDialog(
-                    frame,
-                    "Enter number of Zombies to spawn:\n",
-                    "Number of zombies",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    15);
+        String s = (String) JOptionPane.showInputDialog(
+                frame,
+                "Enter number of Zombies to spawn:\n",
+                "Number of zombies",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                15);
 
-            if(s != null && s.length() > 0) {
-                try {
-                    int numberOfZombies = Integer.valueOf(s);
-                    if(numberOfZombies > 0) {
-                        g.setPlayerName(playerName.getText());
-                        Map<String, Integer> zombieScope = new HashMap<String, Integer>();
-                        zombieScope.put(zombieType, numberOfZombies);
-                        g.generateGame(zombieScope);
-                        this.frame.dispose();
-                        break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Wrong number");
+        if(s != null && s.length() > 0) {
+            try {
+                int numberOfZombies = Integer.valueOf(s);
+                if(numberOfZombies > 0) {
+                    g.setPlayerName(playerName.getText());
+                    Map<String, Integer> zombieScope = new HashMap<String, Integer>();
+                    zombieScope.put(zombieType, numberOfZombies);
+                    g.generateGame(zombieScope);
+                    this.frame.dispose();
                 }
+            } catch (Exception e) {
+                System.out.println("Wrong number");
             }
         }
+
     }
 
     /**
      * Aggregate user response if player choose story mode option
      */
     public void storyMode() {
+        g.setPlayerName(playerName.getText());
         g.generateGame(null);
+        this.frame.dispose();
     }
 
     /**
