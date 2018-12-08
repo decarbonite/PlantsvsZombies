@@ -82,9 +82,10 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
 3. Game Level Builder Mode added.
 4. Unused classes were removed.
 5. JavaDoc added to the entire code.
-4. Overall refactoring.
-5. Changes to the UML diagrams according to the changes noted above.
-6. Sequence diagram has been changed into a multiple pages PDF file for each event as we were advised to by the TA.
+6. Overall refactoring.
+7. Reflections of the project file has been added.
+8. Changes to the UML diagrams according to the changes noted above.
+9. Sequence diagram has been changed into a multiple pages PDF file for each event as we were advised to by the TA.
 
 
    
