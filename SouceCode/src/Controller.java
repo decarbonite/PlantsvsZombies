@@ -66,15 +66,15 @@ public class Controller implements ActionListener {
     /**
      * Check if the condition for ending game is reached
      */
-    public void gameEnded() {
+    public int gameEnded() {
         if (model.hasWon()) {
-            JOptionPane.showMessageDialog(view.getFrame(), "You Won!");
-            System.exit(0);
+            return 1;
         }
         if (model.hasLost()) {
             JOptionPane.showMessageDialog(view.getFrame(), "You Lost!");
             System.exit(0);
         }
+        return 0;
     }
 
     /**

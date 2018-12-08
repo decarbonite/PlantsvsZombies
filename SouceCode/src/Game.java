@@ -1,5 +1,5 @@
 import java.util.Map;
-import javax.swing.Timer;
+import javax.swing.*;
 
 /**
  * Main class that initializes the model, view and controller
@@ -13,11 +13,13 @@ public class Game{
     private View v;
     private Board m;
     private Controller c;
+    private boolean storyMode;
 
     /**
      * Default constructor that start welcome screen
      */
     public Game() {
+        this.storyMode = false;
         currentLevel = 0;
         new InitialScreenController(new InitialScreen(this));
     }
@@ -26,13 +28,14 @@ public class Game{
      * Generate game from the specified scope
      * @param scope Map structure with the zombie types and amounts
      */
-    public void generateGame(Map<String, Integer> scope) {
+    protected void generateGame(Map<String, Integer> scope) {
 
         if(scope != null){
             this.m = new Board(scope, 0, 200);
         } else {
+            this.storyMode = true;
             ReadLevel rl = new ReadLevel();
-            this.m = rl.readLevelFromXML(currentLevel);
+            this.m = rl.readLevelFromXML(currentLevel, 0);
 
             if(m == null) {
                 m = new Board(15, 0, 200);
@@ -49,16 +52,31 @@ public class Game{
     /**
      * Run game with initial delay of 1s and 3s between steps
      */
-    public void runGame() {
-        // A little delay before zombies start to appear
+    private void runGame() {
         Timer timer = new Timer(3000, e -> {
+            if(c.gameEnded() == 1 && storyMode){
+                currentLevel++;
+                ReadLevel rl = new ReadLevel();
+                m = rl.readLevelFromXML(currentLevel, m.score);
+                v.getFrame().dispose();
+
+                if(m == null) {
+                    JOptionPane.showMessageDialog(v.getFrame(), "You Won!");
+                    System.exit(0);
+                }
+
+                v = new View();
+                c = new Controller(v, m);
+                c.generateBoard();
+            }
+
             c.updateBoard();
-            c.gameEnded();
             v.repaint();
         });
 
         timer.setRepeats(true);
         timer.setCoalesce(true);
+        // A little delay before zombies start to appear
         timer.setInitialDelay(1000);
         timer.start();
     }

@@ -76,12 +76,14 @@ public class InitialScreen {
             if(s != null && s.length() > 0) {
                 try {
                     int numberOfZombies = Integer.valueOf(s);
-                    g.setPlayerName(playerName.getText());
-                    Map<String, Integer> zombieScope = new HashMap<String, Integer>();
-                    zombieScope.put(zombieType, numberOfZombies);
-                    g.generateGame(zombieScope);
-                    frame.dispose();
-                    break;
+                    if(numberOfZombies > 0) {
+                        g.setPlayerName(playerName.getText());
+                        Map<String, Integer> zombieScope = new HashMap<String, Integer>();
+                        zombieScope.put(zombieType, numberOfZombies);
+                        g.generateGame(zombieScope);
+                        this.frame.dispose();
+                        break;
+                    }
                 } catch (Exception e) {
                     System.out.println("Wrong number");
                 }

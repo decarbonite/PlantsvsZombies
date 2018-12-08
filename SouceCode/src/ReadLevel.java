@@ -23,10 +23,10 @@ public class ReadLevel {
      * @param l int Level number
      * @return Board instance of the board class formed from XML file, null if cannot read file
      */
-    public Board readLevelFromXML(int l) {
+    public Board readLevelFromXML(int l, int previousScore) {
         Map<String, Integer> zombieScope = new HashMap<String, Integer>();
         try {
-            File fXmlFile = new File("./src/LevelBuilder.xml");
+            File fXmlFile = new File("SouceCode/src/LevelBuilder.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -39,7 +39,6 @@ public class ReadLevel {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     if(eElement.getAttribute("id").equals(Integer.toString(l))){
-                        int score = Integer.valueOf(eElement.getAttribute("score"));
                         int money = Integer.valueOf(eElement.getAttribute("money"));
 
                         NodeList zombies = eElement.getElementsByTagName("zombie");
@@ -49,7 +48,8 @@ public class ReadLevel {
                             int nts = Integer.valueOf(((Element) zombies.item(j)).getAttribute("numberToSpawn"));
                             zombieScope.put(name, nts);
                         }
-                        return new Board(zombieScope, score, money);
+
+                        return new Board(zombieScope, previousScore, money);
                     }
                 }
             }
