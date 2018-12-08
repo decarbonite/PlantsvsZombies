@@ -57,6 +57,9 @@ public class View extends JFrame {
         frame.setVisible(true);
     }
 
+    /**
+     * Subsystem that builds board
+     */
     public void buildGameBoard() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Undo/Redo");

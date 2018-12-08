@@ -3,12 +3,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Controller for the initial screen to take information from user.
+ *
  * @author Dmytro Sytnik (VanArman)
  * @version 07 December, 2018
  */
 public class InitialScreenController implements ActionListener {
     private InitialScreen is;
 
+    /**
+     * Default constructor
+     * @param is InitialScreen object in order to perform actionListener
+     */
     public InitialScreenController(InitialScreen is) {
         this.is = is;
     }

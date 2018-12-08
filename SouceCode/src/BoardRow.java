@@ -91,8 +91,6 @@ public class BoardRow implements Serializable {
         return false;
     }
 
-
-
     /**
      * Simulates fighting between Plant and Zombie
      * @param score int current player score

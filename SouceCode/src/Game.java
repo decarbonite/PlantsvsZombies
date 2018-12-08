@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.Timer;
 
@@ -9,7 +7,6 @@ import javax.swing.Timer;
  * @author Ahmed Romih
  * @version 16, Nov 2018
  */
-
 public class Game{
     private String playerName;
     private int currentLevel;
@@ -17,11 +14,18 @@ public class Game{
     private Board m;
     private Controller c;
 
+    /**
+     * Default constructor that start welcome screen
+     */
     public Game() {
         currentLevel = 0;
         new InitialScreenController(new InitialScreen(this));
     }
 
+    /**
+     * Generate game from the specified scope
+     * @param scope Map structure with the zombie types and amounts
+     */
     public void generateGame(Map<String, Integer> scope) {
 
         if(scope != null){
@@ -42,6 +46,9 @@ public class Game{
         runGame();
     }
 
+    /**
+     * Run game with initial delay of 1s and 3s between steps
+     */
     public void runGame() {
         // A little delay before zombies start to appear
         Timer timer = new Timer(3000, e -> {
@@ -56,6 +63,10 @@ public class Game{
         timer.start();
     }
 
+    /**
+     * Setting player name
+     * @param playerName String player name
+     */
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }

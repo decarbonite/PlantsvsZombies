@@ -10,15 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class that read XML file with level specification
+ *
  * @author Dmytro Sytnik (VanArman)
  * @version 01 December, 2018
  */
 public class ReadLevel {
     public ReadLevel() {}
 
+    /**
+     * Default constructor
+     * @param l int Level number
+     * @return Board instance of the board class formed from XML file, null if cannot read file
+     */
     public Board readLevelFromXML(int l) {
         Map<String, Integer> zombieScope = new HashMap<String, Integer>();
-        // TODO Make as a method of the Game class with score and current level input
         try {
             File fXmlFile = new File("./src/LevelBuilder.xml");
 

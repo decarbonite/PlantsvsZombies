@@ -77,6 +77,9 @@ public class Controller implements ActionListener {
         }
     }
 
+    /**
+     * Revert previous player action (excavate plant)
+     */
     private void undo() {
         if (undoStack.isEmpty()) {
             JOptionPane.showMessageDialog(view.getFrame(), "Nothing to undo");
@@ -100,6 +103,9 @@ public class Controller implements ActionListener {
         View.getBtn()[i][j].stringToImageConverter(new ImageIcon(this.getClass().getResource(View.GRASS_IMAGE)));
     }
 
+    /**
+     * Place previously excavated plant if one exists
+     */
     private void redo() {
         if (redoStack.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nothing to redo");

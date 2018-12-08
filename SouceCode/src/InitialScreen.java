@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * View for the greeting screen
+ *
  * @author Dmytro Sytnik (VanArman)
  * @version 07 December, 2018
  */
@@ -13,6 +15,10 @@ public class InitialScreen {
     protected JTextField playerName;
     private Game g;
 
+    /**
+     * Default constructor
+     * @param g Game copy of the game object
+     */
     public InitialScreen(Game g) {
         this.g = g;
         frame = new JFrame("Welcome");
@@ -43,6 +49,9 @@ public class InitialScreen {
         frame.setVisible(true);
     }
 
+    /**
+     * Aggregate user response if player choose regular game option
+     */
     public void regularGame() {
         Object[] possibilities = {"Zombie1", "Zombie2"};
         String zombieType = (String)JOptionPane.showInputDialog(
@@ -80,10 +89,16 @@ public class InitialScreen {
         }
     }
 
+    /**
+     * Aggregate user response if player choose story mode option
+     */
     public void storyMode() {
         g.generateGame(null);
     }
 
+    /**
+     * Aggregate user response if player did not specify name
+     */
     public void playerNameNotSet() {
         JOptionPane.showMessageDialog(frame,
                 "Please enter your name",

@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.io.Serializable;
 
 /**
- *
- * * NPC is a Non-Player Character which could be any kind of a plant or a zombie
+ * NPC is a Non-Player Character which could be any kind of a plant or a zombie
  *
  * @author Dmytro Sytnik (VanArman)
  * @version 13 October, 2018
