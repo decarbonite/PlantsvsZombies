@@ -79,7 +79,7 @@ public class View extends JFrame {
         menuBar.add(menu2);
         menuBar.add(menu);
 
-        JPanel statsPanel = new JPanel(new GridLayout(1,4,0,0));
+        JPanel statsPanel = new JPanel(new GridLayout(1,6,0,0));
         selectPanel = new JPanel(new GridLayout(1,5,0,0));
         gridPanel = new JPanel(new GridLayout(BOARD_ROWS,BOARD_COLS,0,1));
 
@@ -87,6 +87,12 @@ public class View extends JFrame {
 
         scoreLabel = new JLabel("0");
         moneyLabel = new JLabel("0");
+        JLabel name = new JLabel(Game.getPlayerName());
+        statsPanel.add(new JLabel("Name: "));
+        statsPanel.add(name);
+        JLabel levelLabel = new JLabel(String.valueOf(Game.getCurrentLevel() +1));
+        statsPanel.add(new JLabel("Level: "));
+        statsPanel.add(levelLabel);
         statsPanel.add(new JLabel("Score: "));
         statsPanel.add(scoreLabel);
         statsPanel.add(new JLabel("Money: "));

@@ -8,8 +8,8 @@ import javax.swing.*;
  * @version 16, Nov 2018
  */
 public class Game{
-    private String playerName;
-    private int currentLevel;
+    private static String playerName;
+    private static int currentLevel;
     private View v;
     private Board m;
     private Controller c;
@@ -87,6 +87,22 @@ public class Game{
      */
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    /**
+     * Returns name of the player
+     * @return String returns name of the player
+     */
+    public static String getPlayerName() {
+        return playerName;
+    }
+
+    /**
+     * Returns the current level of the game
+     *  @return int current level
+     */
+    public static int getCurrentLevel() {
+        return currentLevel;
     }
 
     public static void main(String[] args) {
