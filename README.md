@@ -16,6 +16,9 @@ SYSC 3110 - Third Year Project
    * NPC            ->    [Ahmed (Ahmed Romih)](@decarbonite)
    * Zombie         ->    [Ahmed (Ahmed Romih)](@decarbonite)
    * Board          ->    [Ahmed (Ahmed Romih)](@decarbonite) & [Dima (Dmytro Sytnik)](@vanarman)
+   * InitialScreen       ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * InitialScreenController      ->    [Dima (Dmytro Sytnik)](@vanarman)
+   * ReadLevel      ->    [Dima (Dmytro Sytnik)](@vanarman)
    * BoardRow       ->    [Dima (Dmytro Sytnik)](@vanarman)
    * BoardNode      ->    [Dima (Dmytro Sytnik)](@vanarman)
    * Game           ->    [Ahmed (Ahmed Romih)](@decarbonite)
@@ -54,12 +57,13 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
     ![Plants Placement](Documentation/images/Plantsplacing.png)
     
 3. In the top menu you can choose undo to remove a plant that you added to the board or redo to bring it back.
+4. The player can save the state of the game by choosing save from the top menu and upon his return to the game he can loads to start where he left.
     
-4. After the time delay is over the zombies will start to appear from the right side of the board, automatically moving towards the left side of the board.
+5. After the time delay is over the zombies will start to appear from the right side of the board, automatically moving towards the left side of the board.
             
     ![Zombies Display](Documentation/images/zombies.png)
 
-5. The game ends either by the player winning; killing all zombies on the board and no more zombies are left to spawn, or losing in case of a zombie reaching the last cell at the left side of the board.
+6. The game ends either by the player winning; killing all zombies on the board and no more zombies are left to spawn, or losing in case of a zombie reaching the last cell at the left side of the board.
 
    When the player wins, a message pops up indicating victory like the picture below.
    
@@ -80,6 +84,8 @@ By clicking once on the Plant you want to choose from the top panel, the cursor 
 5. JavaDoc added to the entire code.
 4. Overall refactoring.
 5. Changes to the UML diagrams according to the changes noted above.
+6. Sequence diagram has been changed into a multiple pages PDF file for each event as we were advised to by the TA.
+
 
    
 ## Known Issues
